@@ -1,0 +1,16 @@
+{
+  "name": "myassetsautomation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^7.3.0",
+    "cypress-plugin-tab": "^1.0.5",
+    "cypress-social-logins": "^1.11.3"
+  }
+}
