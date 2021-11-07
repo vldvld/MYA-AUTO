@@ -51,5 +51,6 @@ class signup{
     selectButton(){
         return cy.contains('Select')
     }
+    
 }
 export default signup

@@ -43,7 +43,7 @@ balanceFieldCash(){
     return cy.get('#balance')
 }
 modalTitle(){
-    return cy.get('#customized-dialog-title')
+    return cy.get('#customized-dialog-title').find('span')
 }
 savingAccountCreatedNotification(){
     return cy.contains('Saving Account was created')

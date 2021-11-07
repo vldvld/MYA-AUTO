@@ -3,24 +3,13 @@ import Signup from '../pageObjects/signup'
 import MainPage from '../pageObjects/mainPage'
 import myFinance from '../pageObjects/myFinance'
 
-describe('Creating saving account', function () 
+describe('Creating and testing a  saving account', function () 
 {
     const login = new Login()
     const signup = new Signup()
     const mainpage = new MainPage()
     const myfinance = new myFinance()
- 
-        
-    
-    it('Log in into the system', function()
-    {
-        cy.visit('/')
-        login.email().type('myassetstest117@gmail.com')
-        login.password().type('testuser1')
-        login.submitButton().click()
-        cy.url().should('eq', 'https://myassetstest.web.app/finances/accounts')
 
-    })
    it('Go to the MyFinance page and create the Saving account', function()
     {
         myfinance.myFinancePlusButton().click()

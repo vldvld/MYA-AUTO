@@ -28,3 +28,17 @@ Cypress.Commands.add(
     'getWithinIframe',
     (targetElement) => cy.get('iframe').iframeLoaded().its('document').getInDocument(targetElement)
 );
+
+Cypress.Commands.add(
+    "loginCommand",
+    (username, password) => {
+    cy.get('[name="email"]').type(username)
+    cy.get('[name="password"]').type(password)
+    cy.get(':nth-child(4) > .MuiButtonBase-root').click()
+});
+
+Cypress.Commands.add(
+    "goToLoginPage",
+    () => {
+    cy.visit('/')
+ });
