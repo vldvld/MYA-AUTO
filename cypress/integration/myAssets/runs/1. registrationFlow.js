@@ -16,7 +16,7 @@ describe('Sign up flow / log in flow tests', function ()
     
     it('Check the page title', function()
     {
-        cy.visit('/')
+        cy.goToLoginPage()
         cy.title().should('eq', 'MyAssets.com - The Best Life Organisational Tool')
     })
     it('Create a new user', function ()
@@ -58,9 +58,11 @@ describe('Sign up flow / log in flow tests', function ()
         signup.stripeCvc().type('987')
         signup.stripePostal().type('12345')
         signup.subscribeButton().click()
-        cy.contains('Subscription created!',{ timeout: 15000 })
+        cy.contains('Subscription created!',{ timeout: 30000 })
         signup.completeButton().click()
-        signup.selectButton().click()
+        signup.selectButton().click().click()
+        
+        
      
     })
 
@@ -73,7 +75,7 @@ describe('Sign up flow / log in flow tests', function ()
     })
     it('Log in using created credentials for a subscribed account', function() 
     { 
-        cy.visit('/')
+        cy.goToLoginPage()
         login.email().type(testemail).should('have.value', testemail)
         login.password().type('testuser1').should('have.value', 'testuser1')
         login.submitButton().click()

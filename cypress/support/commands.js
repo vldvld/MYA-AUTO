@@ -40,5 +40,5 @@ Cypress.Commands.add(
 Cypress.Commands.add(
     "goToLoginPage",
     () => {
-    cy.visit('/')
+    cy.visit('Login page')
  });

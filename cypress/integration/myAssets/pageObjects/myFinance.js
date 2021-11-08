@@ -18,6 +18,9 @@ selectCashAccont(){
 selectCreditAccount(){
     return cy.get('[data-value="CREDIT_ACCOUNT"]')
 }
+selectMortgageAccount(){
+    return cy.get('[data-value="MORTGAGE_ACCOUNT"]')
+}
 selectCurrentAccount(){
     return cy.get('[data-value="CURRENT_ACCOUNT"]')
 }
@@ -48,14 +51,20 @@ modalTitle(){
 savingAccountCreatedNotification(){
     return cy.contains('Saving Account was created')
 }
+mortgageCreatedNotification(){
+    return cy.contains('Mortgage Account was created')
+}
 cashAccountCreatedNotification(){
-    return cy.contains('Cash Account was created', { timeout: 14000 })
+    return cy.contains('Cash Account was created', { timeout: 18000 })
+}
+creditAccountCreatedNotification(){
+    return cy.contains('Credit Card Account was created', { timeout: 18000 })
 }
 transactionCreatedNotification(){
-    return cy.contains('Transaction was created', { timeout: 14000 })
+    return cy.contains('Transaction was created', { timeout: 18000 })
 }
 cbValueWidget(){
-    return cy.get('[data-cy=cb-collectibles-value]',{ timeout: 15000 })
+    return cy.get('[data-cy=cb-collectibles-value]',{ timeout: 18000 })
 }
 cbLiabilityWidget(){
     return cy.get('data-cy="cb-collectibles-liabilities"')
@@ -63,5 +72,12 @@ cbLiabilityWidget(){
 cbNetValueWidget(){
     return cy.get('data-cy="cb-collectibles-net-value"')
 }
+ziaBankInstitution(){
+    return cy.get('[role=menu]').contains('ZIA Credit Union', { timeout: 18000 })
+}
+outstandingAmmount(){
+    return cy.get('#outstandingAmount')
+}
+
 }
     export default myfinance

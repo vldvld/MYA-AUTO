@@ -9,22 +9,29 @@ describe('Creating and testing a  saving account', function ()
     const signup = new Signup()
     const mainpage = new MainPage()
     const myfinance = new myFinance()
+    const currency = 'USD '
+    const newValue = 1000
+    const internationalNumberFormat = new Intl.NumberFormat('en-US')
 
    it('Go to the MyFinance page and create the Saving account', function()
     {
+        cy.goToLoginPage()
+        cy.loginCommand("automationtests@gmail.com", "testuser1")
+        cy.url().should('eq', 'https://myassetstest.web.app/finances/accounts')
+        
         myfinance.myFinancePlusButton().click()
         cy.contains('Account').should('exist')
         myfinance.selectAccountDropDown().click()
         myfinance.selectSavingAccount().click()
         myfinance.nextButton().click()
-        cy.contains('Saving Account').should('exist')
+        myfinance.modalTitle().should('have.text', 'Saving Account')
         cy.contains('Single-Currency Account').should('exist')
         myfinance.accountNameField().type('accountnametest')
         myfinance.bankInstitutionField().type("ZIA")
-        cy.wait(1300)
+        myfinance.ziaBankInstitution().should('exist')
         myfinance.bankInstitutionField().tab().type('{enter}')
         myfinance.bankInstitutionField().should('have.value', 'ZIA Credit Union')
-        myfinance.balanceField().type("1000").should('have.value', '1,000')
+        myfinance.balanceField().type(newValue).should('have.value', '1,000')
         myfinance.nextButton().click()
         myfinance.createButton().click()
         myfinance.savingAccountCreatedNotification().should('exist')
@@ -33,6 +40,6 @@ describe('Creating and testing a  saving account', function ()
 })
     it('Check the C&B collectibles widget ', function()
     {
-    // Add tests here after updating web a selectors 
+    
     })
 })

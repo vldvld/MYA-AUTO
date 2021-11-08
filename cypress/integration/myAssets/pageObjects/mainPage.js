@@ -1,6 +1,6 @@
 class mainpage{
    personalAccountMenu(){
-       return cy.get('.MuiIconButton-edgeEnd > .MuiIconButton-label')
+       return cy.get('[data-cy=personal-account-btn]',{ timeout: 15000 })
     }
      accountSettings(){
        return cy.contains('Account Settings')
