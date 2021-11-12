@@ -16,7 +16,7 @@ describe('Creating and testing a  saving account', function ()
    it('Go to the MyFinance page and create the Saving account', function()
     {
         cy.goToLoginPage()
-        cy.loginCommand("automationtests@gmail.com", "testuser1")
+        cy.loginCommand("automationtests@gmail.com1", "testuser1")
         cy.url().should('eq', 'https://myassetstest.web.app/finances/accounts')
         
         myfinance.myFinancePlusButton().click()

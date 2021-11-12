@@ -1,1 +1,1 @@
-{"chromeWebSecurity": false, "defaultCommandTimeout": 10000, "baseUrl": "https://myassetstest.web.app", "viewportWidth": 1440, "viewportHeight": 900 }
+{"chromeWebSecurity": false, "defaultCommandTimeout": 4000, "baseUrl": "https://myassetstest.web.app", "viewportWidth": 1440, "viewportHeight": 900 }

@@ -3,7 +3,7 @@ import Signup from '../pageObjects/signup'
 import MainPage from '../pageObjects/mainPage'
 import myFinance from '../pageObjects/myFinance'
 
-describe('Creating and testing a credit card account', function () 
+describe('Creating and testing the credit card account', function () 
 {
     const login = new Login()
     const signup = new Signup()
@@ -16,7 +16,7 @@ describe('Creating and testing a credit card account', function ()
    it('Go to the MyFinance page and create the Credit card account', function()
     {
         cy.goToLoginPage()
-        cy.loginCommand("automationtests@gmail.com", "testuser1")
+        cy.loginCommand("automationtests1@gmail.com", "testuser1")
         cy.url().should('eq', 'https://myassetstest.web.app/finances/accounts')
 
         myfinance.myFinancePlusButton().click()
@@ -27,9 +27,6 @@ describe('Creating and testing a credit card account', function ()
         myfinance.modalTitle().should('have.text', 'Credit Card Account')
         myfinance.accountNameField().type('accountnametest')
         myfinance.bankInstitutionField().type("ZIA")
-    //    cy.wait(1300)
-    //    cy.contains('ZIA Credit Union').should('exist')
-
         myfinance.ziaBankInstitution().should('exist')
         myfinance.bankInstitutionField().tab().type('{enter}')
         myfinance.bankInstitutionField().should('have.value', 'ZIA Credit Union')
