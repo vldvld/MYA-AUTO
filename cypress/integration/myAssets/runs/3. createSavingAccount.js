@@ -1,7 +1,7 @@
-import Login from '../pageObjects/login'
-import Signup from '../pageObjects/signup'
-import MainPage from '../pageObjects/mainPage'
-import myFinance from '../pageObjects/myFinance'
+import Login from '../../../pageObjects/login'
+import Signup from '../../../pageObjects/signup'
+import MainPage from '../../../pageObjects/mainPage'
+import myFinance from '../../../pageObjects/myFinance'
 
 describe('Creating and testing a  saving account', function () 
 {
@@ -16,7 +16,7 @@ describe('Creating and testing a  saving account', function ()
    it('Go to the MyFinance page and create the Saving account', function()
     {
         cy.goToLoginPage()
-        cy.loginCommand("automationtests@gmail.com1", "testuser1")
+        cy.loginCommand("automationtests1@gmail.com", "testuser1")
         cy.url().should('eq', 'https://myassetstest.web.app/finances/accounts')
         
         myfinance.myFinancePlusButton().click()

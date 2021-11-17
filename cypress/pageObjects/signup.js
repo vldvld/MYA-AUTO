@@ -49,7 +49,7 @@ class signup{
         return cy.contains('Complete')
     }
     selectButton(){
-        return cy.contains('Select')
+        return cy.contains('Select',{ timeout: 15000 })
     }
     
 }

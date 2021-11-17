@@ -1,7 +1,7 @@
-import Login from '../pageObjects/login'
-import Signup from '../pageObjects/signup'
-import MainPage from '../pageObjects/mainPage'
-import myFinance from '../pageObjects/myFinance'
+import Login from '../../../pageObjects/login'
+import Signup from '../../../pageObjects/signup'
+import MainPage from '../../../pageObjects/mainPage'
+import myFinance from '../../../pageObjects/myFinance'
 
 describe('Creating Cash account', function () 
 {
@@ -27,7 +27,6 @@ describe('Creating Cash account', function ()
         myfinance.modalTitle().should('have.text', 'Cash')
         myfinance.accountNameField().type('accountnametest')
         myfinance.balanceFieldCash().type(newValue).should('have.value', '1,000')
-        cy.wait(2000)
         myfinance.createButton().click()
         myfinance.cashAccountCreatedNotification().should('exist') 
         myfinance.transactionCreatedNotification().should('exist')     

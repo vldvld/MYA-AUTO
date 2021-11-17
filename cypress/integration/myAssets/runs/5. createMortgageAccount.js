@@ -1,7 +1,7 @@
-import Login from '../pageObjects/login'
-import Signup from '../pageObjects/signup'
-import MainPage from '../pageObjects/mainPage'
-import myFinance from '../pageObjects/myFinance'
+import Login from '../../../pageObjects/login'
+import Signup from '../../../pageObjects/signup'
+import MainPage from '../../../pageObjects/mainPage'
+import myFinance from '../../../pageObjects/myFinance'
 
 describe('Creating and testing the Mortgage account', function () 
 {
@@ -31,7 +31,7 @@ describe('Creating and testing the Mortgage account', function ()
         myfinance.bankInstitutionField().tab().type('{enter}')
         myfinance.bankInstitutionField().should('have.value', 'ZIA Credit Union')
         myfinance.outstandingAmmount().type(newValue).should('have.value', '1,000')
-        cy.wait(100)
+        cy.wait(150)
         myfinance.nextButton().click()
         myfinance.createButton().click()
         myfinance.mortgageCreatedNotification().should('exist')

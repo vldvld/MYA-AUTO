@@ -1,6 +1,6 @@
-import Login from '../pageObjects/login'
-import Signup from '../pageObjects/signup'
-import Mainpage from '../pageObjects/mainPage'
+import Login from '../../../pageObjects/login'
+import Signup from '../../../pageObjects/signup'
+import Mainpage from '../../../pageObjects/mainPage'
 
 describe('Sign up flow / log in flow tests', function () 
 {
@@ -58,17 +58,14 @@ describe('Sign up flow / log in flow tests', function ()
         signup.stripeCvc().type('987')
         signup.stripePostal().type('12345')
         signup.subscribeButton().click()
-        cy.contains('Subscription created!',{ timeout: 30000 })
+        cy.contains('Subscription created!',{ timeout: 20000 })
         signup.completeButton().click()
-        signup.selectButton().click().click()
-        
-        
-     
+        signup.selectButton({ timeout: 20000 }).click()
     })
 
     it('Logout', function ()
     {
-        mainpage.personalAccountMenu().click()
+        mainpage.personalAccountMenu({ timeout: 20000 }).click()
         cy.contains('Personal Account').should('exist')
         mainpage.signOut().click()
         cy.url().should('eq', 'https://myassetstest.web.app/auth/login')

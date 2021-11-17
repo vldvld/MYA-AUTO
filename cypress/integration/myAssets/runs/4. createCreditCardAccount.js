@@ -1,7 +1,7 @@
-import Login from '../pageObjects/login'
-import Signup from '../pageObjects/signup'
-import MainPage from '../pageObjects/mainPage'
-import myFinance from '../pageObjects/myFinance'
+import Login from '../../../pageObjects/login'
+import Signup from '../../../pageObjects/signup'
+import MainPage from '../../../pageObjects/mainPage'
+import myFinance from '../../../pageObjects/myFinance'
 
 describe('Creating and testing the credit card account', function () 
 {
