@@ -1,0 +1,59 @@
+class property{
+    email(){
+        return cy.get('[name="email"]')
+    }
+    myPropertyPlusButton(){
+        return cy.get('.MuiFab-root')
+    }
+    propertyName(){
+        return cy.get('[name="propertyName"]')
+    }
+    nextButton(){
+        return cy.contains('Next')
+    }
+    propertyType(){
+        return cy.get('#propertyType')
+    }
+    ownershipType(){
+        return cy.get('.MuiSelect-root')
+    }
+    locationField(){
+        return cy.get('#location')
+    }
+    saveAndClose(){
+        return cy.contains('Save and close')
+    }
+    listPrice(){
+        return cy.get('#listPrice')
+    }
+    bedroomsNumber(){
+        return cy.get('#bedroomsNumber')
+    }
+    propertyCollectiblesValue(){
+        return cy.get('[data-cy=property-collectibles-value]',{ timeout: 18000 })
+    }
+    propertyLiability(){
+        return cy.get('[data-cy=property-collectibles-liabilities]',{ timeout: 18000 })
+    }
+    propertyCollectiblesNetValue(){
+        return cy.get('[data-cy=property-collectibles-net-value]',{ timeout: 18000 })
+    }
+    propertyCreatedNotification(){
+        return cy.contains('Property Asset was created')
+    }
+    name(){
+        return cy.get('')
+    }
+    name(){
+        return cy.get('')
+    }
+    name(){
+        return cy.get('')
+    }
+    name(){
+        return cy.get('')
+    }
+
+
+}
+export default property
