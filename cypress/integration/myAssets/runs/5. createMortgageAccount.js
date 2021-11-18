@@ -39,8 +39,14 @@ describe('Creating and testing the Mortgage account', function ()
     
         
 })
-    it('Check the C&B collectibles widget ', function()
-    {
-    
+it('Check the Net value C&B collectibles widgets', function()
+  {
+        myfinance.cbNetValueWidget().then($valueState => {
+        const previousNetValueCBWidget = $valueState.text() 
+        myfinance.cbNetValueWidget().should('have.text', previousNetValueCBWidget) 
+        const previousNetValueInt = previousNetValueCBWidget.substr(4)  
+        const resultNetValueCBWidget = parseInt(previousNetValueInt.replace(",", "") ) - newValue 
+        myfinance.cbNetValueWidget().should('have.text', currency + internationalNumberFormat.format(resultNetValueCBWidget))   
     })
+})  
 })

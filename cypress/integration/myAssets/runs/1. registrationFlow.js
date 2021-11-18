@@ -60,11 +60,13 @@ describe('Sign up flow / log in flow tests', function ()
         signup.subscribeButton().click()
         cy.contains('Subscription created!',{ timeout: 20000 })
         signup.completeButton().click()
+        cy.wait(100)
         signup.selectButton({ timeout: 20000 }).click()
     })
 
     it('Logout', function ()
     {
+        signup.selectButton({ timeout: 20000 }).click().click()
         mainpage.personalAccountMenu({ timeout: 20000 }).click()
         cy.contains('Personal Account').should('exist')
         mainpage.signOut().click()

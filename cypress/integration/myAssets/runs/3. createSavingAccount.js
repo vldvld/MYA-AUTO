@@ -38,8 +38,14 @@ describe('Creating and testing a  saving account', function ()
         myfinance.transactionCreatedNotification().should('exist')
         
 })
-    it('Check the C&B collectibles widget ', function()
+       it('Check the C&B collectibles widgets', function()
     {
-    
+        myfinance.cbValueWidget().then($valueState => {
+        const previousValueCBWidget = $valueState.text() 
+        myfinance.cbValueWidget().should('have.text', previousValueCBWidget) 
+        const previousValueInt = previousValueCBWidget.substr(4)  
+        const resultValueCBWidget = parseInt(previousValueInt.replace(",", "") ) + newValue 
+        myfinance.cbValueWidget().should('have.text', currency + internationalNumberFormat.format(resultValueCBWidget))   
     })
+})  
 })

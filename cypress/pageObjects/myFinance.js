@@ -67,10 +67,10 @@ cbValueWidget(){
     return cy.get('[data-cy=cb-collectibles-value]',{ timeout: 18000 })
 }
 cbLiabilityWidget(){
-    return cy.get('data-cy="cb-collectibles-liabilities"')
+    return cy.get('[data-cy=cb-collectibles-liabilities]',{ timeout: 18000 })
 }
 cbNetValueWidget(){
-    return cy.get('data-cy="cb-collectibles-net-value"')
+    return cy.get('[data-cy=cb-collectibles-net-value]',{ timeout: 18000 })
 }
 ziaBankInstitution(){
     return cy.get('[role=menu]').contains('ZIA Credit Union', { timeout: 18000 })
