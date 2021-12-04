@@ -78,6 +78,9 @@ ziaBankInstitution(){
 outstandingAmmount(){
     return cy.get('#outstandingAmount')
 }
+cashAndBankingTab(){
+    return cy.get('[href="/finances/accounts"]')
+}
 
 }
     export default myfinance

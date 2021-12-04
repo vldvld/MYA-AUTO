@@ -39,13 +39,13 @@ class property{
         return cy.get('[data-cy=property-collectibles-net-value]',{ timeout: 18000 })
     }
     propertyCreatedNotification(){
-        return cy.contains('Property Asset was created')
+        return cy.contains('Property Asset was created',{ timeout: 18000 })
     }
-    name(){
-        return cy.get('')
+    myPropertiesTab(){
+        return cy.get('[data-cy=properties-tab-btn]')
     }
-    name(){
-        return cy.get('')
+    npopertySummaryTab(){
+        return cy.get('[data-cy=property-summary-tab-btn]')
     }
     name(){
         return cy.get('')

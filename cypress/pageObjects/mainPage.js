@@ -38,5 +38,8 @@ class mainpage{
     goToDocumentVault(){
       return cy.get('[title="Document Vault"]')
   }
+    homePageUrl(){
+      return cy.url().should('eq', 'https://myassetstest.web.app/')
+    }
 }
 export default mainpage

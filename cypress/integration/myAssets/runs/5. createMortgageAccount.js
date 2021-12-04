@@ -17,8 +17,10 @@ describe('Creating and testing the Mortgage account', function ()
     {
         cy.goToLoginPage()
         cy.loginCommand("automationtests1@gmail.com", "testuser1")
-        cy.url().should('eq', 'https://myassetstest.web.app/finances/accounts')
+        mainpage.homePageUrl()
 
+        mainpage.goToMyFinance().click()
+        myfinance.cashAndBankingTab().click()
         myfinance.myFinancePlusButton().click()
         cy.contains('Account').should('exist')
         myfinance.selectAccountDropDown().click()
