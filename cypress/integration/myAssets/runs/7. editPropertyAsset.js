@@ -20,10 +20,10 @@ describe('Creating and testing the Mortgage account', function ()
     {
         cy.goToLoginPage()
         cy.loginCommand("automationtests1@gmail.com", "testuser1")
-        cy.url().should('eq', 'https://myassetstest.web.app/')
+        mainpage.homePageUrl()
 
         mainpage.goToMyProperty().click()
-        cy.url().should('eq', 'https://myassetstest.web.app/properties/summary')
+        cy.url().should('eq', `${Cypress.config().baseUrl}properties/summary`)
 
         myproperty.myPropertiesTab().click()
         cy.contains('Activity log').should('not.exist');

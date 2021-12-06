@@ -27,7 +27,7 @@ const testName = "AUTOMATEDPROPERTY #" +`${id}`
         mainpage.homePageUrl()
 
         mainpage.goToMyProperty().click()
-        cy.url().should('eq', 'https://myassetstest.web.app/properties/summary')
+        cy.url().should('eq', `${Cypress.config().baseUrl}properties/summary`)
 
         myproperty.myPropertyPlusButton().click()
         cy.contains('Create Property').should('exist')
