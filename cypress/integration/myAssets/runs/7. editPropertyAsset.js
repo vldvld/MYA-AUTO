@@ -16,7 +16,7 @@ describe('Creating and testing the Mortgage account', function ()
     const newValue = 1000
     const internationalNumberFormat = new Intl.NumberFormat('en-US')
 
-   it('Go to the MyFinance page and create the Mortgage ccount', function()
+   it('Go to the Property page and edit the property', function()
     {
         cy.goToLoginPage()
         cy.loginCommand("automationtests1@gmail.com", "testuser1")
@@ -32,7 +32,7 @@ describe('Creating and testing the Mortgage account', function ()
 })
 
 })
-it('Check the Net value C&B collectibles widgets', function()
+it('', function()
   {
     
     })
