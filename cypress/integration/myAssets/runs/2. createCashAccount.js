@@ -41,7 +41,7 @@ describe('Creating Cash account', function ()
         myfinance.cbValueWidget().should('have.text', previousValueCBWidget) 
         const previousValueInt = previousValueCBWidget.substr(4)  
         const resultValueCBWidget = parseInt(previousValueInt.replace(",", "") ) + newValue 
-        myfinance.cbValueWidget().should('have.text', currency + internationalNumberFormat.format(resultValueCBWidget))   
+        myfinance.cbValueWidget().should('have.text', currency + internationalNumberFormat.format(resultValueCBWidget, { timeout: 18000 }))   
     })
 })  
 })
