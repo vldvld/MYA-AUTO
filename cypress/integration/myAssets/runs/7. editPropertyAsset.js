@@ -5,6 +5,10 @@ import MainPage from '../../../pageObjects/mainPage'
 import myFinance from '../../../pageObjects/myFinance'
 import myProperty from '../../../pageObjects/myProperty'
 
+Cypress.on('uncaught:exception', (err, runnable) => {
+  return false
+})
+
 describe('Creating and testing the Mortgage account', function () 
 {
     const login = new Login()
@@ -15,6 +19,10 @@ describe('Creating and testing the Mortgage account', function ()
     const currency = 'USD '
     const newValue = 1000
     const internationalNumberFormat = new Intl.NumberFormat('en-US')
+
+    Cypress.on('uncaught:exception', (err, runnable) => {
+      return false
+  })
 
    it('Go to the Property page and edit the property', function()
     {
@@ -27,7 +35,7 @@ describe('Creating and testing the Mortgage account', function ()
 
         myproperty.myPropertiesTab().click()
         cy.contains('Activity log').should('not.exist');
-        cy.contains('AUTOMATEDPROPERTY',{ timeout: 18000 }).click()
+        cy.contains('AUTOMATEDPROPERTY',{ timeout: 30000 }).click()
     
 })
 

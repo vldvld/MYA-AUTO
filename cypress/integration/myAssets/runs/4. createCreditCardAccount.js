@@ -3,6 +3,10 @@ import Signup from '../../../pageObjects/signup'
 import MainPage from '../../../pageObjects/mainPage'
 import myFinance from '../../../pageObjects/myFinance'
 
+Cypress.on('uncaught:exception', (err, runnable) => {
+    return false
+})
+
 describe('Creating and testing the credit card account', function () 
 {
     const login = new Login()

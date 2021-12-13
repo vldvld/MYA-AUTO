@@ -55,25 +55,25 @@ mortgageCreatedNotification(){
     return cy.contains('Mortgage Account was created')
 }
 cashAccountCreatedNotification(){
-    return cy.contains('Cash Account was created', { timeout: 18000 })
+    return cy.contains('Cash Account was created', { timeout: 30000 })
 }
 creditAccountCreatedNotification(){
-    return cy.contains('Credit Card Account was created', { timeout: 18000 })
+    return cy.contains('Credit Card Account was created', { timeout: 30000 })
 }
 transactionCreatedNotification(){
-    return cy.contains('Transaction was created', { timeout: 18000 })
+    return cy.contains('Transaction was created', { timeout: 30000 })
 }
 cbValueWidget(){
-    return cy.get('[data-cy=cb-collectibles-value]',{ timeout: 18000 })
+    return cy.get('[data-cy=cb-collectibles-value]',{ timeout: 30000 })
 }
 cbLiabilityWidget(){
-    return cy.get('[data-cy=cb-collectibles-liabilities]',{ timeout: 18000 })
+    return cy.get('[data-cy=cb-collectibles-liabilities]',{ timeout: 30000 })
 }
 cbNetValueWidget(){
-    return cy.get('[data-cy=cb-collectibles-net-value]',{ timeout: 18000 })
+    return cy.get('[data-cy=cb-collectibles-net-value]',{ timeout: 30000 })
 }
 ziaBankInstitution(){
-    return cy.get('[role=menu]').contains('ZIA Credit Union', { timeout: 18000 })
+    return cy.get('[role=menu]').contains('ZIA Credit Union', { timeout: 30000 })
 }
 outstandingAmmount(){
     return cy.get('#outstandingAmount')

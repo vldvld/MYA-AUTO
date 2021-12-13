@@ -30,16 +30,16 @@ class property{
         return cy.get('#bedroomsNumber')
     }
     propertyCollectiblesValue(){
-        return cy.get('[data-cy=property-collectibles-value]',{ timeout: 18000 })
+        return cy.get('[data-cy=property-collectibles-value]', { timeout: 30000 })
     }
     propertyLiability(){
-        return cy.get('[data-cy=property-collectibles-liabilities]',{ timeout: 18000 })
+        return cy.get('[data-cy=property-collectibles-liabilities]', { timeout: 30000 })
     }
     propertyCollectiblesNetValue(){
-        return cy.get('[data-cy=property-collectibles-net-value]',{ timeout: 18000 })
+        return cy.get('[data-cy=property-collectibles-net-value]', { timeout: 30000 })
     }
     propertyCreatedNotification(){
-        return cy.contains('Property Asset was created',{ timeout: 18000 })
+        return cy.contains('Property Asset was created', { timeout: 30000})
     }
     myPropertiesTab(){
         return cy.get('[data-cy=properties-tab-btn]')

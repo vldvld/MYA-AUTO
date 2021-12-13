@@ -4,6 +4,10 @@ import MainPage from '../../../pageObjects/mainPage'
 import myFinance from '../../../pageObjects/myFinance'
 import myProperty from '../../../pageObjects/myProperty'
 
+Cypress.on('uncaught:exception', (err, runnable) => {
+    return false
+})
+
 describe('Creating a property asset', function () 
 {
     const login = new Login()
@@ -38,15 +42,15 @@ const testName = "AUTOMATEDPROPERTY #" +`${id}`
         myproperty.ownershipType().type('{enter}')
 
         myproperty.nextButton().click()
-        myproperty.locationField().type('Trinklera 9')
-        cy.wait(500)
-        cy.get('[role="option"]').contains('Trinklera entrance, 9, Kharkiv, Kharkiv Oblast, Ukraine').trigger("click");
-
+        myproperty.locationField().type('74A Hoxton St, London')
+        cy.wait(400)
+        cy.get('[role="option"]', { timeout: 20000 }).contains('74A Hoxton St, London, UK').trigger("click");
+        cy.wait(300) 
         myproperty.nextButton().click()
         myproperty.bedroomsNumber().type('1')
         cy.contains('Configure').click()
         cy.get('#kingBeds').type(1)
-        myproperty.saveAndClose().click()
+        myproperty.saveAndClose().click()   
 
         myproperty.nextButton().click()
         myproperty.nextButton().click()

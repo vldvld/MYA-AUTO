@@ -3,6 +3,12 @@ import Signup from '../../../pageObjects/signup'
 import MainPage from '../../../pageObjects/mainPage'
 import myFinance from '../../../pageObjects/myFinance'
 
+Cypress.on('uncaught:exception', (err, runnable) => {
+    // returning false here prevents Cypress from
+    // failing the test
+    return false
+})
+
 describe('Creating Cash account', function () 
 {
     const login = new Login()
@@ -12,7 +18,7 @@ describe('Creating Cash account', function ()
     const currency = 'USD '
     const newValue = 1000
     const internationalNumberFormat = new Intl.NumberFormat('en-US')
-    
+
    it('Go to the MyFinance page and create the Cash account', function()
     {
         cy.goToLoginPage()
