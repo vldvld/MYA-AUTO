@@ -54,5 +54,37 @@ it('Check the Net value C&B collectibles widgets', function()
         const resultNetValueCBWidget = parseInt(previousNetValueInt.replace(",", "") ) - newValue 
         myfinance.cbNetValueWidget().should('have.text', currency + internationalNumberFormat.format(resultNetValueCBWidget))   
     })
+
+})
+
+it('Check the Liability widget', function()
+{
+        myfinance.myFinancePlusButton().click()
+        cy.contains('Account').should('exist')
+        myfinance.selectAccountDropDown().click()
+        myfinance.selectMortgageAccount().click()
+        myfinance.nextButton().click()
+        myfinance.modalTitle().should('have.text', 'Mortgage Account')
+        myfinance.accountNameField().type('accountnametest')
+        myfinance.bankInstitutionField().type("ZIA")
+        myfinance.ziaBankInstitution().should('exist')
+        myfinance.bankInstitutionField().tab().type('{enter}')
+        myfinance.bankInstitutionField().should('have.value', 'ZIA Credit Union')
+        myfinance.outstandingAmmount().type(newValue).should('have.value', '1,000')
+        cy.wait(150)
+        myfinance.nextButton().click()
+        myfinance.createButton().click()
+        myfinance.mortgageCreatedNotification().should('exist')
+        myfinance.transactionCreatedNotification().should('exist')
+
+        myfinance.cbLiabilityWidget().then($valueLiabilityState => {
+        const previousLiabilityWidget = $valueLiabilityState.text() 
+        myfinance.cbLiabilityWidget().should('have.text', previousLiabilityWidget) 
+        const previousLiabilityWidgetInt = previousLiabilityWidget.replace(/[^\d.-]/g, '')
+        const resultLiabilityWidget = parseInt(previousLiabilityWidgetInt.substr() ) + newValue 
+        cy.log(resultLiabilityWidget)
+        myfinance.cbLiabilityWidget().should('have.text', currency + '(' + internationalNumberFormat.format(resultLiabilityWidget) + ')' )   
+})
+
 })  
 })

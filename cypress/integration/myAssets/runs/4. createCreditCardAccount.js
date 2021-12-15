@@ -44,7 +44,7 @@ describe('Creating and testing the credit card account', function ()
         
 })
         it('Check the Net value C&B collectibles widgets', function()
-  {
+    {
         myfinance.cbNetValueWidget().then($valueState => {
         const previousNetValueCBWidget = $valueState.text() 
         myfinance.cbNetValueWidget().should('have.text', previousNetValueCBWidget) 
@@ -52,5 +52,34 @@ describe('Creating and testing the credit card account', function ()
         const resultNetValueCBWidget = parseInt(previousNetValueInt.replace(",", "") ) - newValue 
         myfinance.cbNetValueWidget().should('have.text', currency + internationalNumberFormat.format(resultNetValueCBWidget))   
     })
+})
+
+        it('Check the Libility widget', function()
+    {
+        myfinance.myFinancePlusButton().click()
+        cy.contains('Account').should('exist')
+        myfinance.selectAccountDropDown().click()
+        myfinance.selectCreditAccount().click()
+        myfinance.nextButton().click()
+        myfinance.modalTitle().should('have.text', 'Credit Card Account')
+        myfinance.accountNameField().type('accountnametest')
+        myfinance.bankInstitutionField().type("ZIA")
+        myfinance.ziaBankInstitution().should('exist')
+        myfinance.bankInstitutionField().tab().type('{enter}')
+        myfinance.bankInstitutionField().should('have.value', 'ZIA Credit Union')
+        myfinance.balanceFieldCash().type(newValue).should('have.value', '1,000')
+        cy.wait(200)
+        myfinance.createButton().click()
+    
+        myfinance.cbLiabilityWidget().then($valueLiabilityState => {
+        const previousLiabilityWidget = $valueLiabilityState.text() 
+        myfinance.cbLiabilityWidget().should('have.text', previousLiabilityWidget) 
+        const previousLiabilityWidgetInt = previousLiabilityWidget.replace(/[^\d.-]/g, '')
+        const resultLiabilityWidget = parseInt(previousLiabilityWidgetInt.substr() ) + newValue 
+        cy.log(resultLiabilityWidget)
+        myfinance.cbLiabilityWidget().should('have.text', currency + '(' + internationalNumberFormat.format(resultLiabilityWidget) + ')' )   
+      })
 })  
+
+
 })

@@ -42,9 +42,9 @@ const testName = "AUTOMATEDPROPERTY #" +`${id}`
         myproperty.ownershipType().type('{enter}')
 
         myproperty.nextButton().click()
-        myproperty.locationField().type('74A Hoxton St, London')
-        cy.wait(400)
-        cy.get('[role="option"]', { timeout: 20000 }).contains('74A Hoxton St, London, UK').trigger("click");
+        myproperty.locationField().type('London')
+        cy.wait(1000)
+        cy.get('[role="option"]', { timeout: 20000 }).contains('London, UK').trigger("click");
         cy.wait(300) 
         myproperty.nextButton().click()
         myproperty.bedroomsNumber().type('1')

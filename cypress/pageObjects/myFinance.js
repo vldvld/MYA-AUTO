@@ -60,6 +60,12 @@ cashAccountCreatedNotification(){
 creditAccountCreatedNotification(){
     return cy.contains('Credit Card Account was created', { timeout: 30000 })
 }
+loanAccountCreatedNotification(){
+    return cy.contains('Loan Account was created', { timeout: 30000 })
+}
+currentAccountCreatedNotification(){
+    return cy.contains('Current Account was created', { timeout: 30000 })
+}
 transactionCreatedNotification(){
     return cy.contains('Transaction was created', { timeout: 30000 })
 }
@@ -81,6 +87,7 @@ outstandingAmmount(){
 cashAndBankingTab(){
     return cy.get('[href="/finances/accounts"]')
 }
+
 
 }
     export default myfinance

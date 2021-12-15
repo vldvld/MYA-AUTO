@@ -4,8 +4,6 @@ import MainPage from '../../../pageObjects/mainPage'
 import myFinance from '../../../pageObjects/myFinance'
 
 Cypress.on('uncaught:exception', (err, runnable) => {
-    // returning false here prevents Cypress from
-    // failing the test
     return false
 })
 
@@ -23,7 +21,7 @@ describe('Creating Cash account', function ()
     {
         cy.goToLoginPage()
         cy.loginCommand("automationtests1@gmail.com", "testuser1")
-        mainpage.homePageUrl()
+    //    mainpage.homePageUrl()
         
         mainpage.goToMyFinance().click()
         myfinance.cashAndBankingTab().click()
