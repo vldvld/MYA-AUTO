@@ -49,11 +49,11 @@ describe('Creating a Loan account and testing the C&B widgets', function ()
 
     it('Check the Liability widget', function()
     {
-        myfinance.cbLiabilityWidget().then($valueLiabilityState => {
+       myfinance.cbLiabilityWidget().then($valueLiabilityState => {
         const previousLiabilityWidget = $valueLiabilityState.text() 
         myfinance.cbLiabilityWidget().should('have.text', previousLiabilityWidget) 
-        const previousLiabilityWidgetInt = previousLiabilityWidget.replace(/[^\d.-]/g, '')
-        const resultLiabilityWidget = parseInt(previousLiabilityWidgetInt.substr() ) + newValue 
+        const previousLiabilityWidgetInt = previousLiabilityWidget.substr(5)  
+        const resultLiabilityWidget = parseInt(previousLiabilityWidgetInt.replace(",", "")) + newValue 
         cy.log(resultLiabilityWidget)
         myfinance.cbLiabilityWidget().should('have.text', currency + '(' + internationalNumberFormat.format(resultLiabilityWidget) + ')' )   
     })

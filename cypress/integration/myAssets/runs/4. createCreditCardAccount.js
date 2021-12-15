@@ -44,17 +44,17 @@ describe('Creating and testing the credit card account', function ()
         
 })
         it('Check the Net value C&B collectibles widgets', function()
-    {
+      {
         myfinance.cbNetValueWidget().then($valueState => {
         const previousNetValueCBWidget = $valueState.text() 
         myfinance.cbNetValueWidget().should('have.text', previousNetValueCBWidget) 
-        const previousNetValueInt = previousNetValueCBWidget.substr(4)  
-        const resultNetValueCBWidget = parseInt(previousNetValueInt.replace(",", "") ) - newValue 
-        myfinance.cbNetValueWidget().should('have.text', currency + internationalNumberFormat.format(resultNetValueCBWidget))   
+        const previousNetValueInt = previousNetValueCBWidget.substr(5)  
+        const resultNetValueCBWidget = parseInt(previousNetValueInt.replace(",", "") ) + newValue 
+        myfinance.cbNetValueWidget().should('have.text', currency + '(' + internationalNumberFormat.format(resultNetValueCBWidget) + ')' )   
     })
 })
 
-        it('Check the Libility widget', function()
+        it('Check the Liability widget', function()
     {
         myfinance.myFinancePlusButton().click()
         cy.contains('Account').should('exist')
@@ -71,11 +71,11 @@ describe('Creating and testing the credit card account', function ()
         cy.wait(200)
         myfinance.createButton().click()
     
-        myfinance.cbLiabilityWidget().then($valueLiabilityState => {
+       myfinance.cbLiabilityWidget().then($valueLiabilityState => {
         const previousLiabilityWidget = $valueLiabilityState.text() 
         myfinance.cbLiabilityWidget().should('have.text', previousLiabilityWidget) 
-        const previousLiabilityWidgetInt = previousLiabilityWidget.replace(/[^\d.-]/g, '')
-        const resultLiabilityWidget = parseInt(previousLiabilityWidgetInt.substr() ) + newValue 
+        const previousLiabilityWidgetInt = previousLiabilityWidget.substr(5)  
+        const resultLiabilityWidget = parseInt(previousLiabilityWidgetInt.replace(",", "")) + newValue 
         cy.log(resultLiabilityWidget)
         myfinance.cbLiabilityWidget().should('have.text', currency + '(' + internationalNumberFormat.format(resultLiabilityWidget) + ')' )   
       })
