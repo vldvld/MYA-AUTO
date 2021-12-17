@@ -19,10 +19,10 @@ describe('Creating a property asset', function ()
     const currency = 'USD '
     const internationalNumberFormat = new Intl.NumberFormat('en-US')
 
-//Create random property name
-const name = () => Cypress._.random(0, 1e6)
-const id = name()
-const testName = "AUTOMATEDPROPERTY #" +`${id}`
+    //Create random property name
+    const name = () => Cypress._.random(0, 1e6)
+    const id = name()
+    const testName = "AUTOMATEDPROPERTY #" +`${id}`
 
    it('Go to the Property page and create the property', function()
     {
@@ -44,7 +44,7 @@ const testName = "AUTOMATEDPROPERTY #" +`${id}`
         myproperty.nextButton().click()
         myproperty.locationField().type('London')
         cy.wait(1000)
-        cy.get('[role="option"]', { timeout: 20000 }).contains('London, UK').trigger("click");
+        cy.get('[role="option"]', { timeout: 20000 }).contains('London, UK').trigger("click")
         cy.wait(300) 
         myproperty.nextButton().click()
         myproperty.bedroomsNumber().type('1')
@@ -64,7 +64,7 @@ const testName = "AUTOMATEDPROPERTY #" +`${id}`
         
        
     })  
-    it('Check the value of the collectibles widget', function()
+    it('Check the Collectibles Value widget', function()
     {   
         myproperty.propertyCollectiblesValue().then($valueState => {
         const previousValueWidget = $valueState.text() 

@@ -21,7 +21,7 @@ describe('Creating Cash account', function ()
     {
         cy.goToLoginPage()
         cy.loginCommand("automationtests1@gmail.com", "testuser1")
-    //    mainpage.homePageUrl()
+        mainpage.homePageUrl()
         
         mainpage.goToMyFinance().click()
         myfinance.cashAndBankingTab().click()
@@ -38,7 +38,7 @@ describe('Creating Cash account', function ()
         myfinance.cashAccountCreatedNotification().should('exist') 
         myfinance.transactionCreatedNotification().should('exist')     
     })
-    it('Check the C&B collectibles widgets', function()
+    it('Check the collectibles Value widget', function()
     {
         myfinance.cbValueWidget().then($valueState => {
         const previousValueCBWidget = $valueState.text() 
