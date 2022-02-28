@@ -1,5 +1,6 @@
 node_modules
 .DS_Store
+.idea
 examples
 cypress.json
 cypress/videos/*
