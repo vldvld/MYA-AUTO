@@ -79,7 +79,7 @@ cbNetValueWidget(){
     return cy.get('[data-cy=cb-collectibles-net-value]',{ timeout: 30000 })
 }
 ziaBankInstitution(){
-    return cy.get('[role=menu]').contains('ZIA Credit Union', { timeout: 30000 })
+    return cy.get('[role=menu]').contains('Zions Bank - Mortgage', { timeout: 30000 })
 }
 outstandingAmmount(){
     return cy.get('#outstandingAmount')

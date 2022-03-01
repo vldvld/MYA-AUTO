@@ -16,11 +16,11 @@ describe('Creating Cash account', function ()
     const currency = 'USD '
     const newValue = 1000
     const internationalNumberFormat = new Intl.NumberFormat('en-US')
-
+    
    it('Go to the MyFinance page and create the Cash account', function()
     {
         cy.goToLoginPage()
-        cy.loginCommand("automationtests1@gmail.com", "testuser1")
+        cy.loginCommand("automationtests3@gmail.com", "testuser1")
         mainpage.homePageUrl()
         
         mainpage.goToMyFinance().click()
@@ -49,5 +49,3 @@ describe('Creating Cash account', function ()
     })
 })  
 })
-
-

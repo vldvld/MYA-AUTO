@@ -20,7 +20,7 @@ describe('Creating a Loan account and testing the C&B widgets', function ()
    it('Go to the MyFinance page and create the Cash account', function()
     {
         cy.goToLoginPage()
-        cy.loginCommand("automationtests1@gmail.com", "testuser1")
+        cy.loginCommand("automationtests3@gmail.com", "testuser1")
         mainpage.homePageUrl()
         
         mainpage.goToMyFinance().click()
@@ -33,10 +33,10 @@ describe('Creating a Loan account and testing the C&B widgets', function ()
         myfinance.modalTitle().should('have.text', 'Loan Account')
         
         myfinance.accountNameField().type('accountnametest')
-        myfinance.bankInstitutionField().type("ZIA")
+        myfinance.bankInstitutionField().type("Zion")
         myfinance.ziaBankInstitution().should('exist')
         myfinance.bankInstitutionField().tab().type('{enter}')
-        myfinance.bankInstitutionField().should('have.value', 'ZIA Credit Union')
+        myfinance.bankInstitutionField().should('have.value', 'Zions Bank - Mortgage')
 
         myfinance.outstandingAmmount().type(newValue).should('have.value', '1,000')
         cy.wait(200)
@@ -49,13 +49,13 @@ describe('Creating a Loan account and testing the C&B widgets', function ()
 
     it('Check the Liability widget', function()
     {
-       myfinance.cbLiabilityWidget().then($valueLiabilityState => {
-        const previousLiabilityWidget = $valueLiabilityState.text() 
-        myfinance.cbLiabilityWidget().should('have.text', previousLiabilityWidget) 
-        const previousLiabilityWidgetInt = previousLiabilityWidget.substr(5)  
-        const resultLiabilityWidget = parseInt(previousLiabilityWidgetInt.replace(",", "")) + newValue 
-        cy.log(resultLiabilityWidget)
-        myfinance.cbLiabilityWidget().should('have.text', currency + '(' + internationalNumberFormat.format(resultLiabilityWidget) + ')' )   
+        myfinance.cbLiabilityWidget().then($valueLiabilityState => {
+            const previousLiabilityWidget = $valueLiabilityState.text() 
+            myfinance.cbLiabilityWidget().should('have.text', previousLiabilityWidget) 
+            const previousLiabilityWidgetInt = previousLiabilityWidget.substr(5)  
+            const resultLiabilityWidget = parseInt(previousLiabilityWidgetInt.replace(",", "")) + newValue 
+            cy.log(resultLiabilityWidget)
+            myfinance.cbLiabilityWidget().should('have.text', currency + '(' + internationalNumberFormat.format(resultLiabilityWidget) + ')' )   
     })
 //PUT A NET VALUE TEST CODE HERE
 })  

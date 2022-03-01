@@ -30,7 +30,7 @@ describe('Creating an Art asset', function ()
    it('Go to the My collectibles page and create an art asset', function()
     {
         cy.goToLoginPage()
-        cy.loginCommand("automationtests1@gmail.com", "testuser1")
+        cy.loginCommand("automationtests3@gmail.com", "testuser1")
         mainpage.homePageUrl()
 
         mainpage.goToMyCollection().click()

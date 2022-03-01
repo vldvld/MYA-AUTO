@@ -22,7 +22,6 @@ class signup{
     }
     monthlyCompleteButton(){
         return cy.contains('div', 'Continue').find('button').first() 
-        // was before - return cy.get(':nth-child(2) > .jss319 > .MuiButtonBase-root')
     }
     backButtonStripeForm(){
         return cy.contains('Back')

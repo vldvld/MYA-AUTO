@@ -27,7 +27,7 @@ describe('Creating a property asset', function ()
    it('Go to the Property page and create the property', function()
     {
         cy.goToLoginPage()
-        cy.loginCommand("automationtests1@gmail.com", "testuser1")
+        cy.loginCommand("automationtests3@gmail.com", "testuser1")
         mainpage.homePageUrl()
 
         mainpage.goToMyProperty().click()
@@ -60,7 +60,7 @@ describe('Creating a property asset', function ()
         myproperty.nextButton().click()
         myproperty.saveAndClose().click()
 
-        myproperty.propertyCreatedNotification()
+        myproperty.propertyCreatedNotification().should('exist') 
         
        
     })  

@@ -39,7 +39,7 @@ class mainpage{
       return cy.get('[title="Document Vault"]')
   }
     homePageUrl(){
-      return cy.url().should('eq', `${Cypress.config().baseUrl}`)
+      return cy.url().should('eq', `${Cypress.config().baseUrl}auth/login`)
     }
 }
 export default mainpage

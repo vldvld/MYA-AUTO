@@ -10,7 +10,7 @@ Cypress.on('uncaught:exception', (err, runnable) => {
     return false
 })
 
-describe('Creating an Art asset', function () 
+describe('Creating an Other asset', function () 
 {
     const login = new Login()
     const signup = new Signup()
@@ -32,7 +32,7 @@ describe('Creating an Art asset', function ()
    it('Go to the My belongings page and create an other asset', function()
     {
         cy.goToLoginPage()
-        cy.loginCommand("automationtests1@gmail.com", "testuser1")
+        cy.loginCommand("automationtests3@gmail.com", "testuser1")
         mainpage.homePageUrl()
 
         mainpage.goToMyBelongings().click()
