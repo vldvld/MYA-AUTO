@@ -36,7 +36,7 @@ describe('Creating a Loan account and testing the C&B widgets', function ()
         myfinance.bankInstitutionField().type("Zion")
         myfinance.ziaBankInstitution().should('exist')
         myfinance.bankInstitutionField().tab().type('{enter}')
-        myfinance.bankInstitutionField().should('have.value', 'Zions Bank - Mortgage')
+        myfinance.bankInstitutionField().should('have.value', 'Zions Bank - Personal')
 
         myfinance.outstandingAmmount().type(newValue).should('have.value', '1,000')
         cy.wait(200)

@@ -22,7 +22,7 @@ purchaseDateField(){
     return cy.get('[placeholder="MM/DD/YYYY"]').first()
 }
 saveAndClose(){
-    return cy.contains('Save and close')
+    return cy.contains('Save and Close')
 }
 artCreatedNotification(){
     return cy.contains('Art Asset was created', { timeout: 30000})

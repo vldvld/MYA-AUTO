@@ -34,7 +34,7 @@ Cypress.Commands.add(
     (username, password) => {
     cy.get('[name="email"]').type(username)
     cy.get('[name="password"]').type(password)
-    cy.get(':nth-child(4) > .MuiButtonBase-root').click()
+    cy.get('[data-cy=login-btn]').click()
 });
 
 Cypress.Commands.add(

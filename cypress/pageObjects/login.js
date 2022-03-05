@@ -6,7 +6,7 @@ class login{
         return cy.get('[name="password"]')
     }
     submitButton(){
-        return cy.get(':nth-child(4) > .MuiButtonBase-root')
+        return cy.get('[data-cy=login-btn]')
     }
 }
 export default login

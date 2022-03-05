@@ -21,7 +21,7 @@ class property{
         return cy.get('#location')
     }
     saveAndClose(){
-        return cy.contains('Save and close')
+        return cy.contains('Save and Close')
     }
     listPrice(){
         return cy.get('#listPrice')

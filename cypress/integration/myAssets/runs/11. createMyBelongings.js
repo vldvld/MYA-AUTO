@@ -41,7 +41,6 @@ describe('Creating an Other asset', function ()
 
         mybelongings.nameField().type(testName).should('have.value', testName)
         mybelongings.priceField().type(newValue).should('have.value', '1,000').tab().type('1')
-        mybelongings.nextButton().click().click().click().click()
         mybelongings.saveAndClose().click()
         mybelongings.myBelongingsCreatedNotification().should('exist') 
     })  

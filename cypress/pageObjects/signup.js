@@ -1,9 +1,9 @@
 class signup{
-    signUpTab(){
-        return cy.get('#sign-up-tab')
+    createNewAccountButton(){
+        return cy.contains('Create a new account')
     }
-    firstName(){
-        return cy.get('#firstName')
+    userName(){
+        return cy.get('#userName')
     }
     lastName(){
         return cy.get('#lastName')
@@ -30,7 +30,7 @@ class signup{
         return cy.get('#billing-email')
     }
     stripeCard(){
-        return cy.getWithinIframe('[name="cardnumber"]')
+        return cy.getWithinIframe('[name="cardnumber"]',{ timeout: 20000 })
     }
     stripeExpDate(){
         return cy.getWithinIframe('[name="exp-date"]')  
@@ -49,6 +49,12 @@ class signup{
     }
     selectButton(){
         return cy.contains('Select',{ timeout: 15000 })
+    }
+    nextButton(){
+        return cy.contains('[type=button]', 'Next')
+    }
+    accountSettingsNotification(){
+        return cy.contains('    ')
     }
     
 }
