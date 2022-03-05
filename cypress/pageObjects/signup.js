@@ -27,19 +27,19 @@ class signup{
         return cy.contains('Back')
     }
     stripeEmail(){
-        return cy.get('#billing-email')
+        return cy.get('#billing-email',{ timeout: 30000 })
     }
     stripeCard(){
-        return cy.getWithinIframe('[name="cardnumber"]',{ timeout: 20000 })
+        return cy.getWithinIframe('[name="cardnumber"]',{ timeout: 30000 })
     }
     stripeExpDate(){
-        return cy.getWithinIframe('[name="exp-date"]')  
+        return cy.getWithinIframe('[name="exp-date"]',{ timeout: 30000 })  
     }
     stripeCvc(){
-        return cy.getWithinIframe('[name="cvc"]')  
+        return cy.getWithinIframe('[name="cvc"]',{ timeout: 30000 })  
     }
     stripePostal(){
-        return cy.getWithinIframe('[name="postal"]')
+        return cy.getWithinIframe('[name="postal"]',{ timeout: 30000 })
     }
     subscribeButton(){
         return cy.contains('Subscribe')
@@ -51,7 +51,7 @@ class signup{
         return cy.contains('Select',{ timeout: 15000 })
     }
     nextButton(){
-        return cy.contains('[type=button]', 'Next')
+        return cy.contains('Next', { timeout: 25000 })
     }
     accountSettingsNotification(){
         return cy.contains('    ')

@@ -35,6 +35,7 @@ describe('Creating an Art asset', function ()
 
         mainpage.goToMyCollection({ timeout: 20000 }).click()
         cy.url().should('eq', `${Cypress.config().baseUrl}collections/all-assets/dashboard`)
+        cy.wait(500)
         mycollection.myCollectionPlusButton().click()
         
         mycollection.artistField().type('Bob Evans').should('have.value', 'Bob Evans')
