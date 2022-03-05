@@ -33,7 +33,7 @@ describe('Creating an Art asset', function ()
         cy.loginCommand("automationtests3@gmail.com", "testuser1")
         mainpage.homePageUrl()
 
-        mainpage.goToMyCollection().click({ timeout: 20000 })
+        mainpage.goToMyCollection({ timeout: 20000 }).click()
         cy.url().should('eq', `${Cypress.config().baseUrl}collections/all-assets/dashboard`)
         mycollection.myCollectionPlusButton().click()
         
