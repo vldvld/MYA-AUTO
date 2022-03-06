@@ -1,6 +1,6 @@
 class mainpage{
    personalAccountMenu(){
-       return cy.get('[data-cy=personal-account-btn]',{ timeout: 15000 })
+       return cy.get('[data-cy=personal-account-btn]',{ timeout: 20000 })
     }
      accountSettings(){
        return cy.contains('Account Settings')
@@ -21,19 +21,19 @@ class mainpage{
        return cy.contains('Sign out')
     }
      goToMyFinance(){
-        return cy.get('[title="My Finance"]')
+        return cy.get('[title="My Finance"]',{ timeout: 20000 })
     }
      goToMyProperty(){
-        return cy.get('[title="My Property"]')
+        return cy.get('[title="My Property"]',{ timeout: 20000 })
     }
       goToMyCollection(){
-        return cy.get('[title="My Collection"]')
+        return cy.get('[title="My Collection"]',{ timeout: 20000 })
     }
       goToMyBelongings(){
-        return cy.get('[title="My Belongings"]')
+        return cy.get('[title="My Belongings"]',{ timeout: 20000 })
     }
       goToMyGroups(){
-        return cy.get('[title="Groups"]')
+        return cy.get('[title="Groups"]',{ timeout: 20000 })
     }
     goToDocumentVault(){
       return cy.get('[title="Document Vault"]')
