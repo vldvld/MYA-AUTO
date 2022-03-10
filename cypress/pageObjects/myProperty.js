@@ -21,6 +21,9 @@ class property{
         return cy.get('#location')
     }
     saveAndClose(){
+        return cy.get('.MuiPaper-root > .MuiDialogActions-root').contains('Save and Close')
+    }
+    saveAndCloseMain(){
         return cy.contains('Save and Close')
     }
     listPrice(){
