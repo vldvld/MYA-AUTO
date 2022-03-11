@@ -66,7 +66,7 @@ describe('Sign up flow / Sign in flow tests', function ()
     })
     it('Test the Logout feature', function ()
     {
-        mainpage.personalAccountMenu().click()
+        mainpage.personalAccountMenu({timeout: 25000 }).click()
         cy.contains('Personal Account').should('exist')
         mainpage.signOut().click()
         cy.url().should('eq', `${Cypress.config().baseUrl}auth/login`)

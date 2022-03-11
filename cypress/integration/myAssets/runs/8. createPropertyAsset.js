@@ -50,7 +50,7 @@ describe('Creating a property asset', function ()
         cy.contains('Configuration').click()
         myproperty.bedroomsNumber().type('1')
         cy.contains('Configure').click()
-        cy.get('#kingBeds').type(1)//.tab().tab().tab().tab().tab().tab().tab().tab().tab().tab().tab().trigger('{enter}').trigger('{enter}')
+        cy.get('#kingBeds').type(1)
         myproperty.saveAndClose().trigger('click')   
 //nextbutton was here 
         cy.contains('Acquisition').click()

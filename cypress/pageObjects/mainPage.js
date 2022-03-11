@@ -1,6 +1,6 @@
 class mainpage{
    personalAccountMenu(){
-       return cy.get('[data-cy=personal-account-btn]',{ timeout: 20000 })
+       return cy.get('[data-cy=personal-account-btn]',{ timeout: 25000 })
     }
      accountSettings(){
        return cy.contains('Account Settings')
