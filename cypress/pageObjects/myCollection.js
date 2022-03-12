@@ -27,6 +27,16 @@ saveAndClose(){
 artCreatedNotification(){
     return cy.contains('Art Asset was created', { timeout: 30000})
 }
+winesTab(){
+    return cy.contains('Wines')
+}
+createNewWine(){
+    return cy.contains('Create a new wine')
+}
+
+
+
+
 
 }
 export default mycollection

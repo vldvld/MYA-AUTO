@@ -19,7 +19,7 @@ describe('Creating a property asset', function ()
     const currency = 'USD '
     const internationalNumberFormat = new Intl.NumberFormat('en-US')
 
-    //Create random property name
+
     const name = () => Cypress._.random(0, 1e6)
     const id = name()
     const testName = "AUTOMATEDPROPERTY #" +`${id}`
@@ -40,22 +40,22 @@ describe('Creating a property asset', function ()
         myproperty.propertyType().click().type('{downarrow}').type('{enter}')
         myproperty.propertyType().should('have.value', 'Apartment')
         myproperty.ownershipType().type('{enter}')
-//nextbutton was here
+
         cy.contains('Additional details').click()
         myproperty.locationField().type('London')
         cy.wait(1000)
         cy.get('[role="option"]', { timeout: 20000 }).contains('London, UK').trigger("click")
         cy.wait(300) 
-//nextbutton was here
+
         cy.contains('Configuration').click()
         myproperty.bedroomsNumber().type('1')
         cy.contains('Configure').click()
         cy.get('#kingBeds').type(1)
         myproperty.saveAndClose().trigger('click')   
-//nextbutton was here 
+
         cy.contains('Acquisition').click()
         myproperty.listPrice().type(newValue).tab().tab().tab().type('1')
-//nextbutton was here 
+
         myproperty.saveAndCloseMain().trigger('click')   
         myproperty.propertyCreatedNotification().should('exist') 
     })  

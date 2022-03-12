@@ -21,25 +21,28 @@ class mainpage{
        return cy.contains('Sign out')
     }
      goToMyFinance(){
-        return cy.get('[title="My Finance"]',{ timeout: 20000 })
+      return cy.get('[title="My Finance"]',{ timeout: 20000 })
     }
      goToMyProperty(){
-        return cy.get('[title="My Property"]',{ timeout: 20000 })
+      return cy.get('[title="My Property"]',{ timeout: 20000 })
     }
       goToMyCollection(){
-        return cy.get('[title="My Collection"]',{ timeout: 20000 })
+      return cy.get('[title="My Collection"]',{ timeout: 20000 })
     }
       goToMyBelongings(){
-        return cy.get('[title="My Belongings"]',{ timeout: 20000 })
+      return cy.get('[title="My Belongings"]',{ timeout: 20000 })
     }
       goToMyGroups(){
-        return cy.get('[title="Groups"]',{ timeout: 20000 })
+      return cy.get('[title="Groups"]',{ timeout: 20000 })
     }
-    goToDocumentVault(){
+      goToDocumentVault(){
       return cy.get('[title="Document Vault"]')
-  }
+    }
     homePageUrl(){
       return cy.url().should('eq', `${Cypress.config().baseUrl}auth/login`)
     }
+    modalTitle(){
+      return cy.get('#customized-dialog-title').find('span')
+  }
 }
 export default mainpage
