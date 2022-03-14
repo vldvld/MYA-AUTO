@@ -2,7 +2,7 @@ class mycollection{
 
 myCollectionPlusButton(){
     return cy.get('.MuiFab-root')
-    }
+}
 artistField(){
     return cy.get('#artist')
 }
@@ -33,8 +33,27 @@ winesTab(){
 createNewWine(){
     return cy.contains('Create a new wine')
 }
-
-
+wineProducer(){
+    return cy.get('#wineProducer')
+}
+wineName(){
+    return cy.get('#wineName')
+}
+wineVintage(){
+    return cy.get('#wineVintageText')
+}
+amountOfBottles(){
+    return cy.get('#amountOfBottles')
+}
+pricePerBottle(){
+    return cy.get('#pricePerBottle')
+}
+bottleStatus(){
+    return cy.get('#bottleStatus')
+}
+wineCreatedNotification(){
+    return cy.contains('Wine was created', {timeout: 30000})
+}
 
 
 

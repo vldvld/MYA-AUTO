@@ -36,7 +36,6 @@ describe('Creating and testing a  saving account', function ()
         myfinance.bankInstitutionField().type("Zion")
         myfinance.ziaBankInstitution().should('exist')
         myfinance.bankInstitutionField().tab().type('{enter}')
-
         myfinance.balanceField().type(newValue).should('have.value', '1,000')
         myfinance.nextButton().click()
         myfinance.createButton().click()
