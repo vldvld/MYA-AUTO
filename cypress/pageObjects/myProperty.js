@@ -1,4 +1,5 @@
 class property{
+    
     email(){
         return cy.get('[name="email"]')
     }

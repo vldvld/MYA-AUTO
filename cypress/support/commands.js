@@ -1,3 +1,5 @@
+import 'cypress-file-upload';
+
 Cypress.Commands.add(
     'iframeLoaded',
     {prevSubject: 'element'},
@@ -32,8 +34,8 @@ Cypress.Commands.add(
 Cypress.Commands.add(
     "loginCommand",
     (username, password) => {
-    cy.get('[name="email"]').type(username)
-    cy.get('[name="password"]').type(password)
+    cy.get('[name="email"]').type(username).should('have.value', username)
+    cy.get('[name="password"]').type(password).should('have.value', password)
     cy.get('[data-cy=login-btn]').click()
 });
 
@@ -42,3 +44,5 @@ Cypress.Commands.add(
     () => {
     cy.visit('Login page')
  });
+
+

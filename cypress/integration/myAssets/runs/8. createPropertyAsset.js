@@ -46,7 +46,6 @@ describe('Creating a property asset', function ()
         cy.wait(1000)
         cy.get('[role="option"]', { timeout: 20000 }).contains('London, UK').trigger("click")
         cy.wait(300) 
-
         cy.contains('Configuration').click()
         myproperty.bedroomsNumber().type('1')
         cy.contains('Configure').click()
