@@ -22,7 +22,7 @@ class documentstorage{
         return cy.get('.jss491')
     }
     documentAddedNotification(){
-        return cy.contains('Success! Document was uploaded', { timeout: 60000})
+        return cy.contains('Success! Document was uploaded', { timeout: 50000})
     }  
 }
 export default documentstorage

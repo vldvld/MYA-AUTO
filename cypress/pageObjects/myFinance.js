@@ -1,5 +1,7 @@
 class myfinance{
 
+//C&B module selectors:
+
 myFinancePlusButton(){
     return cy.get('.MuiFab-root')
     }
@@ -84,7 +86,31 @@ outstandingAmmount(){
 cashAndBankingTab(){
     return cy.get('[href="/finances/accounts"]')
 }
+//Portfolio module selectors:
 
-
+TITab(){
+    return cy.get('[href="/finances/traditional-investments"]') 
+}
+TIName(){
+    return cy.get('#name')
+}
+TIPortfolioType(){
+    return cy.get('#portfolioType')
+}
+TIPremium(){
+    return cy.get('#premium')
+}
+TICompany(){
+    return cy.get('#company')
+}
+TIProduct(){
+    return cy.get('#product')
+}
+TISaveAndCloseButton(){
+    return cy.contains('Save and Close')
+}
+portfolioWasCreatedNotification(){
+    return cy.contains('Portfolio was created', { timeout: 30000 })
+}
 }
     export default myfinance

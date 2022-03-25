@@ -12,7 +12,7 @@ Cypress.on('uncaught:exception', (err, runnable) => {
     return false
 })
 
-describe('Creating an Other asset', function () 
+describe('Document Storage page test`s', function () 
 {
     const login = new Login()
     const signup = new Signup()
@@ -24,7 +24,7 @@ describe('Creating an Other asset', function ()
     const mycontacts = new myContacts()
     const documentstorage = new documentStorage()
 
-   it('Log in, go to the contacts page, create a new contact', function()
+   it('Go to the Document storage page and add a tests documents', function()
     {
         cy.goToLoginPage()
         cy.loginCommand("automationtests3@gmail.com", "testuser1")
@@ -44,25 +44,21 @@ describe('Creating an Other asset', function ()
     //  documentstorage.dropFilesButton().attachFile('mp4-test.mp4', { subjectType: 'drag-n-drop' })
         documentstorage.dropFilesButton().attachFile('jpg-test.jpg', { subjectType: 'drag-n-drop' })
         documentstorage.dropFilesButton().attachFile('doc-test.doc', { subjectType: 'drag-n-drop' })
+
+        cy.contains('png-test.png', { timeout: 10000 }).should('exist')
+        cy.contains('0.0210 MB').should('exist')
+        cy.contains('pdf-test.pdf', { timeout: 10000 }).should('exist')
+        cy.contains('5.32 MB').should('exist')
+        cy.contains('jpg-test.jpg', { timeout: 10000 }).should('exist')
+        cy.contains('0.0305 MB').should('exist')
+        cy.contains('doc-test.doc', { timeout: 10000 }).should('exist')
+        cy.contains('0.192 MB').should('exist')
         cy.contains('Storage space 5.57%').should('exist')
-        documentstorage.uploadButton().click()
+
+        documentstorage.uploadButton().should('be.enabled').click()
         documentstorage.documentAddedNotification().should('exist')
     })   
     })  
-
-        // mycontacts.plusButton().click()
-        // mycontacts.createButton().should('be.disabled')
-        // mycontacts.firstName().type(testName).should('have.value', testName)
-        // mycontacts.lastName().type('TEST_LAST_NAME').should('have.value', 'TEST_LAST_NAME').tab().type('{enter}')
-        // cy.get('#menu-').contains('Supplier', { timeout: 30000 }).click()
-        // mycontacts.companyField().type('QA').should('have.value', 'QA')
-        // mycontacts.positionField().type('QA_ENGINEER').should('have.value', 'QA_ENGINEER')
-        // mycontacts.emailField().type('QA_ENGINEER@TESTMAIL.COM').should('have.value', 'QA_ENGINEER@TESTMAIL.COM')
-        // mycontacts.phoneField().type('+380999999999').should('have.value', '+380999999999')
-        // mycontacts.addressSearchField().type('London')
-        // mycontacts.createButton().click()
-        // mycontacts.contactCreatedNotification().should('exist')
-        // cy.contains(testName+' TEST_LAST_NAME').should('exist')
 
     
 
