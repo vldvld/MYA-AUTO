@@ -43,13 +43,18 @@ describe('Creating a Portfolio account', function ()
         cy.contains('Add product: TestAutoProduct '+`${id}`, { timeout: 5000 }).click()
         myfinance.TIProduct().should('have.value', 'TestAutoProduct '+`${id}`)
         myfinance.TISaveAndCloseButton().click()
+    })      
+    it('Check the created Portfolio notifications and created data', function()
+    {  
         myfinance.portfolioWasCreatedNotification().should('exist')
         cy.contains(testName).should('exist')
         cy.contains("TestAutoProduct "+`${id}`).should('exist')
         cy.contains("TestAutoCompany "+`${id}`).should('exist')
-        
         myfinance.transactionCreatedNotification().should('exist')
     })
+})
+
+
     // it('Check the collectibles Value widget', function()
     // {
    
@@ -65,4 +70,4 @@ describe('Creating a Portfolio account', function ()
     //     myfinance.cbValueWidget().should('have.text', currency + internationalNumberFormat.format(resultValueCBWidget, { timeout: 18000 }))   
     // })
 
-})
+
