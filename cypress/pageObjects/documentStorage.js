@@ -19,7 +19,7 @@ class documentstorage{
         return cy.get('#customized-dialog-title')   
     }
     dropFilesButton(){
-        return cy.get('.jss491')
+        return cy.contains('Drop files here or chose files')
     }
     documentAddedNotification(){
         return cy.contains('Success! Document was uploaded', { timeout: 50000})
