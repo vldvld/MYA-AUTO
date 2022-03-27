@@ -28,7 +28,7 @@ describe('Document Storage page test`s', function ()
         documentstorage.dropFilesButton().attachFile('png-test.png', { subjectType: 'drag-n-drop' })
         documentstorage.dropFilesButton().attachFile('pdf-test.pdf', { subjectType: 'drag-n-drop' })
     //  documentstorage.dropFilesButton().attachFile('mp4-test.mp4', { subjectType: 'drag-n-drop' })
-        documentstorage.dropFilesButton().attachFile('jpg-test.jpg', { subjectType: 'drag-n-drop' })
+    //  documentstorage.dropFilesButton().attachFile('jpg-test.jpg', { subjectType: 'drag-n-drop' })
         documentstorage.dropFilesButton().attachFile('doc-test.doc', { subjectType: 'drag-n-drop' })
 
         cy.contains('png-test.png', { timeout: 10000 }).should('exist')
