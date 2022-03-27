@@ -39,7 +39,7 @@ describe('Document Storage page test`s', function ()
         cy.contains('0.0305 MB').should('exist')
         cy.contains('doc-test.doc', { timeout: 10000 }).should('exist')
         cy.contains('0.192 MB').should('exist')
-        cy.contains('Storage space 5.57%').should('exist')
+        cy.contains('Storage space 0.244%').should('exist')
 
         documentstorage.uploadButton().should('be.enabled').click()
         documentstorage.documentAddedNotification().should('exist')
