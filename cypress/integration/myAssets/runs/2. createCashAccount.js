@@ -1,5 +1,3 @@
-import Login from '../../../pageObjects/login'
-import Signup from '../../../pageObjects/signup'
 import MainPage from '../../../pageObjects/mainPage'
 import myFinance from '../../../pageObjects/myFinance'
 
@@ -9,15 +7,13 @@ Cypress.on('uncaught:exception', (err, runnable) => {
 
 describe('Creating Cash account', function () 
 {
-    const login = new Login()
-    const signup = new Signup()
     const mainpage = new MainPage()
     const myfinance = new myFinance()
     const currency = 'USD '
     const newValue = 1000
     const internationalNumberFormat = new Intl.NumberFormat('en-US')
     
-   it('Go to the MyFinance page and create the Cash account', function()
+    it('Go to the MyFinance page and create the Cash account', function()
     {
         cy.goToLoginPage()
         cy.loginCommand("automationtests3@gmail.com", "testuser1")

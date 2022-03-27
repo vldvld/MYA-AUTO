@@ -1,5 +1,3 @@
-import Login from '../../../pageObjects/login'
-import Signup from '../../../pageObjects/signup'
 import MainPage from '../../../pageObjects/mainPage'
 import myFinance from '../../../pageObjects/myFinance'
 
@@ -9,15 +7,13 @@ Cypress.on('uncaught:exception', (err, runnable) => {
 
 describe('Creating and testing the Mortgage account', function () 
 {
-    const login = new Login()
-    const signup = new Signup()
     const mainpage = new MainPage()
     const myfinance = new myFinance()
     const currency = 'USD '
     const newValue = 1000
     const internationalNumberFormat = new Intl.NumberFormat('en-US')
 
-   it('Go to the MyFinance page and create the Mortgage ccount', function()
+    it('Go to the MyFinance page and create the Mortgage account', function()
     {
         cy.goToLoginPage()
         cy.loginCommand("automationtests3@gmail.com", "testuser1")
@@ -42,9 +38,9 @@ describe('Creating and testing the Mortgage account', function ()
         myfinance.mortgageCreatedNotification().should('exist')
         myfinance.transactionCreatedNotification().should('exist')
         
-})
-it('Check the Net value C&B collectibles widgets', function()
-  {
+    })
+    it('Check the Net value C&B collectibles widgets', function()
+    {
         myfinance.cbNetValueWidget().then($valueState => {
         const previousNetValueCBWidget = $valueState.text() 
         myfinance.cbNetValueWidget().should('have.text', previousNetValueCBWidget) 
@@ -53,10 +49,10 @@ it('Check the Net value C&B collectibles widgets', function()
         myfinance.cbNetValueWidget().should('have.text', currency + '(' + internationalNumberFormat.format(resultNetValueCBWidget) + ')' )   
     })
 
-})
+    })
 
-it('Create the mortgage account and check the Liability widget', function()
-{
+    it('Create the mortgage account and check the Liability widget', function()
+    {
         myfinance.myFinancePlusButton().click()
         cy.contains('Account').should('exist')
         myfinance.selectAccountDropDown().click()
@@ -73,8 +69,11 @@ it('Create the mortgage account and check the Liability widget', function()
         myfinance.createButton().click()
         myfinance.mortgageCreatedNotification().should('exist')
         myfinance.transactionCreatedNotification().should('exist')
+    })
 
-        //check the c&b liability widget
+
+    it('Check the Liability widget', function()
+    {
         myfinance.cbLiabilityWidget().then($valueLiabilityState => {
         const previousLiabilityWidget = $valueLiabilityState.text() 
         myfinance.cbLiabilityWidget().should('have.text', previousLiabilityWidget) 
@@ -82,7 +81,8 @@ it('Create the mortgage account and check the Liability widget', function()
         const resultLiabilityWidget = parseInt(previousLiabilityWidgetInt.replace(",", "")) + newValue 
         cy.log(resultLiabilityWidget)
         myfinance.cbLiabilityWidget().should('have.text', currency + '(' + internationalNumberFormat.format(resultLiabilityWidget) + ')' )   
+    })
 })
 
 })  
-})
+

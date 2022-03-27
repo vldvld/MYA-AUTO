@@ -1,11 +1,4 @@
-import Login from '../../../pageObjects/login'
-import Signup from '../../../pageObjects/signup'
 import MainPage from '../../../pageObjects/mainPage'
-import myFinance from '../../../pageObjects/myFinance'
-import myProperty from '../../../pageObjects/myProperty'
-import myCollection from '../../../pageObjects/myCollection'
-import myBelongings from '../../../pageObjects/myBelongings'
-import myContacts from '../../../pageObjects/myContacts'
 import documentStorage from '../../../pageObjects/documentStorage'
 
 Cypress.on('uncaught:exception', (err, runnable) => {
@@ -14,14 +7,7 @@ Cypress.on('uncaught:exception', (err, runnable) => {
 
 describe('Document Storage page test`s', function () 
 {
-    const login = new Login()
-    const signup = new Signup()
     const mainpage = new MainPage()
-    const myfinance = new myFinance()
-    const myproperty = new myProperty()
-    const mycollection = new myCollection()
-    const mybelongings = new myBelongings()
-    const mycontacts = new myContacts()
     const documentstorage = new documentStorage()
 
    it('Go to the Document storage page and add a tests documents', function()

@@ -1,5 +1,3 @@
-import Login from '../../../pageObjects/login'
-import Signup from '../../../pageObjects/signup'
 import MainPage from '../../../pageObjects/mainPage'
 import myFinance from '../../../pageObjects/myFinance'
 
@@ -9,15 +7,13 @@ Cypress.on('uncaught:exception', (err, runnable) => {
 
 describe('Creating and testing the credit card account', function () 
 {
-    const login = new Login()
-    const signup = new Signup()
     const mainpage = new MainPage()
     const myfinance = new myFinance()
     const currency = 'USD '
     const newValue = 1000
     const internationalNumberFormat = new Intl.NumberFormat('en-US')
 
-   it('Go to the MyFinance page and create the Credit card account', function()
+    it('Go to the MyFinance page and create the Credit card account', function()
     {
         cy.goToLoginPage()
         cy.loginCommand("automationtests3@gmail.com", "testuser1")
@@ -40,10 +36,9 @@ describe('Creating and testing the credit card account', function ()
         myfinance.createButton().click()
         myfinance.creditAccountCreatedNotification().should('exist')
         myfinance.transactionCreatedNotification().should('exist')
-        
-})
-        it('Check the Net value C&B collectibles widgets', function()
-      {
+    })
+    it('Check the Net value C&B collectibles widget', function()
+    {
         myfinance.cbNetValueWidget().then($valueState => {
         const previousNetValueCBWidget = $valueState.text() 
         myfinance.cbNetValueWidget().should('have.text', previousNetValueCBWidget) 
@@ -51,9 +46,9 @@ describe('Creating and testing the credit card account', function ()
         const resultNetValueCBWidget = parseInt(previousNetValueInt.replace(",", "") ) + newValue 
         myfinance.cbNetValueWidget().should('have.text', currency + '(' + internationalNumberFormat.format(resultNetValueCBWidget) + ')' )   
     })
-})
+    })
 
-        it('Check the Liability widget', function()
+    it('Create the Credit card account and check the Liability widget', function()
     {
         myfinance.myFinancePlusButton().click()
         cy.contains('Account').should('exist')
@@ -76,6 +71,6 @@ describe('Creating and testing the credit card account', function ()
         const resultLiabilityWidget = parseInt(previousLiabilityWidgetInt.replace(",", "")) + newValue 
         cy.log(resultLiabilityWidget)
         myfinance.cbLiabilityWidget().should('have.text', currency + '(' + internationalNumberFormat.format(resultLiabilityWidget) + ')' )   
-      })
+    })
 })  
 })

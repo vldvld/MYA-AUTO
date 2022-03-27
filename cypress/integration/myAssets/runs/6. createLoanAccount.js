@@ -1,5 +1,3 @@
-import Login from '../../../pageObjects/login'
-import Signup from '../../../pageObjects/signup'
 import MainPage from '../../../pageObjects/mainPage'
 import myFinance from '../../../pageObjects/myFinance'
 
@@ -7,17 +5,15 @@ Cypress.on('uncaught:exception', (err, runnable) => {
     return false
 })
 
-describe('Creating a Loan account and testing the C&B widgets', function () 
+describe('Create the Loan account and check the C&B widgets', function () 
 {
-    const login = new Login()
-    const signup = new Signup()
     const mainpage = new MainPage()
     const myfinance = new myFinance()
     const currency = 'USD '
     const newValue = 1000
     const internationalNumberFormat = new Intl.NumberFormat('en-US')
 
-   it('Go to the MyFinance page and create the Cash account', function()
+    it('Go to the MyFinance page and create the loan account', function()
     {
         cy.goToLoginPage()
         cy.loginCommand("automationtests3@gmail.com", "testuser1")
@@ -49,13 +45,14 @@ describe('Creating a Loan account and testing the C&B widgets', function ()
     it('Check the Liability widget', function()
     {
         myfinance.cbLiabilityWidget().then($valueLiabilityState => {
-            const previousLiabilityWidget = $valueLiabilityState.text() 
-            myfinance.cbLiabilityWidget().should('have.text', previousLiabilityWidget) 
-            const previousLiabilityWidgetInt = previousLiabilityWidget.substr(5)  
-            const resultLiabilityWidget = parseInt(previousLiabilityWidgetInt.replace(",", "")) + newValue 
-            cy.log(resultLiabilityWidget)
-            myfinance.cbLiabilityWidget().should('have.text', currency + '(' + internationalNumberFormat.format(resultLiabilityWidget) + ')' )   
+        const previousLiabilityWidget = $valueLiabilityState.text() 
+        myfinance.cbLiabilityWidget().should('have.text', previousLiabilityWidget) 
+        const previousLiabilityWidgetInt = previousLiabilityWidget.substr(5)  
+        const resultLiabilityWidget = parseInt(previousLiabilityWidgetInt.replace(",", "")) + newValue 
+        cy.log(resultLiabilityWidget)
+        myfinance.cbLiabilityWidget().should('have.text', currency + '(' + internationalNumberFormat.format(resultLiabilityWidget) + ')' )   
     })
+    
 //PUT A NET VALUE TEST CODE HERE
 })  
 }) 

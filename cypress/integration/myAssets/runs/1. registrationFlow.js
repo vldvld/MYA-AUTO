@@ -12,11 +12,10 @@ describe('Sign up flow / Sign in flow tests', function ()
     const signup = new Signup()
     const mainpage = new Mainpage()
 
-    //Create random email and use it for the registration and login process 
+    // Create random email and use it for the registration and login flow 
     const uuid = () => Cypress._.random(0, 1e6)
     const id = uuid()
     const testemail = `testemail${id}` + "@nonexistentdomain.com"
-
     
     it('Go to the login page, check the page title', function()
     {
