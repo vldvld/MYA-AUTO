@@ -4,7 +4,7 @@ class login{
         return cy.contains('Next')
     }
     saveAndClose(){
-        return cy.contains('Save and Close')
+        return cy.contains('Create')
     }
     myBelongingsCreatedNotification(){
         return cy.contains('Other Asset was created', { timeout: 30000})

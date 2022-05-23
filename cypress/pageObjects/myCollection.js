@@ -46,13 +46,16 @@ amountOfBottles(){
     return cy.get('#amountOfBottles')
 }
 pricePerBottle(){
-    return cy.get('#pricePerBottle')
+    return cy.get('#purchasePrice')
 }
 bottleStatus(){
     return cy.get('#bottleStatus')
 }
 wineCreatedNotification(){
     return cy.contains('Wine was created', {timeout: 30000})
+}
+createButton(){
+    return cy.contains('Create', {timeout: 20000})
 }
 
 

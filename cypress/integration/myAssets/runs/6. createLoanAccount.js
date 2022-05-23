@@ -34,9 +34,7 @@ describe('Create the Loan account and check the C&B widgets', function ()
         myfinance.bankInstitutionField().tab().type('{enter}')
 
         myfinance.outstandingAmmount().type(newValue).should('have.value', '1,000')
-        cy.wait(200)
-        myfinance.nextButton().click().click()
-        
+        cy.wait(250)
         myfinance.createButton().click()
         myfinance.loanAccountCreatedNotification().should('exist') 
         myfinance.transactionCreatedNotification().should('exist') 
