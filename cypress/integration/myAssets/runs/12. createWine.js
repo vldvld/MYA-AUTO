@@ -9,6 +9,18 @@ describe('Wine module tests', function ()
 {
     const mainpage = new Mainpage()
     const mycollection = new Mycollection()
+        
+    // Clear a web cache before tests to prevent browser issues 
+    afterEach(() => {
+        if (window.navigator && navigator.serviceWorker) {
+          navigator.serviceWorker.getRegistrations()
+          .then((registrations) => {
+            registrations.forEach((registration) => {
+              registration.unregister()
+            })
+          })
+        }
+    })    
     
     it('Go to the My wine page and add a new wine manually', function()
     {

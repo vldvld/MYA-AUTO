@@ -1,0 +1,3 @@
+{"chromeWebSecurity": false, "defaultCommandTimeout": 4000, "baseUrl": "https://myassetstest.web.app/", "viewportWidth": 1440, "viewportHeight": 900 , "compilerOptions": {
+    "types": ["cypress", "cypress-file-upload"]                                         
+  } }

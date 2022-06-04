@@ -21,14 +21,11 @@ class property{
     locationField(){
         return cy.get('#location')
     }
-    saveAndClose(){
-        return cy.get('.MuiPaper-root > .MuiDialogActions-root').contains('Save and Close')
+    createButton(){
+        return cy.contains('Create', {timeout: 20000})
     }
-    saveAndCloseMain(){
-        return cy.contains('Save and Close')
-    }
-    listPrice(){
-        return cy.get('#listPrice')
+    purchasePrice(){
+        return cy.get('#purchasePrice')
     }
     bedroomsNumber(){
         return cy.get('#bedroomsNumber')
@@ -57,7 +54,5 @@ class property{
     name(){
         return cy.get('')
     }
-
-
 }
 export default property

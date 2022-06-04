@@ -12,7 +12,19 @@ describe('Creating and testing a current account', function ()
     const currency = 'USD '
     const newValue = 1000
     const internationalNumberFormat = new Intl.NumberFormat('en-US')
-
+    
+    // Clear a web cache before tests to prevent browser issues 
+    afterEach(() => {
+        if (window.navigator && navigator.serviceWorker) {
+          navigator.serviceWorker.getRegistrations()
+          .then((registrations) => {
+            registrations.forEach((registration) => {
+              registration.unregister()
+            })
+          })
+        }
+    })    
+    
     it('Go to the MyFinance page and create a Saving account', function()
     {
         cy.goToLoginPage()
@@ -33,6 +45,7 @@ describe('Creating and testing a current account', function ()
         myfinance.ziaBankInstitution().should('exist')
         myfinance.bankInstitutionField().tab().type('{enter}')
         myfinance.balanceField().type(newValue).should('have.value', '1,000')
+        cy.wait(250)
         myfinance.createButton().click()
         myfinance.currentAccountCreatedNotification().should('exist')
         myfinance.transactionCreatedNotification().should('exist')

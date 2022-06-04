@@ -5,13 +5,22 @@ Cypress.on('uncaught:exception', (err, runnable) => {
     return false
 })
 
-describe('Document Storage page test`s', function () 
-{
+describe('Document Storage page test`s', function () {
     const mainpage = new MainPage()
     const documentstorage = new documentStorage()
 
-   it('Go to the Document storage page and add a tests documents', function()
-    {
+    afterEach(() => {
+        if (window.navigator && navigator.serviceWorker) {
+            navigator.serviceWorker.getRegistrations()
+                .then((registrations) => {
+                    registrations.forEach((registration) => {
+                        registration.unregister()
+                    })
+                })
+        }
+    })
+
+    it('Go to the Document storage page and add a tests documents', function () {
         cy.goToLoginPage()
         cy.loginCommand("automationtests3@gmail.com", "testuser1")
         mainpage.homePageUrl()
@@ -27,15 +36,15 @@ describe('Document Storage page test`s', function ()
 
         documentstorage.dropFilesButton().attachFile('png-test.png', { subjectType: 'drag-n-drop' })
         documentstorage.dropFilesButton().attachFile('pdf-test.pdf', { subjectType: 'drag-n-drop' })
-    //  documentstorage.dropFilesButton().attachFile('mp4-test.mp4', { subjectType: 'drag-n-drop' })
-    //  documentstorage.dropFilesButton().attachFile('jpg-test.jpg', { subjectType: 'drag-n-drop' })
+        //  documentstorage.dropFilesButton().attachFile('mp4-test.mp4', { subjectType: 'drag-n-drop' })
+        //  documentstorage.dropFilesButton().attachFile('jpg-test.jpg', { subjectType: 'drag-n-drop' })
         documentstorage.dropFilesButton().attachFile('doc-test.doc', { subjectType: 'drag-n-drop' })
 
         cy.contains('png-test.png', { timeout: 10000 }).should('exist')
         cy.contains('0.0210 MB').should('exist')
         cy.contains('pdf-test.pdf', { timeout: 10000 }).should('exist')
-    //  cy.contains('5.32 MB').should('exist')
-    //  cy.contains('jpg-test.jpg', { timeout: 10000 }).should('exist')
+        //  cy.contains('5.32 MB').should('exist')
+        //  cy.contains('jpg-test.jpg', { timeout: 10000 }).should('exist')
         cy.contains('0.0305 MB').should('exist')
         cy.contains('doc-test.doc', { timeout: 10000 }).should('exist')
         cy.contains('0.192 MB').should('exist')
@@ -43,8 +52,8 @@ describe('Document Storage page test`s', function ()
 
         documentstorage.uploadButton().should('be.enabled').click()
         documentstorage.documentAddedNotification().should('exist')
-    })   
-    })  
+    })
+})
 
-    
+
 

@@ -13,14 +13,20 @@ class login{
         return cy.get('.MuiFab-root')
     }
     nameField(){
-        return cy.get('#otherName')
+        return cy.get('#belongingName')
     }
     priceField(){
-        return cy.get('#purchasePricePerUnit')
+        return cy.get('#purchasePrice')
     }
-
-    
-
+    locationField(){
+        return cy.get('#linkedPropertyAsLocation')
+    }
+    belongingTypeFiled(){
+        return cy.get('#belongingType')
+    }
+    manufacturerField(){
+        return cy.get('#manufacturer')
+    }
 
         
 }

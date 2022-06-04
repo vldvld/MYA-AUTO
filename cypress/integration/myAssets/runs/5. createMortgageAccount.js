@@ -12,7 +12,19 @@ describe('Creating and testing the Mortgage account', function ()
     const currency = 'USD '
     const newValue = 1000
     const internationalNumberFormat = new Intl.NumberFormat('en-US')
-
+    
+   // Clear a web cache before tests to prevent browser issues 
+    beforeEach(() => {
+        if (window.navigator && navigator.serviceWorker) {
+          navigator.serviceWorker.getRegistrations()
+          .then((registrations) => {
+            registrations.forEach((registration) => {
+              registration.unregister()
+            })
+          })
+        }
+    })    
+    
     it('Go to the MyFinance page and create the Mortgage account', function()
     {
         cy.goToLoginPage()
