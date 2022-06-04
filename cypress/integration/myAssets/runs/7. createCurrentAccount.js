@@ -12,6 +12,10 @@ describe('Creating and testing a current account', function () {
   const newValue = 1000
   const internationalNumberFormat = new Intl.NumberFormat('en-US')
 
+  const name = () => Cypress._.random(0, 1e6)
+  const id = name()
+  const testName = "AUTOMATEDCURRENT #" + `${id}`
+
   // Clear a web cache before tests to prevent browser issues 
   afterEach(() => {
     if (window.navigator && navigator.serviceWorker) {
@@ -38,13 +42,13 @@ describe('Creating and testing a current account', function () {
     myfinance.nextButton().click()
     mainpage.modalTitle().should('have.text', 'Current Account')
     cy.contains('Single-Currency Account').should('exist')
-    myfinance.accountNameField().type('accountnametest')
+    myfinance.balanceField().type(newValue).should('have.value', '1,000')
+    myfinance.accountNameField().type(testName)
     myfinance.bankInstitutionField().type("Zion")
     myfinance.ziaBankInstitution().should('exist')
     myfinance.bankInstitutionField().tab().type('{enter}')
-    myfinance.balanceField().type(newValue).should('have.value', '1,000')
 
-    cy.wait(500) //I use this wait to prevent the 0 asset balance issue 
+  //  cy.wait(1000) //I use this wait to prevent the 0 asset balance issue 
 
     myfinance.createButton().should('not.be.disabled').click()
     myfinance.currentAccountCreatedNotification().should('exist')

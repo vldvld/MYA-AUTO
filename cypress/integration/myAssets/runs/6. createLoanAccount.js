@@ -13,6 +13,10 @@ describe('Create the Loan account and check the C&B widgets', function ()
     const newValue = 1000
     const internationalNumberFormat = new Intl.NumberFormat('en-US')
     
+    const name = () => Cypress._.random(0, 1e6)
+    const id = name()
+    const testName = "AUTOMATEDLOAN #" + `${id}`
+
    // Clear a web cache before tests to prevent browser issues 
     afterEach(() => {
         if (window.navigator && navigator.serviceWorker) {
@@ -40,14 +44,14 @@ describe('Create the Loan account and check the C&B widgets', function ()
         myfinance.nextButton().click()
         mainpage.modalTitle().should('have.text', 'Loan Account')
         
-        myfinance.accountNameField().type('accountnametest').should('have.value', 'accountnametest')
+        myfinance.outstandingAmmount().type(newValue).should('have.value', '1,000')
+        
+        myfinance.accountNameField().type(testName).should('have.value', testName)
         myfinance.bankInstitutionField().type("Zion")
         myfinance.ziaBankInstitution().should('exist')
         myfinance.bankInstitutionField().tab().type('{enter}')
 
-        myfinance.outstandingAmmount().type(newValue).should('have.value', '1,000')
-
-        cy.wait(500) //I use this wait to prevent the 0 asset balance issue 
+//        cy.wait(1000) //I use this wait to prevent the 0 asset balance issue 
         
         myfinance.createButton().should('not.be.disabled').click()
         myfinance.loanAccountCreatedNotification().should('exist') 

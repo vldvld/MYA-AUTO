@@ -12,6 +12,10 @@ describe('Creating Cash account', function () {
   const newValue = 1000
   const internationalNumberFormat = new Intl.NumberFormat('en-US')
 
+  const name = () => Cypress._.random(0, 1e6)
+  const id = name()
+  const testName = "AUTOMATEDCASH #" + `${id}`
+
   // Clear a web cache before tests to prevent browser issues 
   afterEach(() => {
     if (window.navigator && navigator.serviceWorker) {
@@ -37,10 +41,10 @@ describe('Creating Cash account', function () {
     myfinance.selectCashAccont().click()
     myfinance.nextButton().click()
     mainpage.modalTitle().should('have.text', 'Cash')
-    myfinance.accountNameField().type('accountnametest')
+    myfinance.accountNameField().type(testName)
     myfinance.balanceFieldCash().type(newValue).should('have.value', '1,000')
 
-    cy.wait(500) //I use this wait to prevent the 0 asset balance issue 
+    cy.wait(1000) //I use this wait to prevent the 0 asset balance issue 
     
     myfinance.createButton().should('not.be.disabled').click()
     myfinance.cashAccountCreatedNotification().should('exist')
