@@ -57,9 +57,7 @@ describe('Creating an Other asset', function ()
 
 
     mybelongings.priceField().type(newValue).should('have.value', '1,000')
-    cy.wait(300)
-
-    mybelongings.saveAndClose().trigger("click")
+    mybelongings.saveAndClose().should('not.be.disabled').click()
     mybelongings.myBelongingsCreatedNotification().should('exist') 
   })  
 })

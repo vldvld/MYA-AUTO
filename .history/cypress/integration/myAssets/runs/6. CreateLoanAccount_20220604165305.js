@@ -12,7 +12,19 @@ describe('Create the Loan account and check the C&B widgets', function ()
     const currency = 'USD '
     const newValue = 1000
     const internationalNumberFormat = new Intl.NumberFormat('en-US')
-
+    
+   // Clear a web cache before tests to prevent browser issues 
+    afterEach(() => {
+        if (window.navigator && navigator.serviceWorker) {
+          navigator.serviceWorker.getRegistrations()
+          .then((registrations) => {
+            registrations.forEach((registration) => {
+              registration.unregister()
+            })
+          })
+        }
+    })    
+    
     it('Go to the MyFinance page and create the loan account', function()
     {
         cy.goToLoginPage()
@@ -34,8 +46,7 @@ describe('Create the Loan account and check the C&B widgets', function ()
         myfinance.bankInstitutionField().tab().type('{enter}')
 
         myfinance.outstandingAmmount().type(newValue).should('have.value', '1,000')
-        cy.wait(200)
-        myfinance.createButton().click()
+        myfinance.createButton().should('not.be.disabled').click()
         myfinance.loanAccountCreatedNotification().should('exist') 
         myfinance.transactionCreatedNotification().should('exist') 
     })

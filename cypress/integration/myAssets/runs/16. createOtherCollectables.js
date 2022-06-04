@@ -60,9 +60,7 @@ describe('Creating an other collectables asset', function () {
 
 
     mycollection.purcasePriceArt().type('1000').should('have.value', '1,000')
-    cy.wait(300)
-
-    cy.contains('Save and Close').click()
+    cy.contains('Save and Close').should('not.be.disabled').click()
     mycollection.OtherCollectablesAssetCreatedNotification().should('exist')
   })
 })

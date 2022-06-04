@@ -14,7 +14,7 @@ describe('Creating and testing the Mortgage account', function ()
     const internationalNumberFormat = new Intl.NumberFormat('en-US')
     
    // Clear a web cache before tests to prevent browser issues 
-    beforeEach(() => {
+    afterEach(() => {
         if (window.navigator && navigator.serviceWorker) {
           navigator.serviceWorker.getRegistrations()
           .then((registrations) => {
@@ -75,8 +75,7 @@ describe('Creating and testing the Mortgage account', function ()
         myfinance.ziaBankInstitution().should('exist')
         myfinance.bankInstitutionField().tab().type('{enter}')
         myfinance.outstandingAmmount().type(newValue).should('have.value', '1,000')
-        cy.wait(250)
-        myfinance.createButton().click()
+        myfinance.createButton().should('not.be.disabled').click()
         myfinance.mortgageCreatedNotification().should('exist')
         myfinance.transactionCreatedNotification().should('exist')
     })

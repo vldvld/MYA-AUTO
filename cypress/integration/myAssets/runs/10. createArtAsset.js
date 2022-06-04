@@ -54,9 +54,8 @@ describe('Creating an Art asset', function () {
     cy.get('#linkedPropertyAsLocation').click()
     cy.contains(/AUTOMATEDPROPERTY/)
     cy.get('li').last().click()
-    cy.wait(300)
 
-    mycollection.createButton().click()
+    mycollection.createButton().should('not.be.disabled').click()
     mycollection.artCreatedNotification().should('exist')
   })
 })

@@ -13,6 +13,18 @@ describe('Creating Cash account', function ()
     const newValue = 1000
     const internationalNumberFormat = new Intl.NumberFormat('en-US')
     
+   // Clear a web cache before tests to prevent browser issues 
+    afterEach(() => {
+        if (window.navigator && navigator.serviceWorker) {
+          navigator.serviceWorker.getRegistrations()
+          .then((registrations) => {
+            registrations.forEach((registration) => {
+              registration.unregister()
+            })
+          })
+        }
+      })    
+    
     it('Go to the MyFinance page and create the Cash account', function()
     {
         cy.goToLoginPage()
@@ -27,10 +39,9 @@ describe('Creating Cash account', function ()
         myfinance.selectCashAccont().click()
         myfinance.nextButton().click()
         mainpage.modalTitle().should('have.text', 'Cash')
-        myfinance.accountNameField().type('accountnametest')
+        myfinance.accountNameField().type('accountnamete    st')
         myfinance.balanceFieldCash().type(newValue).should('have.value', '1,000')
-        cy.wait(200)
-        myfinance.createButton().click()
+        myfinance.createButton().should('not.be.disabled').click()
         myfinance.cashAccountCreatedNotification().should('exist') 
         myfinance.transactionCreatedNotification().should('exist')     
     })
