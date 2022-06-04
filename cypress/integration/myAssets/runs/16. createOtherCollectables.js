@@ -58,8 +58,10 @@ describe('Creating an other collectables asset', function () {
     cy.contains(/AUTOMATEDPROPERTY/)
     cy.get('li').last().click()
 
-
     mycollection.purcasePriceArt().type('1000').should('have.value', '1,000')
+
+    cy.wait(500) //I use this wait to prevent the 0 asset balance issue 
+    
     cy.contains('Save and Close').should('not.be.disabled').click()
     mycollection.OtherCollectablesAssetCreatedNotification().should('exist')
   })

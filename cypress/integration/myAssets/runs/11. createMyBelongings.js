@@ -55,8 +55,10 @@ describe('Creating an Other asset', function ()
     cy.contains(/AUTOMATEDPROPERTY/)
     cy.get('li').last().click()
 
-
     mybelongings.priceField().type(newValue).should('have.value', '1,000')
+
+    cy.wait(500) //I use this wait to prevent the 0 asset balance issue 
+    
     mybelongings.saveAndClose().should('not.be.disabled').click()
     mybelongings.myBelongingsCreatedNotification().should('exist') 
   })  

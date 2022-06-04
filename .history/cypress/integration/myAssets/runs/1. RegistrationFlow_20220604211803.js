@@ -12,11 +12,23 @@ describe('Sign up flow / Sign in flow tests', function ()
     const signup = new Signup()
     const mainpage = new Mainpage()
 
-    // Create random email and use it for the registration and login flow 
+    // Create random email and use it for the registration and login flows
     const uuid = () => Cypress._.random(0, 1e6)
     const id = uuid()
     const testemail = `testemail${id}` + "@nonexistentdomain.com"
     
+    // Clear a web cache before tests to prevent browser issues 
+    afterEach(() => {
+        if (window.navigator && navigator.serviceWorker) {
+          navigator.serviceWorker.getRegistrations()
+          .then((registrations) => {
+            registrations.forEach((registration) => {
+              registration.unregister()
+            })
+          })
+        }
+      })
+      
     it('Go to the login page, check the page title', function()
     {
         cy.goToLoginPage()

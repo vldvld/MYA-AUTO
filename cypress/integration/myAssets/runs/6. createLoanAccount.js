@@ -46,6 +46,9 @@ describe('Create the Loan account and check the C&B widgets', function ()
         myfinance.bankInstitutionField().tab().type('{enter}')
 
         myfinance.outstandingAmmount().type(newValue).should('have.value', '1,000')
+
+        cy.wait(500) //I use this wait to prevent the 0 asset balance issue 
+        
         myfinance.createButton().should('not.be.disabled').click()
         myfinance.loanAccountCreatedNotification().should('exist') 
         myfinance.transactionCreatedNotification().should('exist') 

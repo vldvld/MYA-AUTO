@@ -55,6 +55,8 @@ describe('Creating an Art asset', function () {
     cy.contains(/AUTOMATEDPROPERTY/)
     cy.get('li').last().click()
 
+    cy.wait(500) //I use this wait to prevent the 0 asset balance issue 
+    
     mycollection.createButton().should('not.be.disabled').click()
     mycollection.artCreatedNotification().should('exist')
   })

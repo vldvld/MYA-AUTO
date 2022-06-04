@@ -5,71 +5,71 @@ import myFinance from '../../../pageObjects/myFinance'
 import myProperty from '../../../pageObjects/myProperty'
 
 Cypress.on('uncaught:exception', (err, runnable) => {
-    return false
+  return false
 })
 
-describe('Creating a property asset', function () 
-{
-    const login = new Login()
-    const signup = new Signup()
-    const mainpage = new MainPage()
-    const myfinance = new myFinance()
-    const myproperty = new myProperty()
-    const newValue = 1000
-    const currency = 'USD '
-    const internationalNumberFormat = new Intl.NumberFormat('en-US')
+describe('Creating a property asset', function () {
+  const login = new Login()
+  const signup = new Signup()
+  const mainpage = new MainPage()
+  const myfinance = new myFinance()
+  const myproperty = new myProperty()
+  const newValue = 1000
+  const currency = 'USD '
+  const internationalNumberFormat = new Intl.NumberFormat('en-US')
 
 
-    const name = () => Cypress._.random(0, 1e6)
-    const id = name()
-    const testName = "AUTOMATEDPROPERTY #" +`${id}`
-    
-    // Clear a web cache before tests to prevent browser issues 
-    afterEach(() => {
-        if (window.navigator && navigator.serviceWorker) {
-          navigator.serviceWorker.getRegistrations()
-          .then((registrations) => {
-            registrations.forEach((registration) => {
-              registration.unregister()
-            })
+  const name = () => Cypress._.random(0, 1e6)
+  const id = name()
+  const testName = "AUTOMATEDPROPERTY #" + `${id}`
+
+  // Clear a web cache before tests to prevent browser issues 
+  afterEach(() => {
+    if (window.navigator && navigator.serviceWorker) {
+      navigator.serviceWorker.getRegistrations()
+        .then((registrations) => {
+          registrations.forEach((registration) => {
+            registration.unregister()
           })
-        }
-    })    
-    
-   it('Go to the Property page and create the property', function()
-    {
-        cy.goToLoginPage()
-        cy.loginCommand("automationtests3@gmail.com", "testuser1")
-        mainpage.homePageUrl()
+        })
+    }
+  })
 
-        mainpage.goToMyProperty().click()
-        cy.url().should('eq', `${Cypress.config().baseUrl}properties/summary`)
+  it('Go to the Property page and create the property', function () {
+    cy.goToLoginPage()
+    cy.loginCommand("automationtests3@gmail.com", "testuser1")
+    mainpage.homePageUrl()
 
-        myproperty.myPropertyPlusButton().click()
-        cy.contains('Property').should('exist')
-        myproperty.propertyName().click().type(testName).should('have.value', testName)
+    mainpage.goToMyProperty().click()
+    cy.url().should('eq', `${Cypress.config().baseUrl}properties/summary`)
 
-        myproperty.propertyType().click().type('{downarrow}').type('{enter}')
-        myproperty.locationField().type('trinklera')
-        cy.wait(1000)
-        cy.get('[role="option"]', { timeout: 20000 }).contains(/Kharkiv/).trigger('click',{force: true})
-        cy.wait(200)
-        myproperty.purchasePrice().type(newValue)
-        myproperty.createButton().should('not.be.disabled').click()
-        myproperty.propertyCreatedNotification().should('exist') 
- 
+    myproperty.myPropertyPlusButton().click()
+    cy.contains('Property').should('exist')
+    myproperty.propertyName().click().type(testName).should('have.value', testName)
 
-    })  
-    it('Check the Collectibles Value widget', function()
-    {   
-        myproperty.propertyCollectiblesValue().then($valueState => {
-        const previousValueWidget = $valueState.text() 
-        myproperty.propertyCollectiblesValue().should('have.text', previousValueWidget) 
-        const previousValueInt = previousValueWidget.substr(4)  
-        const resultValueCBWidget = parseInt(previousValueInt.replace(",", "") ) + newValue 
-        myproperty.propertyCollectiblesValue().should('have.text', currency + internationalNumberFormat.format(resultValueCBWidget)) 
-      })
-})
-    
+    myproperty.propertyType().click().type('{downarrow}').type('{enter}')
+    myproperty.locationField().type('trinklera')
+    cy.wait(1000)
+    cy.get('[role="option"]', { timeout: 20000 }).contains(/Kharkiv/).trigger('click', { force: true })
+    cy.wait(200)
+    myproperty.purchasePrice().type(newValue)
+
+    cy.wait(500) //I use this wait to prevent the 0 asset balance issue 
+
+    myproperty.createButton().should('not.be.disabled').click()
+    myproperty.propertyCreatedNotification().should('exist')
+
+
+  })
+  it('Check the Collectibles Value widget', function () {
+    myproperty.propertyCollectiblesValue().then($valueState => {
+      const previousValueWidget = $valueState.text()
+      myproperty.propertyCollectiblesValue().should('have.text', previousValueWidget)
+      const previousValueInt = previousValueWidget.substr(4)
+      const resultValueCBWidget = parseInt(previousValueInt.replace(",", "")) + newValue
+      myproperty.propertyCollectiblesValue().should('have.text', currency + internationalNumberFormat.format(resultValueCBWidget))
+    })
+  })
+
 })
 

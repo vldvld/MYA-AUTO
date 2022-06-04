@@ -1,4 +1,11 @@
-import 'cypress-file-upload';
+import 'cypress-file-upload'
+
+import MainPage from '../pageObjects/mainPage'
+import myFinance from '../pageObjects/myFinance'
+
+const mainpage = new MainPage()
+const myfinance = new myFinance()
+ 
 
 Cypress.Commands.add(
     'iframeLoaded',
@@ -43,6 +50,23 @@ Cypress.Commands.add(
     "goToLoginPage",
     () => {
     cy.visit('Login page')
+ });
+
+ Cypress.Commands.add(
+    "createCashAccount",
+    
+    () => {  
+    mainpage.goToMyFinance().click()
+    myfinance.cashAndBankingTab().click()
+    myfinance.myFinancePlusButton().click()
+    myfinance.selectAccountDropDown().click()
+    myfinance.selectCashAccont().click()
+    myfinance.nextButton().click()
+    myfinance.accountNameField().type('accountnametest')
+    myfinance.balanceFieldCash().type('1000')
+    myfinance.createButton().should('not.be.disabled').click()
+    myfinance.cashAccountCreatedNotification().should('exist')
+    myfinance.transactionCreatedNotification().should('exist')
  });
 
 
