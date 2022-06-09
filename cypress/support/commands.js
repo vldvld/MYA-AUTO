@@ -54,7 +54,6 @@ Cypress.Commands.add(
 
  Cypress.Commands.add(
     "createCashAccount",
-    
     () => {  
     mainpage.goToMyFinance().click()
     myfinance.cashAndBankingTab().click()

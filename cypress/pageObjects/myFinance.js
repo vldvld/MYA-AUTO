@@ -69,13 +69,13 @@ transactionCreatedNotification(){
     return cy.contains('Transaction was created', { timeout: 30000 })
 }
 cbValueWidget(){
-    return cy.get('[data-cy=cb-collectibles-value]',{ timeout: 30000 })
+    return cy.get('[data-cy=summary-widget-value]',{ timeout: 30000 })
 }
 cbLiabilityWidget(){
-    return cy.get('[data-cy=cb-collectibles-liabilities]',{ timeout: 30000 })
+    return cy.get('[data-cy=summary-widget-liabilities]',{ timeout: 30000 })
 }
 cbNetValueWidget(){
-    return cy.get('[data-cy=cb-collectibles-net-value]',{ timeout: 30000 })
+    return cy.get('[data-cy=summary-widget-net-value]',{ timeout: 30000 })
 }
 ziaBankInstitution(){
     return cy.get('[role=menu]').contains('Zions Bank - Mortgage', { timeout: 30000 })
@@ -111,6 +111,21 @@ TISaveAndCloseButton(){
 }
 portfolioWasCreatedNotification(){
     return cy.contains('Portfolio was created', { timeout: 30000 })
+}
+TIInvestmentsAmountField(){
+    return cy.get('#investmentAmount')
+}
+TIHoldingName(){
+    return cy.get('#holding')
+}
+TIUnits (){
+    return cy.get('#units')
+}
+TIPricePerUnit(){
+    return cy.get('#pricePerUnit')
+}
+TIAddHoldingButton(){
+    return cy.get('.MuiFormControl-root > .MuiGrid-container > .MuiGrid-root > .MuiButtonBase-root > .MuiIconButton-label > .MuiSvgIcon-root')
 }
 }
     export default myfinance

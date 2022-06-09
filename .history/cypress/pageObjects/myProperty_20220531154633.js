@@ -34,7 +34,7 @@ class property{
         return cy.get('#bedroomsNumber')
     }
     propertyCollectiblesValue(){
-        return cy.get('[data-cy=property-collectibles-value]', { timeout: 30000 })
+        return cy.get('[data-cy="summary-widget-value"]', { timeout: 30000 })
     }
     propertyLiability(){
         return cy.get('[data-cy=property-collectibles-liabilities]', { timeout: 30000 })
