@@ -20,7 +20,7 @@ describe('Creating a new contact', function ()
     it('Log in, go to the Contacts pag and create a new contact', function()
     {
         cy.goToLoginPage()
-        cy.loginCommand("automationtests3@gmail.com", "testuser1")
+        cy.loginCommand("automationtests5@gmail.com", "testuser1")
         mainpage.homePageUrl()
 
         mainpage.personalAccountMenu().click()

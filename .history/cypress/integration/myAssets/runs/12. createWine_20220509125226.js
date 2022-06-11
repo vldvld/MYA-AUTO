@@ -13,7 +13,7 @@ describe('Wine module tests', function ()
     it('Go to the My wine page and add a new wine manually', function()
     {
         cy.goToLoginPage()
-        cy.loginCommand("automationtests3@gmail.com", "testuser1")
+        cy.loginCommand("automationtests5@gmail.com", "testuser1")
         mainpage.homePageUrl()
 
         mainpage.goToMyCollection({ timeout: 20000 }).click()
@@ -38,7 +38,7 @@ describe('Wine module tests', function ()
 //     it('Go to the My wine page, add a new wine from catalog', function()
 //     {   
 //         cy.goToLoginPage()
-//         cy.loginCommand("automationtests3@gmail.com", "testuser1")
+//         cy.loginCommand("automationtests5@gmail.com", "testuser1")
 //         mainpage.homePageUrl()
 
 //         mainpage.goToMyCollection({ timeout: 20000 }).click()

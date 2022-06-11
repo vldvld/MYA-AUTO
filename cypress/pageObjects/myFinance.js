@@ -3,7 +3,7 @@ class myfinance{
 //C&B module selectors:
 
 myFinancePlusButton(){
-    return cy.get('.MuiFab-root')
+    return cy.get('[data-cy="add-btn"]')
     }
 selectAccountDropDown(){
     return cy.contains('Select type')
@@ -69,7 +69,7 @@ transactionCreatedNotification(){
     return cy.contains('Transaction was created', { timeout: 30000 })
 }
 cbValueWidget(){
-    return cy.get('[data-cy=summary-widget-value]',{ timeout: 30000 })
+    return cy.get('[data-cy="summary-widget-value"]',{ timeout: 30000 })
 }
 cbLiabilityWidget(){
     return cy.get('[data-cy=summary-widget-liabilities]',{ timeout: 30000 })
@@ -78,7 +78,7 @@ cbNetValueWidget(){
     return cy.get('[data-cy=summary-widget-net-value]',{ timeout: 30000 })
 }
 ziaBankInstitution(){
-    return cy.get('[role=menu]').contains('Zions Bank - Mortgage', { timeout: 30000 })
+    return cy.get('[role=menu]').contains('Zions Bank - Mortgage', { timeout: 60000 })
 }
 outstandingAmmount(){
     return cy.get('#outstandingAmount')
@@ -126,6 +126,15 @@ TIPricePerUnit(){
 }
 TIAddHoldingButton(){
     return cy.get('.MuiFormControl-root > .MuiGrid-container > .MuiGrid-root > .MuiButtonBase-root > .MuiIconButton-label > .MuiSvgIcon-root')
+}
+creditCardType(){
+    return cy.get('[data-cy="input-credit-card-type-select"] > .MuiSelect-root')
+}
+creditCardTypeLast4(){
+    return cy.get('#cardType')
+}
+modalName(){
+    return cy.get('[data-cy="asset-dialog-title"]')
 }
 }
     export default myfinance

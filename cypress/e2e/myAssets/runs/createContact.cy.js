@@ -15,24 +15,12 @@ describe('Creating a new contact', function ()
     // Create a random Contact name
     const name = () => Cypress._.random(0, 1e6)
     const id = name()
-    const testName = "AContact #" +`${id}`
-    
-    // Clear a web cache before tests to prevent browser issues 
-    afterEach(() => {
-        if (window.navigator && navigator.serviceWorker) {
-        navigator.serviceWorker.getRegistrations()
-        .then((registrations) => {
-        registrations.forEach((registration) => {
-        registration.unregister()
-            })
-          })
-        }
-    })    
+    const testName = "AContact #" +`${id}` 
     
     it('Log in, go to the Contacts page and create a new contact', function()
     {
         cy.goToLoginPage()
-        cy.loginCommand("automationtests3@gmail.com", "testuser1")
+        cy.loginCommand("automationtests5@gmail.com", "testuser1")
         mainpage.homePageUrl()
 
         mainpage.personalAccountMenu().click()

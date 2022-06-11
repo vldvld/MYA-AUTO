@@ -22,7 +22,7 @@ describe('Document Storage page test`s', function () {
 
     it('Go to the Document storage page and add a tests documents', function () {
         cy.goToLoginPage()
-        cy.loginCommand("automationtests3@gmail.com", "testuser1")
+        cy.loginCommand("automationtests5@gmail.com", "testuser1")
         mainpage.homePageUrl()
 
         mainpage.goToDocumentVault().click()

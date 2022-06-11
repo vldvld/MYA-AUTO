@@ -16,7 +16,7 @@ describe('Creating and testing the credit card account', function ()
     it('Go to the MyFinance page and create the Credit card account', function()
     {
         cy.goToLoginPage()
-        cy.loginCommand("automationtests3@gmail.com", "testuser1")
+        cy.loginCommand("automationtests5@gmail.com", "testuser1")
         mainpage.homePageUrl()
 
         mainpage.goToMyFinance().click()

@@ -16,21 +16,9 @@ describe('Creating and testing the Mortgage account', function () {
     const id = name()
     const testName = "AUTOMATEDMORTGAGE #" + `${id}`
 
-    // Clear a web cache before tests to prevent browser issues 
-    afterEach(() => {
-        if (window.navigator && navigator.serviceWorker) {
-            navigator.serviceWorker.getRegistrations()
-                .then((registrations) => {
-                    registrations.forEach((registration) => {
-                        registration.unregister()
-                    })
-                })
-        }
-    })
-
     it('Go to the MyFinance page and create the Mortgage account', function () {
         cy.goToLoginPage()
-        cy.loginCommand("automationtests3@gmail.com", "testuser1")
+        cy.loginCommand("automationtests5@gmail.com", "testuser1")
         mainpage.homePageUrl()
 
         mainpage.goToMyFinance().click()
@@ -41,60 +29,66 @@ describe('Creating and testing the Mortgage account', function () {
         myfinance.selectMortgageAccount().click()
         myfinance.nextButton().click()
         mainpage.modalTitle().should('have.text', 'Mortgage Account')
+
+        // wait for a full firebase API loading
+        cy.contains('0 / 0.00%', { timeout: 50000 }).should('exist')
+
         myfinance.accountNameField().type(testName)
+        myfinance.outstandingAmmount().type(newValue).should('have.value', '1,000')
         myfinance.bankInstitutionField().type("Zion")
         myfinance.ziaBankInstitution().should('exist')
         myfinance.bankInstitutionField().tab().type('{enter}')
-        myfinance.outstandingAmmount().type(newValue).should('have.value', '1,000')
 
-        cy.wait(1000) //I use this wait to prevent the 0 asset balance issue 
+        myfinance.cbValueWidget().then($widgetvalue => {
+            const widgetvaluetext = $widgetvalue.text().replace(currency, "");
+            cy.log(widgetvaluetext)
+            cy.wrap(widgetvaluetext.replace(/[^a-zA-Z0-9 ]/g, '')).as('wrapvalue')
+        })
+
+        myfinance.cbLiabilityWidget().then($widgetliability => {
+            const widgetliabilitytext = $widgetliability.text().replace(currency, "")
+            cy.log(widgetliabilitytext)
+            cy.wrap(widgetliabilitytext.replace(/[^a-zA-Z0-9 ]/g, '')).as('wrapliability')
+        })
+
+        myfinance.cbNetValueWidget().then($widgetnetvalue => {
+            const widgetnetvaluetext = $widgetnetvalue.text().replace(currency, "")
+            cy.log(widgetnetvaluetext)
+            cy.wrap(widgetnetvaluetext.replace(/[^a-zA-Z0-9 ]/g, '')).as('wrapnetvalue')
+        })
 
         myfinance.createButton().should('not.be.disabled').click()
         myfinance.mortgageCreatedNotification().should('exist')
         myfinance.transactionCreatedNotification().should('exist')
 
     })
-    it('Check the Net value C&B collectibles widgets', function () {
-        myfinance.cbNetValueWidget().then($valueState => {
-            const previousNetValueCBWidget = $valueState.text()
-            myfinance.cbNetValueWidget().should('have.text', previousNetValueCBWidget)
-            const previousNetValueInt = previousNetValueCBWidget.substr(5)
-            const resultNetValueCBWidget = parseInt(previousNetValueInt.replace(",", "")) + newValue
-            myfinance.cbNetValueWidget().should('have.text', currency + '(' + internationalNumberFormat.format(resultNetValueCBWidget) + ')')
-        })
+    it('Check the value widget', function () {
+        cy.log('wrap result is ' + this.wrapvalue)
+        const wrapvalueconst = Number(this.wrapvalue)
+        cy.log(wrapvalueconst)
+        myfinance.cbValueWidget().should('have.text', currency + internationalNumberFormat.format(wrapvalueconst))
 
     })
 
-    it('Create the mortgage account and check the Liability widget', function () {
-        myfinance.myFinancePlusButton().click()
-        cy.contains('Account').should('exist')
-        myfinance.selectAccountDropDown().click()
-        myfinance.selectMortgageAccount().click()
-        myfinance.nextButton().click()
-        mainpage.modalTitle().should('have.text', 'Mortgage Account')
-        myfinance.accountNameField().type(testName)
-        myfinance.bankInstitutionField().type("Zion")
-        myfinance.ziaBankInstitution().should('exist')
-        myfinance.bankInstitutionField().tab().type('{enter}')
-        myfinance.outstandingAmmount().type(newValue).should('have.value', '1,000')
 
-        cy.wait(1000) //I use this wait to prevent the 0 asset balance issue 
-        
-        myfinance.createButton().should('not.be.disabled').click()
-        myfinance.mortgageCreatedNotification().should('exist')
-        myfinance.transactionCreatedNotification().should('exist')
+    it('Check the liability widget', function () {
+        cy.log('wrap result is ' + this.wrapliability)
+        const wrapliabilityconst = Number(this.wrapliability) + newValue
+        cy.log(wrapliabilityconst)
+        myfinance.cbLiabilityWidget().should('have.text', currency + '(' + internationalNumberFormat.format(wrapliabilityconst) + ')')
+
     })
 
+    it('Check the Net value widget', function () {
+        cy.log('wrap result is ' + this.wrapnetvalue)
+        const wrapnetvaluetyconst = Number(this.wrapnetvalue) + newValue
+        cy.log(wrapnetvaluetyconst)
+        myfinance.cbNetValueWidget().should('have.text', currency + '(' + internationalNumberFormat.format(wrapnetvaluetyconst) + ')')
 
-    it('Check the Liability widget', function () {
-        myfinance.cbLiabilityWidget().then($valueLiabilityState => {
-            const previousLiabilityWidget = $valueLiabilityState.text()
-            myfinance.cbLiabilityWidget().should('have.text', previousLiabilityWidget)
-            const previousLiabilityWidgetInt = previousLiabilityWidget.substr(5)
-            const resultLiabilityWidget = parseInt(previousLiabilityWidgetInt.replace(",", "")) + newValue
-            cy.log(resultLiabilityWidget)
-            myfinance.cbLiabilityWidget().should('have.text', currency + '(' + internationalNumberFormat.format(resultLiabilityWidget) + ')')
-        })
+    })
+
+    it('Make sure that created asset is shown on the list of created assets', function () {
+        cy.contains(testName).should('exist')
     })
 
 })

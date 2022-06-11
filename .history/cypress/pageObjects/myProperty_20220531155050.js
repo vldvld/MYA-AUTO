@@ -4,7 +4,7 @@ class property{
         return cy.get('[name="email"]')
     }
     myPropertyPlusButton(){
-        return cy.get('.MuiFab-root')
+        return cy.get('[data-cy="add-btn"]')
     }
     propertyName(){
         return cy.get('[name="propertyName"]')

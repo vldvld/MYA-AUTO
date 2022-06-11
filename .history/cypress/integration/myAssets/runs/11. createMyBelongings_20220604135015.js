@@ -33,7 +33,7 @@ describe('Creating an Other asset', function ()
   it('Go to the My belongings page and create an other asset', function()
   {
     cy.goToLoginPage()
-    cy.loginCommand("automationtests3@gmail.com", "testuser1")
+    cy.loginCommand("automationtests5@gmail.com", "testuser1")
     mainpage.homePageUrl()
 
     mainpage.goToMyBelongings().click()
@@ -56,7 +56,7 @@ describe('Creating an Other asset', function ()
     // cy.get('li').last().click()
 
     cy.get('#linkedPropertyAsLocation').click()
-    cy.get('[tabindex="0"]', { timeout: 20000 }).should('contain', /AUTOMATEDPROPERTY/);
+    cy.get('[tabindex="0"]', { timeout: 20000 }).should('contain', /AUTOMATEDPROPERTY/,{ timeout: 20000 });
     cy.get('li').last().click()
 
 

@@ -23,21 +23,9 @@ describe('Creating a property asset', function () {
   const id = name()
   const testName = "AUTOMATEDPROPERTY #" + `${id}`
 
-  // Clear a web cache before tests to prevent browser issues 
-  afterEach(() => {
-    if (window.navigator && navigator.serviceWorker) {
-      navigator.serviceWorker.getRegistrations()
-        .then((registrations) => {
-          registrations.forEach((registration) => {
-            registration.unregister()
-          })
-        })
-    }
-  })
-
   it('Go to the Property page and create the property', function () {
     cy.goToLoginPage()
-    cy.loginCommand("automationtests3@gmail.com", "testuser1")
+    cy.loginCommand("automationtests5@gmail.com", "testuser1")
     mainpage.homePageUrl()
 
     mainpage.goToMyProperty().click()

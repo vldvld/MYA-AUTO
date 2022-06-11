@@ -1,7 +1,7 @@
 class mycollection{
 
 myCollectionPlusButton(){
-    return cy.get('.MuiFab-root')
+    return cy.get('[data-cy="add-btn"]')
 }
 purcasePriceArt(){
     return cy.get('#purchasePrice')
@@ -74,6 +74,9 @@ modelTypeField(){
 }
 OtherCollectablesAssetCreatedNotification(){
     return cy.contains('Other Collectibles Asset was created', { timeout: 30000})
+}
+shouldExistPropertySearch(){
+    return cy.contains(/AUTOMATEDPROPERTY/, { timeout: 50000 })
 }
 
 

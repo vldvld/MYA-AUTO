@@ -5,11 +5,11 @@ import myFinance from '../pageObjects/myFinance'
 
 const mainpage = new MainPage()
 const myfinance = new myFinance()
- 
+
 
 Cypress.Commands.add(
     'iframeLoaded',
-    {prevSubject: 'element'},
+    { prevSubject: 'element' },
     ($iframe) => {
         const contentWindow = $iframe.prop('contentWindow');
         return new Promise(resolve => {
@@ -29,7 +29,7 @@ Cypress.Commands.add(
 
 Cypress.Commands.add(
     'getInDocument',
-    {prevSubject: 'document'},
+    { prevSubject: 'document' },
     (document, selector) => Cypress.$(selector, document)
 );
 
@@ -41,31 +41,31 @@ Cypress.Commands.add(
 Cypress.Commands.add(
     "loginCommand",
     (username, password) => {
-    cy.get('[name="email"]').type(username).should('have.value', username)
-    cy.get('[name="password"]').type(password).should('have.value', password)
-    cy.get('[data-cy=login-btn]').click()
-});
+        cy.get('[name="email"]').type(username).should('have.value', username)
+        cy.get('[name="password"]').type(password).should('have.value', password)
+        cy.get('[data-cy=login-btn]').click()
+    });
 
 Cypress.Commands.add(
     "goToLoginPage",
     () => {
-    cy.visit('Login page')
- });
+        cy.visit('Login page')
+    });
 
- Cypress.Commands.add(
+Cypress.Commands.add(
     "createCashAccount",
-    () => {  
-    mainpage.goToMyFinance().click()
-    myfinance.cashAndBankingTab().click()
-    myfinance.myFinancePlusButton().click()
-    myfinance.selectAccountDropDown().click()
-    myfinance.selectCashAccont().click()
-    myfinance.nextButton().click()
-    myfinance.accountNameField().type('accountnametest')
-    myfinance.balanceFieldCash().type('1000')
-    myfinance.createButton().should('not.be.disabled').click()
-    myfinance.cashAccountCreatedNotification().should('exist')
-    myfinance.transactionCreatedNotification().should('exist')
- });
+    () => {
+        mainpage.goToMyFinance().click()
+        myfinance.cashAndBankingTab().click()
+        myfinance.myFinancePlusButton().click()
+        myfinance.selectAccountDropDown().click()
+        myfinance.selectCashAccont().click()
+        myfinance.nextButton().click()
+        myfinance.accountNameField().type('accountnametest')
+        myfinance.balanceFieldCash().type('1000')
+        myfinance.createButton().should('not.be.disabled').click()
+        myfinance.cashAccountCreatedNotification().should('exist')
+        myfinance.transactionCreatedNotification().should('exist')
+    })
 
 

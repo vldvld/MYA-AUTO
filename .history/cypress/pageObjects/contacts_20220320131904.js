@@ -1,6 +1,6 @@
 class contacts{
     plusButton(){
-        return cy.get('.MuiFab-root')
+        return cy.get('[data-cy="add-btn"]')
     }
 
 }

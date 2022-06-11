@@ -1,5 +1,6 @@
 import MainPage from '../../../pageObjects/mainPage'
 import myBelongings from '../../../pageObjects/myBelongings'
+import myCollection from '../../../pageObjects/myCollection'
 
 Cypress.on('uncaught:exception', (err, runnable) => {
   return false
@@ -9,6 +10,8 @@ describe('Creating an Other asset', function ()
 {
   const mainpage = new MainPage()
   const mybelongings = new myBelongings()
+  const mycollection = new myCollection()
+
   const newValue = 1000
   const currency = 'USD '
   const internationalNumberFormat = new Intl.NumberFormat('en-US')
@@ -18,22 +21,10 @@ describe('Creating an Other asset', function ()
   const id = name()
   const testName = "AUTOMATEDOTHERASSET #" +`${id}`
   
-  // Clear a web cache before tests to prevent browser issues 
-  afterEach(() => {
-      if (window.navigator && navigator.serviceWorker) {
-        navigator.serviceWorker.getRegistrations()
-        .then((registrations) => {
-          registrations.forEach((registration) => {
-            registration.unregister()
-          })
-        })
-      }
-  })    
-  
   it('Go to the My belongings page and create an other asset', function()
   {
     cy.goToLoginPage()
-    cy.loginCommand("automationtests3@gmail.com", "testuser1")
+    cy.loginCommand("automationtests5@gmail.com", "testuser1")
     mainpage.homePageUrl()
 
     mainpage.goToMyBelongings().click()
@@ -51,7 +42,7 @@ describe('Creating an Other asset', function ()
     cy.get('li').last().click()
 
     cy.get('#linkedPropertyAsLocation').click()
-    cy.contains(/AUTOMATEDPROPERTY/)
+    mycollection.shouldExistPropertySearch().should('exist')
     cy.get('li').last().click()
 
     mybelongings.priceField().type(newValue).should('have.value', '1,000')

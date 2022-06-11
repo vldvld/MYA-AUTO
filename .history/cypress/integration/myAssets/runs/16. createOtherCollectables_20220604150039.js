@@ -32,7 +32,7 @@ describe('Creating an other collectables asset', function () {
 
   it('Go to the My collectibles page and create an other collectables asset', function () {
     cy.goToLoginPage()
-    cy.loginCommand("automationtests3@gmail.com", "testuser1")
+    cy.loginCommand("automationtests5@gmail.com", "testuser1")
     mainpage.homePageUrl()
 
     mainpage.goToMyCollection({ timeout: 20000 }).click()
@@ -55,7 +55,7 @@ describe('Creating an other collectables asset', function () {
     mycollection.modelTypeField().should('have.value', 'Test Model Type')
 
     cy.get('#linkedPropertyAsLocation').click()
-    cy.contains(/AUTOMATEDPROPERTY/)
+    cy.contains(/AUTOMATEDPROPERTY/,{ timeout: 20000 })
     cy.get('li').last().click()
 
 

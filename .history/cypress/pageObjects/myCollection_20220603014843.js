@@ -1,7 +1,7 @@
 class mycollection{
 
 myCollectionPlusButton(){
-    return cy.get('.MuiFab-root')
+    return cy.get('[data-cy="add-btn"]')
 }
 purcasePriceArt(){
     return cy.get('#purchasePrice')

@@ -30,7 +30,7 @@ describe('Creating a Portfolio account', function () {
 
     it('Go to the Traditional page and create the portfolio', function () {
         cy.goToLoginPage()
-        cy.loginCommand("automationtests3@gmail.com", "testuser1")
+        cy.loginCommand("automationtests5@gmail.com", "testuser1")
         mainpage.homePageUrl()
 
         mainpage.goToMyFinance().click()

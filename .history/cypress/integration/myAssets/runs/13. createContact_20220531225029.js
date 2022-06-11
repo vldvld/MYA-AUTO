@@ -21,7 +21,7 @@ describe('Creating a new contact', function ()
     {
         cy.clearCookies()
         cy.goToLoginPage()
-        cy.loginCommand("automationtests3@gmail.com", "testuser1")
+        cy.loginCommand("automationtests5@gmail.com", "testuser1")
         mainpage.homePageUrl()
 
         mainpage.personalAccountMenu().click()

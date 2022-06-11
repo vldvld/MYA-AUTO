@@ -1,7 +1,7 @@
 class documentstorage{
 
     plusButton(){   
-        return cy.get('.MuiFab-root')
+        return cy.get('[data-cy="add-btn"]')
     }
     assetType(){
         return cy.get('[aria-haspopup="listbox"]')

@@ -9,20 +9,9 @@ describe('Document Storage page test`s', function () {
     const mainpage = new MainPage()
     const documentstorage = new documentStorage()
 
-    afterEach(() => {
-        if (window.navigator && navigator.serviceWorker) {
-            navigator.serviceWorker.getRegistrations()
-                .then((registrations) => {
-                    registrations.forEach((registration) => {
-                        registration.unregister()
-                    })
-                })
-        }
-    })
-
     it('Go to the Document storage page and add a tests documents', function () {
         cy.goToLoginPage()
-        cy.loginCommand("automationtests3@gmail.com", "testuser1")
+        cy.loginCommand("automationtests5@gmail.com", "testuser1")
         mainpage.homePageUrl()
 
         mainpage.goToDocumentVault().click()

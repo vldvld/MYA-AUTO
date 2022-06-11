@@ -3,7 +3,7 @@ class myfinance{
 //C&B module selectors:
 
 myFinancePlusButton(){
-    return cy.get('.MuiFab-root')
+    return cy.get('[data-cy="add-btn"]')
     }
 selectAccountDropDown(){
     return cy.contains('Select type')

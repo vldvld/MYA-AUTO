@@ -1,0 +1,67 @@
+import MainPage from '../../../pageObjects/mainPage'
+import myFinance from '../../../pageObjects/myFinance'
+
+Cypress.on('uncaught:exception', (err, runnable) => {
+  return false
+})
+
+describe('Creating Cash account', function () {
+  const mainpage = new MainPage()
+  const myfinance = new myFinance()
+  const currency = 'USD '
+  const newValue = 1000
+  const internationalNumberFormat = new Intl.NumberFormat('en-US')
+
+  const name = () => Cypress._.random(0, 1e6)
+  const id = name()
+  const testName = "AUTOMATEDCASH #" + `${id}`
+
+
+
+  it('Go to the MyFinance page and create the Cash account', function () {
+    cy.goToLoginPage()
+    cy.loginCommand("automationtests5@gmail.com", "testuser1")
+    mainpage.homePageUrl()
+
+    mainpage.goToMyFinance().click()
+    myfinance.cashAndBankingTab().click()
+    myfinance.myFinancePlusButton().click()
+    cy.contains('Account').should('exist')
+    myfinance.selectAccountDropDown().click()
+    myfinance.selectCashAccont().click()
+    myfinance.nextButton().click()
+    mainpage.modalTitle().should('have.text', 'Cash')
+    myfinance.accountNameField().type(testName)
+    myfinance.balanceFieldCash().type(newValue).should('have.value', '1,000')
+
+    cy.wait(1000) //I use this wait to prevent the 0 asset balance issue 
+    
+    myfinance.createButton().should('not.be.disabled').click()
+    myfinance.cashAccountCreatedNotification().should('exist')
+    myfinance.transactionCreatedNotification().should('exist')
+
+    // myfinance.cbValueWidget().then($valueState => {
+    //   const previousValueCBWidget = $valueState.text()
+    //   myfinance.cbValueWidget().should('have.text', previousValueCBWidget)
+    //   const previousValueInt = previousValueCBWidget.substr(4)
+    //   const resultValueCBWidget = parseInt(previousValueInt.replace(",", "")) + newValue
+    //   myfinance.cbValueWidget().should('have.text', currency + internationalNumberFormat.format(resultValueCBWidget, { timeout: 60000 }))
+    // })
+
+  })
+  it('Go to the MyFinance page and create the Cash account', function () {
+
+    myfinance.cbValueWidget().then($fieldone => {
+      const value = $fieldone.text()
+      cy.log(value)
+    })
+    cy.log(value+100)
+    // const value = myfinance.cbValueWidget().text()
+    // cy.log(value)
+    // const liability = myfinance.cbLiabilityWidget().text()
+    // const netvalue = myfinance.cbNetValueWidget().text()
+
+
+
+  })
+})

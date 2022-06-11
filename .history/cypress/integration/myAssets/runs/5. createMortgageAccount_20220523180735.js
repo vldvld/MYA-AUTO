@@ -16,7 +16,7 @@ describe('Creating and testing the Mortgage account', function ()
     it('Go to the MyFinance page and create the Mortgage account', function()
     {
         cy.goToLoginPage()
-        cy.loginCommand("automationtests3@gmail.com", "testuser1")
+        cy.loginCommand("automationtests5@gmail.com", "testuser1")
         mainpage.homePageUrl()
 
         mainpage.goToMyFinance().click()

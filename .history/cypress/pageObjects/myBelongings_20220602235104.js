@@ -10,7 +10,7 @@ class login{
         return cy.contains('Other Asset was created', { timeout: 30000})
     }
     myBelongingsPlusButton(){
-        return cy.get('.MuiFab-root')
+        return cy.get('[data-cy="add-btn"]')
     }
     nameField(){
         return cy.get('#belongingName')

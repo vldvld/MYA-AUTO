@@ -17,31 +17,20 @@ describe('Creating a Portfolio account', function () {
     const id = name()
     const testName = "AutoPortfolio #" + `${id}`
 
-    afterEach(() => {
-        if (window.navigator && navigator.serviceWorker) {
-            navigator.serviceWorker.getRegistrations()
-                .then((registrations) => {
-                    registrations.forEach((registration) => {
-                        registration.unregister()
-                    })
-                })
-        }
-    })
-
     it('Go to the Traditional page and create the portfolio', function () {
         cy.goToLoginPage()
-        cy.loginCommand("automationtests3@gmail.com", "testuser1")
+        cy.loginCommand("automationtests5@gmail.com", "testuser1")
         mainpage.homePageUrl()
 
         mainpage.goToMyFinance().click()
         myfinance.TITab().click()
         myfinance.myFinancePlusButton().click()
+        // wait for a full firebase API loading
+        cy.contains('0 / 0.00%', { timeout: 50000 }).should('exist')
 
         myfinance.TIName().type(testName).should('have.value', testName)
         myfinance.TIInvestmentsAmountField().type(newValue).should('have.value', '1,000')
         
-        cy.wait(3000)
-
         myfinance.TIAddHoldingButton().click()
         myfinance.TIHoldingName().type('bitcoin')
 
