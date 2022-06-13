@@ -5,11 +5,11 @@ Cypress.on('uncaught:exception', (err, runnable) => {
     return false
 })
 
-describe('Document Storage page test`s', function () {
+describe('Document Storage page tests', function () {
     const mainpage = new MainPage()
     const documentstorage = new documentStorage()
 
-    it('Go to the Document storage page and add a tests documents', function () {
+    it('Go to the Document storage page and add png/pdf/doc documents', function () {
         cy.goToLoginPage()
         cy.loginCommand("automationtests5@gmail.com", "testuser1")
         mainpage.homePageUrl()

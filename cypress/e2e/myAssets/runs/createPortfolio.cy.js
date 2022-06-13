@@ -29,11 +29,9 @@ describe('Creating a Portfolio account', function () {
         cy.contains('0 / 0.00%', { timeout: 50000 }).should('exist')
 
         myfinance.TIName().type(testName).should('have.value', testName)
-        cy.wait(200)
-        myfinance.TIInvestmentsAmountField().type(newValue)
-        cy.wait(200)
-        myfinance.TIInvestmentsAmountField().should('have.value', '1,000')
-        
+
+        cy.wait(500)
+
         myfinance.TIAddHoldingButton().click()
         myfinance.TIHoldingName().type('bitcoin')
 

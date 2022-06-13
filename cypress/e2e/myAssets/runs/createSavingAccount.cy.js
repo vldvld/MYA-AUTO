@@ -5,7 +5,7 @@ Cypress.on('uncaught:exception', (err, runnable) => {
   return false
 })
 
-describe('Creating and testing a  saving account', function () {
+describe('Creating and testing a saving account', function () {
   const mainpage = new MainPage()
   const myfinance = new myFinance()
   const currency = 'USD '
@@ -57,7 +57,7 @@ describe('Creating and testing a  saving account', function () {
       cy.log(widgetnetvaluetext)
       cy.wrap(widgetnetvaluetext.replace(/[^a-zA-Z0-9 ]/g, '')).as('wrapnetvalue')
     })
-    cy.wait(200)
+    cy.wait(500)
     myfinance.createButton().should('not.be.disabled').click()
     myfinance.savingAccountCreatedNotification().should('exist')
     myfinance.transactionCreatedNotification().should('exist')

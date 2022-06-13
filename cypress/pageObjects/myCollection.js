@@ -78,6 +78,9 @@ OtherCollectablesAssetCreatedNotification(){
 shouldExistPropertySearch(){
     return cy.contains(/AUTOMATEDPROPERTY/, { timeout: 50000 })
 }
+winePropertyLocation(){
+    return cy.get('#linkedPropertyAsLocation')
+}
 
 
 
