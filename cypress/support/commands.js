@@ -41,9 +41,9 @@ Cypress.Commands.add(
 Cypress.Commands.add(
     "loginCommand",
     (username, password) => {
-        cy.get('[name="email"]').type(username).should('have.value', username)
-        cy.get('[name="password"]').type(password).should('have.value', password)
-        cy.get('[data-cy=login-btn]').click()
+        cy.get('[name="email"]').should('not.be.disabled').type(username).should('have.value', username)
+        cy.get('[name="password"]').should('not.be.disabled').type(password).should('have.value', password)
+        cy.get('[data-cy=login-btn]').should('not.be.disabled').click()
     });
 
 Cypress.Commands.add(

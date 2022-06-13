@@ -5,7 +5,7 @@ Cypress.on('uncaught:exception', (err, runnable) => {
   return false
 })
 
-describe('Wine module tests', function () {
+describe('Wine page tests', function () {
   const mainpage = new Mainpage()
   const mycollection = new Mycollection()
   const vintage = '1999'
@@ -41,9 +41,9 @@ describe('Wine module tests', function () {
     cy.contains('You added', { timeout: 20000 })
     mycollection.shouldExistPropertySearch().should('exist')
     mycollection.winePropertyLocation().type('automatedproperty')
-    //cy.contains(/AUTOMATEDPROPERTY/, { timeout: 50000 })
+
     cy.get('[role="dialog"]', { timeout: 20000 }).contains(/AUTOMATEDPROPERTY/, { timeout: 50000 }).trigger("click")
-  //  cy.get('li').contains(/AUTOMATEDPROPERTY/, { timeout: 50000 }).last().click()
+
     cy.wait(500) //I use this wait to prevent the 0 asset balance issue 
 
     mainpage.cbValueWidget().then($widgetvalue => {
@@ -98,7 +98,7 @@ describe('Wine module tests', function () {
     cy.contains('You bought 1 bottles of ' + vintage + ' ' + testName + ' for USD 1,000', { timeout: 20000 }).should('exist')
   })
 
-  it('Create the wine by using the wine catalogue', function () {
+  it('Check the wine catalogue', function () {
     cy.goToLoginPage()
     cy.loginCommand("automationtests5@gmail.com", "testuser1")
     mainpage.homePageUrl()
@@ -116,8 +116,7 @@ describe('Wine module tests', function () {
     cy.get('[data-cy="header-action-panel-search-input"]').type('testwinesearchnamenonvalid').type('{enter}')
     cy.contains('Sorry, no Wines were found matching your search').should('exist')
     cy.get('[data-cy="header-action-panel-search-input"]').clear().type('1723 Vineyards Chardonel').type('{enter}')
-    cy.contains('1723 Vineyards').should('exist')
-
+    cy.contains('1723 Vineyards', { timeout: 20000 }).should('exist')
 
   })
 })
