@@ -15,13 +15,13 @@ class mainpage {
     return cy.contains('Billing and Subscription')
   }
   contacts() {
-    return cy.contains('Contacts')
+    return cy.contains('Address Book')
   }
   signOut() {
     return cy.contains('Sign out')
   }
   goToMyDashboard() {
-    return cy.get('[title="MyDashboard"]', { timeout: 20000 })
+    return cy.get('[title="Global Dashboard"]', { timeout: 20000 })
   }
   goToMyFinance() {
     return cy.get('[title="MyFinances"]', { timeout: 20000 })
@@ -39,7 +39,7 @@ class mainpage {
     return cy.get('[title="Groups"]', { timeout: 20000 })
   }
   goToDocumentVault() {
-    return cy.get('[title="DataVault"]', { timeout: 20000 })
+    return cy.get('[title="Document Vault"]', { timeout: 20000 })
   }
   homePageUrl() {
     return cy.url().should('eq', `${Cypress.config().baseUrl}auth/login`)

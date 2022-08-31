@@ -50,8 +50,34 @@ describe('Creating an other collectables asset', function () {
 
     cy.wait(500) //I use this wait to prevent the 0 asset balance issue 
 
+    mainpage.cbValueWidget().then($widgetvalue => {
+      const widgetvaluetext = $widgetvalue.text().replace(currency, "");
+      cy.log(widgetvaluetext)
+      cy.wrap(widgetvaluetext.replace(/[^a-zA-Z0-9 ]/g, '')).as('wrapvalue')
+    })
+
+    mainpage.cbNetValueWidget().then($widgetnetvalue => {
+      const widgetnetvaluetext = $widgetnetvalue.text().replace(currency, "")
+      cy.log(widgetnetvaluetext)
+      cy.wrap(widgetnetvaluetext.replace(/[^a-zA-Z0-9 ]/g, '')).as('wrapNetvalue')
+    })
+    
     cy.contains('Save and Close').should('not.be.disabled').click()
     mycollection.OtherCollectablesAssetCreatedNotification().should('exist')
+  })
+
+  it('Check the value widget', function () {
+    cy.log('wrap result is ' + this.wrapvalue)
+    const wrapvalueconst = Number(this.wrapvalue) + newValue
+    cy.log(wrapvalueconst)
+    mainpage.cbValueWidget().should('have.text', currency + internationalNumberFormat.format(wrapvalueconst))
+  })
+
+  it('Check the Net value widget', function () {
+    cy.log('wrap result is ' + this.wrapNetvalue)
+    const wrapnetvaluetyconst = Number(this.wrapNetvalue) + newValue
+    cy.log(wrapnetvaluetyconst)
+    mainpage.cbNetValueWidget().should('have.text', currency + internationalNumberFormat.format(wrapnetvaluetyconst))
   })
 })
 

@@ -31,14 +31,16 @@ describe('Creating and testing a current account', function () {
     mainpage.modalTitle().should('have.text', 'Current Account')
 
     // wait for a full firebase API loading
-    cy.contains('0 / 0.00%', { timeout: 50000 }).should('exist')
+    
 
     cy.contains('Single-Currency Account').should('exist')
     myfinance.balanceField().type(newValue).should('have.value', '1,000')
     myfinance.accountNameField().type(testName)
-    myfinance.bankInstitutionField().type("Zion")
+    myfinance.bankInstitutionField().type("Afghanistan Commercial Bank")
     myfinance.ziaBankInstitution().should('exist')
     myfinance.bankInstitutionField().tab().type('{enter}')
+
+    cy.contains('0%', { timeout: 30000 })
 
     myfinance.cbValueWidget().then($widgetvalue => {
       const widgetvaluetext = $widgetvalue.text().replace(currency, "");
@@ -85,7 +87,7 @@ describe('Creating and testing a current account', function () {
 
   })
 
-  it('Make sure that created asset is shown on the list of created assets', function () {
-    cy.contains(testName).should('exist')
-  })
+  // it('Make sure that created asset is shown on the list of created assets', function () {
+  //   cy.contains(testName).should('exist')
+  // })
 })

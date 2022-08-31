@@ -19,7 +19,7 @@ describe('Document Storage page tests', function () {
         documentstorage.plusButton().click()
         documentstorage.skipButton().click()
 
-        cy.contains('Drop files here or chose files').should('exist')
+        cy.contains('Drop file(s) here or choose file(s)').should('exist')
         cy.contains('Storage space 0%').should('exist')
         documentstorage.uploadButton().should('be.disabled')
 

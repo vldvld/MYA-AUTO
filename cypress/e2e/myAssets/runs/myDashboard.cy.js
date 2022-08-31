@@ -1,16 +1,18 @@
 import MainPage from '../../../pageObjects/mainPage'
 import myFinance from '../../../pageObjects/myFinance'
 
+const mainpage = new MainPage()
+const myfinance = new myFinance()
+const currency = 'USD '
+const newValue = 1000
+const internationalNumberFormat = new Intl.NumberFormat('en-US')
+
 Cypress.on('uncaught:exception', (err, runnable) => {
   return false
 })
 
-describe('Collect values from the each dashboard page and calculate the sum', function () {
-  const mainpage = new MainPage()
-  const myfinance = new myFinance()
-  const currency = 'USD '
-  const newValue = 1000
-  const internationalNumberFormat = new Intl.NumberFormat('en-US')
+describe('Collect values from the each dashboard page and calculate a sum', function () {
+
 
   it('Collect a values from the collectables widgets', function () {
     cy.goToLoginPage()

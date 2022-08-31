@@ -42,15 +42,46 @@ describe('Creating an Other asset', function ()
     cy.get('li').last().click()
 
     cy.get('#linkedPropertyAsLocation').click()
+    cy.wait(1500)
     mycollection.shouldExistPropertySearch().should('exist')
     cy.get('li').last().click()
 
     mybelongings.priceField().type(newValue).should('have.value', '1,000')
 
     cy.wait(500) //I use this wait to prevent the 0 asset balance issue 
-    
+
+    mainpage.cbValueWidget().then($widgetvalue => {
+      const widgetvaluetext = $widgetvalue.text().replace(currency, "");
+      cy.log(widgetvaluetext)
+      cy.wrap(widgetvaluetext.replace(/[^a-zA-Z0-9 ]/g, '')).as('wrapvalue')
+    })
+
+    mainpage.cbNetValueWidget().then($widgetnetvalue => {
+      const widgetnetvaluetext = $widgetnetvalue.text().replace(currency, "")
+      cy.log(widgetnetvaluetext)
+      cy.wrap(widgetnetvaluetext.replace(/[^a-zA-Z0-9 ]/g, '')).as('wrapNetvalue')
+    })
+
     mybelongings.saveAndClose().should('not.be.disabled').click()
     mybelongings.myBelongingsCreatedNotification().should('exist') 
   })  
+  it('Check the value widget', function () {
+    cy.log('wrap result is ' + this.wrapvalue)
+    const wrapvalueconst = Number(this.wrapvalue) + newValue
+    cy.log(wrapvalueconst)
+    mainpage.cbValueWidget().should('have.text', currency + internationalNumberFormat.format(wrapvalueconst))
+  })
+
+  it('Check the Net value widget', function () {
+    cy.log('wrap result is ' + this.wrapNetvalue)
+    const wrapnetvaluetyconst = Number(this.wrapNetvalue) + newValue
+    cy.log(wrapnetvaluetyconst)
+    mainpage.cbNetValueWidget().should('have.text', currency + internationalNumberFormat.format(wrapnetvaluetyconst))
+  })
+
+  it('Make sure that a created asset is shown on the asstest list', function () {
+    cy.get('[href="/others/collection"]').click()
+    cy.contains(testName).should('exist')
+  })
 })
 

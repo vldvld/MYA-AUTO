@@ -1,3 +1,5 @@
+const A = 30000
+
 class mycollection{
 
 myCollectionPlusButton(){
@@ -28,10 +30,13 @@ saveAndClose(){
     return cy.contains('Save and Close')
 }
 artCreatedNotification(){
-    return cy.contains('Art Asset was created', { timeout: 30000})
+    return cy.contains('Art Asset was created', { timeout: A})
 }
-winesTab(){
-    return cy.contains('Wines')
+wineTab(){
+    return cy.contains('Wine')
+}
+artTab(){
+    return cy.get('[data-cy="collectibles-art-tab-btn"]')
 }
 createNewWine(){
     return cy.contains('Create a new wine')
@@ -73,7 +78,7 @@ modelTypeField(){
     return cy.get('#modelType')
 }
 OtherCollectablesAssetCreatedNotification(){
-    return cy.contains('Other Collectibles Asset was created', { timeout: 30000})
+    return cy.contains('Other Collectables Asset was created', { timeout: 30000})
 }
 shouldExistPropertySearch(){
     return cy.contains(/AUTOMATEDPROPERTY/, { timeout: 50000 })
@@ -81,7 +86,25 @@ shouldExistPropertySearch(){
 winePropertyLocation(){
     return cy.get('#linkedPropertyAsLocation')
 }
+artCarouselValue(){
+    return cy.get('[data-cy=art-dashboard-collectibles-value]')
+}
+artCarouselLiability(){
+    return cy.get('[data-cy=art-dashboard-collectibles-liabilities]')
+}
+artCarouselNetValue(){
+    return cy.get('[data-cy=art-dashboard-collectibles-net-value]')
 
+}
+artSummarylValue(){
+    return cy.get('[data-cy=summary-widget-value]')
+}
+artSummaryLiability(){
+    return cy.get('[data-cy=summary-widget-liabilities]')
+}
+artSummaryNetValue(){
+    return cy.get('[data-cy=summary-widget-net-value]')
+}
 
 
 }

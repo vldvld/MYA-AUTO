@@ -67,5 +67,13 @@ Cypress.Commands.add(
         myfinance.cashAccountCreatedNotification().should('exist')
         myfinance.transactionCreatedNotification().should('exist')
     })
+    Cypress.Commands.add(
+        "wrapcheck",
+        () => {
+    cy.log('wrap commandresult is ' + this.wrapnetvalue)
+    const wrapnetvaluetyconst = Number(this.wrapnetvalue) - newValue
+    cy.log(wrapnetvaluetyconst)
+    myfinance.cbNetValueWidget().should('have.text', currency + '(' + internationalNumberFormat.format(wrapnetvaluetyconst) + ')')
+})
 
 

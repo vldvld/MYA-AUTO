@@ -25,7 +25,7 @@ describe('Wine page tests', function () {
     mainpage.goToMyCollection({ timeout: 20000 }).click()
     cy.url().should('eq', `${Cypress.config().baseUrl}collections/all-assets/dashboard`)
 
-    mycollection.winesTab().click()
+    mycollection.wineTab().click()
     cy.url().should('eq', `${Cypress.config().baseUrl}collections/wine/summary`)
     
   //  cy.contains('Search My Wine').click()
@@ -38,7 +38,7 @@ describe('Wine page tests', function () {
     mycollection.wineName().type(testName).should('have.value', testName)
     mycollection.wineVintage().type(vintage).should('have.value', vintage)
     mycollection.pricePerBottle().type(price).should('have.value', '1,000')
-    cy.contains('You added', { timeout: 20000 })
+   // cy.contains('You added', { timeout: 20000 })
     mycollection.shouldExistPropertySearch().should('exist')
     mycollection.winePropertyLocation().type('automatedproperty')
 
@@ -94,8 +94,8 @@ describe('Wine page tests', function () {
   })
 
   it('Check the values of created asset on the activity log widget', function () {
-    cy.contains('You added ' + vintage + ' vintage ' +'for ' + testName, { timeout: 20000 }).should('exist')
-    cy.contains('You bought 1 bottles of ' + vintage + ' ' + testName + ' for USD 1,000', { timeout: 20000 }).should('exist')
+    cy.contains('You located 1 bottles of '+ testName + ' at', { timeout: 20000 }).should('exist')
+    cy.contains('You bought 1 bottles of ' + testName + ' for USD 1,000', { timeout: 20000 }).should('exist')
   })
 
   it('Check the wine catalogue', function () {
@@ -106,12 +106,12 @@ describe('Wine page tests', function () {
     mainpage.goToMyCollection({ timeout: 20000 }).click()
     cy.url().should('eq', `${Cypress.config().baseUrl}collections/all-assets/dashboard`)
 
-    mycollection.winesTab().click()
+    mycollection.wineTab().click()
     cy.url().should('eq', `${Cypress.config().baseUrl}collections/wine/summary`)
     
     mycollection.myCollectionPlusButton().click()
+    cy.wait(3000)
     cy.contains('Add from wine catalogue').click()
-    cy.contains('Wine').should('exist')
     
     cy.get('[data-cy="header-action-panel-search-input"]').type('testwinesearchnamenonvalid').type('{enter}')
     cy.contains('Sorry, no Wines were found matching your search').should('exist')
