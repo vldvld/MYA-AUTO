@@ -18,7 +18,7 @@ describe('Creating Cash account', function () {
 
   it('Go to the MyFinance page and create the Cash account', function () {
     cy.goToLoginPage()
-    cy.loginCommand("automationtests5@gmail.com", "testuser1")
+    cy.loginCommand("automationtests6@gmail.com", "testuser1")
     mainpage.homePageUrl()
 
     mainpage.goToMyFinance().click()

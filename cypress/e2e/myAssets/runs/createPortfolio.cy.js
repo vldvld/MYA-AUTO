@@ -5,28 +5,28 @@ Cypress.on('uncaught:exception', (err, runnable) => {
     return false
 })
 
+const mainpage = new MainPage()
+const myfinance = new myFinance()
+const currency = 'USD '
+const newValue = 1000
+const internationalNumberFormat = new Intl.NumberFormat('en-US')
+
+// Create a random Portfolio name
+const name = () => Cypress._.random(0, 1e6)
+const id = name()
+const testName = "AutoPortfolio #" + `${id}`
+
 describe('Creating a Portfolio account', function () {
-    const mainpage = new MainPage()
-    const myfinance = new myFinance()
-    const currency = 'USD '
-    const newValue = 1000
-    const internationalNumberFormat = new Intl.NumberFormat('en-US')
-
-    // Create a random Portfolio name
-    const name = () => Cypress._.random(0, 1e6)
-    const id = name()
-    const testName = "AutoPortfolio #" + `${id}`
-
     it('Go to the Traditional page and create the portfolio', function () {
         cy.goToLoginPage()
-        cy.loginCommand("automationtests5@gmail.com", "testuser1")
+        cy.loginCommand("automationtests6@gmail.com", "testuser1")
         mainpage.homePageUrl()
 
         mainpage.goToMyFinance().click()
         myfinance.TITab().click()
         myfinance.myFinancePlusButton().click()
         // wait for a full firebase API loading
-        cy.contains('0 / 0.00%', { timeout: 50000 }).should('exist')
+        cy.contains('0 / 0.00%', { timeout: 40000 }).should('exist')
 
         myfinance.TIName().type(testName).should('have.value', testName)
 
@@ -44,7 +44,7 @@ describe('Creating a Portfolio account', function () {
 
         myfinance.portfolioWasCreatedNotification().should('exist')
 
-        
+
         // myfinance.TIPortfolioType().click()
         // cy.get('#portfolioType-option-0').click()
         // myfinance.TICompany().type('TestAutoCompany '+`${id}`)

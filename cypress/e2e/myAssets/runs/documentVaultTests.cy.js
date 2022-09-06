@@ -11,7 +11,7 @@ describe('Document Storage page tests', function () {
 
     it('Go to the Document storage page and add png/pdf/doc documents', function () {
         cy.goToLoginPage()
-        cy.loginCommand("automationtests5@gmail.com", "testuser1")
+        cy.loginCommand("automationtests6@gmail.com", "testuser1")
         mainpage.homePageUrl()
 
         mainpage.goToDocumentVault().click()

@@ -24,7 +24,7 @@ describe('Creating an Other asset', function ()
   it('Go to the My belongings page and create an other asset', function()
   {
     cy.goToLoginPage()
-    cy.loginCommand("automationtests5@gmail.com", "testuser1")
+    cy.loginCommand("automationtests6@gmail.com", "testuser1")
     mainpage.homePageUrl()
 
     mainpage.goToMyBelongings().click()

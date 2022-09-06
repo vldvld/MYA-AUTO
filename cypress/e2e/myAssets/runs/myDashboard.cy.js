@@ -16,7 +16,7 @@ describe('Collect values from the each dashboard page and calculate a sum', func
 
   it('Collect a values from the collectables widgets', function () {
     cy.goToLoginPage()
-    cy.loginCommand("automationtests5@gmail.com", "testuser1")
+    cy.loginCommand("automationtests6@gmail.com", "testuser1")
     mainpage.homePageUrl()
 
     // wait for a full firebase API list loading

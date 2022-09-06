@@ -20,7 +20,7 @@ describe('Creating an other collectables asset', function () {
 
   it('Go to the My collectibles page and create an other collectables asset', function () {
     cy.goToLoginPage()
-    cy.loginCommand("automationtests5@gmail.com", "testuser1")
+    cy.loginCommand("automationtests6@gmail.com", "testuser1")
     mainpage.homePageUrl()
 
     mainpage.goToMyCollection({ timeout: 20000 }).click()
