@@ -7,7 +7,7 @@ class login{
         return cy.contains('Create')
     }
     myBelongingsCreatedNotification(){
-        return cy.contains('Other Asset was created', { timeout: 30000})
+        return cy.contains('Belonging asset was created', { timeout: 30000})
     }
     myBelongingsPlusButton(){
         return cy.get('[data-cy="add-btn"]')
@@ -16,8 +16,11 @@ class login{
         return cy.get('#belongingName')
     }
     priceField(){
-        return cy.get('#purchasePrice')
+        return cy.get('#itemPrice') 
     }
+    priceField(){
+    return cy.get('#itemPrice')
+    }    
     locationField(){
         return cy.get('#linkedPropertyAsLocation')
     }
@@ -27,7 +30,6 @@ class login{
     manufacturerField(){
         return cy.get('#manufacturer')
     }
-
-        
+     
 }
 export default login

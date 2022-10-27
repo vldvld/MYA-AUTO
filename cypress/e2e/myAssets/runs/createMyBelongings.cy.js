@@ -6,7 +6,7 @@ Cypress.on('uncaught:exception', (err, runnable) => {
   return false
 })
 
-describe('Creating an Other asset', function () 
+describe('Creating the My Belonging asset', function () 
 {
   const mainpage = new MainPage()
   const mybelongings = new myBelongings()
@@ -24,7 +24,7 @@ describe('Creating an Other asset', function ()
   it('Go to the My belongings page and create an other asset', function()
   {
     cy.goToLoginPage()
-    cy.loginCommand("automationtests6@gmail.com", "testuser1")
+    cy.loginCommand("myautomation10@gmail.com", "myautomation10@gmail.com")
     mainpage.homePageUrl()
 
     mainpage.goToMyBelongings().click()
@@ -42,10 +42,9 @@ describe('Creating an Other asset', function ()
     cy.get('li').last().click()
 
     cy.get('#linkedPropertyAsLocation').click()
-    cy.wait(1500)
     mycollection.shouldExistPropertySearch().should('exist')
-    cy.get('li').last().click()
-
+  //  cy.get('li').last().click()
+   cy.get('[role="dialog"]', { timeout: 20000 }).contains(/AUTOMATEDPROPERTY/, { timeout: 50000 }).trigger("click")
     mybelongings.priceField().type(newValue).should('have.value', '1,000')
 
     cy.wait(500) //I use this wait to prevent the 0 asset balance issue 

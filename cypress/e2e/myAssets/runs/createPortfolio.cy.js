@@ -19,14 +19,14 @@ const testName = "AutoPortfolio #" + `${id}`
 describe('Creating a Portfolio account', function () {
     it('Go to the Traditional page and create the portfolio', function () {
         cy.goToLoginPage()
-        cy.loginCommand("automationtests6@gmail.com", "testuser1")
+        cy.loginCommand("myautomation10@gmail.com", "myautomation10@gmail.com")
         mainpage.homePageUrl()
 
         mainpage.goToMyFinance().click()
         myfinance.TITab().click()
         myfinance.myFinancePlusButton().click()
         // wait for a full firebase API loading
-        cy.contains('0 / 0.00%', { timeout: 40000 }).should('exist')
+        cy.contains('%', { timeout: 40000 }).should('exist')
 
         myfinance.TIName().type(testName).should('have.value', testName)
 
@@ -38,7 +38,7 @@ describe('Creating a Portfolio account', function () {
         cy.contains(/Bitcoin/)
         cy.get('li').last().click()
 
-        myfinance.TIUnits().type(1)
+    //    myfinance.TIUnits().type(1)
         cy.wait(1000)
         myfinance.createButton().click()
 

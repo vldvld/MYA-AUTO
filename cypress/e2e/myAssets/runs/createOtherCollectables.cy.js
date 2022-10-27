@@ -20,7 +20,7 @@ describe('Creating an other collectables asset', function () {
 
   it('Go to the My collectibles page and create an other collectables asset', function () {
     cy.goToLoginPage()
-    cy.loginCommand("automationtests6@gmail.com", "testuser1")
+    cy.loginCommand("myautomation10@gmail.com", "myautomation10@gmail.com")
     mainpage.homePageUrl()
 
     mainpage.goToMyCollection({ timeout: 20000 }).click()
@@ -46,7 +46,7 @@ describe('Creating an other collectables asset', function () {
     mycollection.shouldExistPropertySearch().should('exist')
     cy.get('li').last().click()
 
-    mycollection.purcasePriceArt().type('1000').should('have.value', '1,000')
+    mycollection.purchasePriceOtherCollectable().type('1000').should('have.value', '1,000')
 
     cy.wait(500) //I use this wait to prevent the 0 asset balance issue 
 
@@ -80,4 +80,3 @@ describe('Creating an other collectables asset', function () {
     mainpage.cbNetValueWidget().should('have.text', currency + internationalNumberFormat.format(wrapnetvaluetyconst))
   })
 })
-

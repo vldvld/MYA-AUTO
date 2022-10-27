@@ -18,7 +18,7 @@ describe('Creating and testing a current account', function () {
 
   it('Go to the MyFinance page and create a Saving account', function () {
     cy.goToLoginPage()
-    cy.loginCommand("automationtests6@gmail.com", "testuser1")
+    cy.loginCommand("myautomation10@gmail.com", "myautomation10@gmail.com")
     mainpage.homePageUrl()
 
     mainpage.goToMyFinance().click()
@@ -36,10 +36,9 @@ describe('Creating and testing a current account', function () {
     cy.contains('Single-Currency Account').should('exist')
     myfinance.balanceField().type(newValue).should('have.value', '1,000')
     myfinance.accountNameField().type(testName)
-    myfinance.bankInstitutionField().type("Afghanistan Commercial Bank")
-    myfinance.ziaBankInstitution().should('exist')
-    myfinance.bankInstitutionField().tab().type('{enter}')
-
+    myfinance.bankInstitutionField().type("Afghan u")
+    myfinance.ziaBankInstitution().should('exist') 
+    cy.get(".MuiList-root").contains(/Afghan United Bank/, { timeout: 50000 }).trigger("click")
     cy.contains('0%', { timeout: 30000 })
 
     myfinance.cbValueWidget().then($widgetvalue => {

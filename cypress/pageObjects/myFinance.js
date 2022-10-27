@@ -78,7 +78,8 @@ cbNetValueWidget(){
     return cy.get('[data-cy=summary-widget-net-value]',{ timeout: 30000 })
 }
 ziaBankInstitution(){
-    return cy.get('[role=menu]').contains('Afghanistan Commercial Bank', { timeout: 60000 })
+    return cy.get('[role=menu]')
+    // .contains('Afghanistan Commercial Bank', { timeout: 60000 })
 }
 outstandingAmmount(){
     return cy.get('#outstandingAmount')

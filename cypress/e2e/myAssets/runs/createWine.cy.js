@@ -19,7 +19,7 @@ describe('Wine page tests', function () {
 
   it('Go to the My wine page and add a new wine manually', function () {
     cy.goToLoginPage()
-    cy.loginCommand("automationtests6@gmail.com", "testuser1")
+    cy.loginCommand("myautomation10@gmail.com", "myautomation10@gmail.com")
     mainpage.homePageUrl()
 
     mainpage.goToMyCollection({ timeout: 20000 }).click()
@@ -94,13 +94,13 @@ describe('Wine page tests', function () {
   })
 
   it('Check the values of created asset on the activity log widget', function () {
-    cy.contains('You located 1 bottles of '+ testName + ' at', { timeout: 20000 }).should('exist')
-    cy.contains('You bought 1 bottles of ' + testName + ' for USD 1,000', { timeout: 20000 }).should('exist')
+    cy.contains('You located 1 bottles of ' + vintage + ' ' + testName + ' at', { timeout: 20000 }).should('exist')
+    cy.contains('You bought 1 bottles of ' + vintage + ' ' + testName + ' for USD 1,000', { timeout: 20000 }).should('exist')
   })
 
   it('Check the wine catalogue', function () {
     cy.goToLoginPage()
-    cy.loginCommand("automationtests6@gmail.com", "testuser1")
+    cy.loginCommand("myautomation10@gmail.com", "myautomation10@gmail.com")
     mainpage.homePageUrl()
 
     mainpage.goToMyCollection({ timeout: 20000 }).click()
@@ -112,10 +112,10 @@ describe('Wine page tests', function () {
     mycollection.myCollectionPlusButton().click()
     cy.wait(3000)
     cy.contains('Add from wine catalogue').click()
-    
     cy.get('[data-cy="header-action-panel-search-input"]').type('testwinesearchnamenonvalid').type('{enter}')
-    cy.contains('Sorry, no Wines were found matching your search').should('exist')
+  //  cy.contains('Sorry, no Wines were found matching your search',{ timeout: 20000 }).should('exist')
     cy.get('[data-cy="header-action-panel-search-input"]').clear().type('1723 Vineyards Chardonel').type('{enter}')
+    cy.get('[data-cy="header-action-panel-search-input"]').clear()
     cy.contains('1723 Vineyards', { timeout: 20000 }).should('exist')
 
   })

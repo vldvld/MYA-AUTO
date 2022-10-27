@@ -8,6 +8,9 @@ myCollectionPlusButton(){
 purcasePriceArt(){
     return cy.get('#purchasePrice')
 }
+purchasePriceOtherCollectable(){
+    return cy.get('#itemPrice')
+}
 artistField(){
     return cy.get('#artist')
 }
@@ -78,7 +81,7 @@ modelTypeField(){
     return cy.get('#modelType')
 }
 OtherCollectablesAssetCreatedNotification(){
-    return cy.contains('Other Collectables Asset was created', { timeout: 30000})
+    return cy.contains('Other Collectable asset was created', { timeout: 30000})
 }
 shouldExistPropertySearch(){
     return cy.contains(/AUTOMATEDPROPERTY/, { timeout: 50000 })
@@ -94,7 +97,6 @@ artCarouselLiability(){
 }
 artCarouselNetValue(){
     return cy.get('[data-cy=art-dashboard-collectibles-net-value]')
-
 }
 artSummarylValue(){
     return cy.get('[data-cy=summary-widget-value]')

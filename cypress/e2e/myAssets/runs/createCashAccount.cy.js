@@ -18,7 +18,7 @@ describe('Creating Cash account', function () {
 
   it('Go to the MyFinance page and create the Cash account', function () {
     cy.goToLoginPage()
-    cy.loginCommand("automationtests6@gmail.com", "testuser1")
+    cy.loginCommand("myautomation10@gmail.com", "myautomation10@gmail.com")
     mainpage.homePageUrl()
 
     mainpage.goToMyFinance().click()
@@ -29,6 +29,8 @@ describe('Creating Cash account', function () {
     myfinance.selectCashAccont().click()
     myfinance.nextButton().click()
     mainpage.modalTitle().should('have.text', 'Cash')
+   
+    
 
     // wait for a full firebase API list loading
     

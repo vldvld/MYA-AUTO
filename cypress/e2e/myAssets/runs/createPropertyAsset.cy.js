@@ -25,7 +25,7 @@ describe('Creating and testing a property asset', function () {
 
   it('Go to the Property page and create the property', function () {
     cy.goToLoginPage()
-    cy.loginCommand("automationtests6@gmail.com", "testuser1")
+    cy.loginCommand("myautomation10@gmail.com", "myautomation10@gmail.com")
     mainpage.homePageUrl()
 
     mainpage.goToMyProperty().click()

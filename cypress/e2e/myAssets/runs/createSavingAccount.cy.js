@@ -18,7 +18,7 @@ const testName = "AUTOMATEDSAVING #" + `${id}`
 describe('Creating and testing a saving account', function () {
   it('Go to the MyFinance page and create the Saving account', function () {
     cy.goToLoginPage()
-    cy.loginCommand("automationtests6@gmail.com", "testuser1")
+    cy.loginCommand("myautomation10@gmail.com", "myautomation10@gmail.com")
     mainpage.homePageUrl()
 
     mainpage.goToMyFinance().click()
