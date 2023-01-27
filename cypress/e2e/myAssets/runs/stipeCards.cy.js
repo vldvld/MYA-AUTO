@@ -17,7 +17,7 @@
 // const testemail = `testStripeEmail${id}` + "@nonexistentdomain.com"
 // const password = 'testuser1'
 
-// describe('Go to the login page and check the list of a valid stripe cards', function () {
+// describe('Go to the login page and check the list of a valid stripe cards', { testIsolation: false }, function () {
 //     it('Create a new user, use the VISA-DEBIT card, finish the registration', function () { 
 //         cy.goToLoginPage()
 

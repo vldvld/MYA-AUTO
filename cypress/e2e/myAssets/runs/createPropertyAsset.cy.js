@@ -23,10 +23,13 @@ const testName = "AUTOMATEDPROPERTY #" + `${id}`
 
 describe('Creating and testing a property asset', function () {
 
-  it('Go to the Property page and create the property', function () {
+  beforeEach(() => {
     cy.goToLoginPage()
-    cy.loginCommand("myautomation10@gmail.com", "myautomation10@gmail.com")
+    cy.loginCommand("mya-automated-tests@gmail.com", "mya-automated-tests@gmail.com")
     mainpage.homePageUrl()
+})
+
+  it('Go to the Property page and create the property', function () {
 
     mainpage.goToMyProperty().click()
     cy.url().should('eq', `${Cypress.config().baseUrl}properties/summary`)
@@ -58,19 +61,24 @@ describe('Creating and testing a property asset', function () {
 
     myproperty.createButton().should('not.be.disabled').click()
     myproperty.propertyCreatedNotification().should('exist')
+    cy.wait(500)
   })
-  it('Check the Value widget', function () {
+  it('Check the value and net value widget', function () {
+    mainpage.goToMyProperty().click()
+    cy.url().should('eq', `${Cypress.config().baseUrl}properties/summary`)
+    mainpage.cbValueWidget().should('not.have.value', '0');
+    //value
+
     cy.log('wrap result is ' + this.wrapvalue)
     const wrapvalueconst = Number(this.wrapvalue) + newValue
     cy.log(wrapvalueconst)
     mainpage.cbValueWidget().should('have.text', currency + internationalNumberFormat.format(wrapvalueconst))
-  })
-
-  it('Check the Net Value widget', function () {
+   
     cy.log('wrap result is ' + this.wrapNetvalue)
     const wrapnetvaluetyconst = Number(this.wrapNetvalue) + newValue
     cy.log(wrapnetvaluetyconst)
     mainpage.cbNetValueWidget().should('have.text', currency + internationalNumberFormat.format(wrapnetvaluetyconst))
+  
   })
 })
 

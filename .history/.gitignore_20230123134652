@@ -1,0 +1,10 @@
+node_modules
+.DS_Store
+.idea
+examples
+cypress/e2e/myAssets/runs/all.cy.js
+cypress.config.js
+cypress/videos/*
+cypress/screenshots/*
+serviceAccount.jso
+cypress.env.json

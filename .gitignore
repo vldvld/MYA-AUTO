@@ -6,3 +6,5 @@ cypress/e2e/myAssets/runs/all.cy.js
 cypress.config.js
 cypress/videos/*
 cypress/screenshots/*
+serviceAccount.json
+cypress.env.json

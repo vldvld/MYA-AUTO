@@ -1,0 +1,17 @@
+{
+    "extends": "@tsconfig/node16/tsconfig.json",
+    "compilerOptions": {
+      "moduleResolution": "node",
+      "declaration": true,
+      "outDir": "lib",
+      "rootDir": "./src",
+      "importHelpers": true,
+      "esModuleInterop": true,
+      "downlevelIteration": true,
+      "allowSyntheticDefaultImports": true,
+      "baseUrl": "https://myassetstest.firebaseapp.com/"
+    },
+    "typeRoots": ["./types", "./node_modules/@types"],
+    "include": ["src/**/*"],
+    "exclude": ["node_modules"]
+  }

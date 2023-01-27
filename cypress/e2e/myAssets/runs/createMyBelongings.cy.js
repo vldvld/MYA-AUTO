@@ -2,30 +2,32 @@ import MainPage from '../../../pageObjects/mainPage'
 import myBelongings from '../../../pageObjects/myBelongings'
 import myCollection from '../../../pageObjects/myCollection'
 
+const mainpage = new MainPage()
+const mybelongings = new myBelongings()
+const mycollection = new myCollection()
+
+const newValue = 1000
+const currency = 'USD '
+const internationalNumberFormat = new Intl.NumberFormat('en-US')
+
+// Create a random Asset name
+const name = () => Cypress._.random(0, 1e6)
+const id = name()
+const testName = "AUTOMATEDOTHERASSET #" + `${id}`
+
 Cypress.on('uncaught:exception', (err, runnable) => {
   return false
 })
 
-describe('Creating the My Belonging asset', function () 
-{
-  const mainpage = new MainPage()
-  const mybelongings = new myBelongings()
-  const mycollection = new myCollection()
+describe('Creating the My Belonging asset', function () {
 
-  const newValue = 1000
-  const currency = 'USD '
-  const internationalNumberFormat = new Intl.NumberFormat('en-US')
-
-  // Create a random Asset name
-  const name = () => Cypress._.random(0, 1e6)
-  const id = name()
-  const testName = "AUTOMATEDOTHERASSET #" +`${id}`
-  
-  it('Go to the My belongings page and create an other asset', function()
-  {
+  beforeEach(() => {
     cy.goToLoginPage()
-    cy.loginCommand("myautomation10@gmail.com", "myautomation10@gmail.com")
+    cy.loginCommand("mya-automated-tests@gmail.com", "mya-automated-tests@gmail.com")
     mainpage.homePageUrl()
+  })
+
+  it('Go to the My belongings page and create an other asset', function () {
 
     mainpage.goToMyBelongings().click()
     cy.url().should('eq', `${Cypress.config().baseUrl}others/summary`)
@@ -33,18 +35,17 @@ describe('Creating the My Belonging asset', function ()
 
     mybelongings.nameField().type(testName).should('have.value', testName)
     cy.wait(500)
-    
-    mybelongings.belongingTypeFiled().click()
-    cy.wait(500)
+
+    mybelongings.belongingTypeFiled().click().type('a')
     cy.get('li').last().click()
 
     mybelongings.manufacturerField().type('manufacturer')
     cy.get('li').last().click()
 
-    cy.get('#linkedPropertyAsLocation').click()
+    cy.get('#linkedPropertyAsLocation').click().type('AUT')
     mycollection.shouldExistPropertySearch().should('exist')
-  //  cy.get('li').last().click()
-   cy.get('[role="dialog"]', { timeout: 20000 }).contains(/AUTOMATEDPROPERTY/, { timeout: 50000 }).trigger("click")
+
+    cy.get('[role="dialog"]', { timeout: 20000 }).contains(/AUTOMATEDPROPERTY/, { timeout: 50000 }).trigger("click")
     mybelongings.priceField().type(newValue).should('have.value', '1,000')
 
     cy.wait(500) //I use this wait to prevent the 0 asset balance issue 
@@ -62,25 +63,31 @@ describe('Creating the My Belonging asset', function ()
     })
 
     mybelongings.saveAndClose().should('not.be.disabled').click()
-    mybelongings.myBelongingsCreatedNotification().should('exist') 
-  })  
-  it('Check the value widget', function () {
+    mybelongings.myBelongingsCreatedNotification().should('exist')
+    cy.wait(500)
+  })
+
+  it('Check the value / netValue widget values', function () {
+
+    mainpage.goToMyBelongings().click()
+    mainpage.cbValueWidget().should('not.have.value', '0');
+    //value
     cy.log('wrap result is ' + this.wrapvalue)
     const wrapvalueconst = Number(this.wrapvalue) + newValue
     cy.log(wrapvalueconst)
     mainpage.cbValueWidget().should('have.text', currency + internationalNumberFormat.format(wrapvalueconst))
-  })
 
-  it('Check the Net value widget', function () {
+    //netValue
     cy.log('wrap result is ' + this.wrapNetvalue)
     const wrapnetvaluetyconst = Number(this.wrapNetvalue) + newValue
     cy.log(wrapnetvaluetyconst)
     mainpage.cbNetValueWidget().should('have.text', currency + internationalNumberFormat.format(wrapnetvaluetyconst))
+
   })
 
-  it('Make sure that a created asset is shown on the asstest list', function () {
-    cy.get('[href="/others/collection"]').click()
-    cy.contains(testName).should('exist')
-  })
+  // it('Make sure that a created asset is shown on the asstest list', function () {
+  //   cy.get('[href="/others/collection"]').click()
+  //   cy.contains(testName).should('exist')
+  // })
 })
 

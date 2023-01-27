@@ -16,10 +16,12 @@ const id = name()
 const testName = "AUTOMATEDSAVING #" + `${id}`
 
 describe('Creating and testing a saving account', function () {
-  it('Go to the MyFinance page and create the Saving account', function () {
+  beforeEach(() => {
     cy.goToLoginPage()
-    cy.loginCommand("myautomation10@gmail.com", "myautomation10@gmail.com")
+    cy.loginCommand("mya-automated-tests@gmail.com", "mya-automated-tests@gmail.com")
     mainpage.homePageUrl()
+})
+  it('Go to the MyFinance page and create the Saving account', function () {
 
     mainpage.goToMyFinance().click()
     myfinance.cashAndBankingTab().click()
@@ -32,16 +34,16 @@ describe('Creating and testing a saving account', function () {
     cy.contains('Single-Currency Account').should('exist')
 
     // wait for a full firebase API loading
-    
-
+  
     myfinance.accountNameField().type(testName)
     myfinance.bankInstitutionField().type("Afghanistan Commercial Bank")
     myfinance.ziaBankInstitution().should('exist')
     myfinance.bankInstitutionField().tab().type('{enter}')
     myfinance.balanceField().type(newValue).should('have.value', '1,000')
 
-    cy.contains('0%', { timeout: 30000 })
-
+    cy.contains('Last Updated', { timeout: 30000 })
+    myfinance.cbValueWidget().should('not.have.value', '0');
+    
     myfinance.cbValueWidget().then($widgetvalue => {
       const widgetvaluetext = $widgetvalue.text().replace(currency, "");
       cy.log(widgetvaluetext)
@@ -65,28 +67,29 @@ describe('Creating and testing a saving account', function () {
     myfinance.transactionCreatedNotification().should('exist')
   })
 
-  it('Check the Value widget', function () {
+  it('Check the value / liability / netValue widget values', function () {
+
+    mainpage.goToMyFinance().click()
+    myfinance.cashAndBankingTab().click()
+    myfinance.cbValueWidget().should('not.have.value', '0');
+
+    //value
     cy.log('wrap result is ' + this.wrapvalue)
     const wrapvalueconst = Number(this.wrapvalue) + newValue
     cy.log(wrapvalueconst)
     myfinance.cbValueWidget().should('have.text', currency + internationalNumberFormat.format(wrapvalueconst))
-
-  })
-
-  it('Check the Liability widget', function () {
+    
+    //liability
     cy.log('wrap result is ' + this.wrapliability)
     const wrapliabilityconst = Number(this.wrapliability)
     cy.log(wrapliabilityconst)
     myfinance.cbLiabilityWidget().should('have.text', currency + '(' + internationalNumberFormat.format(wrapliabilityconst) + ')')
-
-  })
-
-  it('Check the Net Value widget', function () {
+    
+    //netValue
     cy.log('wrap result is ' + this.wrapnetvalue)
     const wrapnetvaluetyconst = Number(this.wrapnetvalue) - newValue
     cy.log(wrapnetvaluetyconst)
     myfinance.cbNetValueWidget().should('have.text', currency + '(' + internationalNumberFormat.format(wrapnetvaluetyconst) + ')')
-
   })
 
   // it('Make sure that created asset is shown on the list of existed assets', function () {

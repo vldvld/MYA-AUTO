@@ -6,6 +6,14 @@ Cypress.on('uncaught:exception', (err, runnable) => {
 })
 
 describe('Creating Cash account', function () {
+  beforeEach(() => {
+    cy.goToLoginPage()
+    cy.loginCommand("mya-automated-tests@gmail.com", "mya-automated-tests@gmail.com")
+    mainpage.homePageUrl()
+    mainpage.goToMyFinance().click()
+    myfinance.cashAndBankingTab().click()
+  })
+
   const mainpage = new MainPage()
   const myfinance = new myFinance()
   const currency = 'USD '
@@ -17,41 +25,35 @@ describe('Creating Cash account', function () {
   const testName = "AUTOMATEDCASH #" + `${id}`
 
   it('Go to the MyFinance page and create the Cash account', function () {
-    cy.goToLoginPage()
-    cy.loginCommand("myautomation10@gmail.com", "myautomation10@gmail.com")
-    mainpage.homePageUrl()
-
-    mainpage.goToMyFinance().click()
-    myfinance.cashAndBankingTab().click()
     myfinance.myFinancePlusButton().click()
     cy.contains('Account').should('exist')
     myfinance.selectAccountDropDown().click()
     myfinance.selectCashAccont().click()
     myfinance.nextButton().click()
     mainpage.modalTitle().should('have.text', 'Cash')
-   
-    
+
+
 
     // wait for a full firebase API list loading
-    
-   // cy.wait(10000)
+
+    // cy.wait(10000)
     //  myfinance.cbNetValueWidget().should('be.gt', 0 ,{ timeout: 30000 })
     // myfinance.cbValueWidget().then($widgetvalue => {
-      
+
     //     const widgetvaluetext = $widgetvalue.text().replace(currency, "");
     //     cy.log(widgetvaluetext)
     //     cy.wrap(widgetvaluetext.replace(/[^a-zA-Z0-9 ]/g, '')).as('wrapvalue')
-    
-       
+
+
     //   })
-    cy.contains('0%', { timeout: 30000 })
-      myfinance.cbValueWidget().then($widgetvalue => {
+    cy.contains('Last Updated', { timeout: 30000 })
+    myfinance.cbValueWidget().then($widgetvalue => {
       const widgetvaluetext = $widgetvalue.text().replace(currency, "");
       cy.log(widgetvaluetext)
       cy.wrap(widgetvaluetext.replace(/[^a-zA-Z0-9 ]/g, '')).as('wrapvalue')
-      
+
     })
-   
+
 
     myfinance.cbLiabilityWidget().then($widgetliability => {
       const widgetliabilitytext = $widgetliability.text().replace(currency, "")
@@ -81,7 +83,7 @@ describe('Creating Cash account', function () {
     myfinance.cbValueWidget().should('have.text', currency + internationalNumberFormat.format(wrapvalueconst))
 
   })
-  
+
   it('Check the liability widget', function () {
     cy.log('wrap result is ' + this.wrapliability)
     const wrapliabilityconst = Number(this.wrapliability)

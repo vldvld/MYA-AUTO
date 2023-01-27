@@ -1,25 +1,29 @@
 import MainPage from '../../../pageObjects/mainPage'
 import myFinance from '../../../pageObjects/myFinance'
 
+const mainpage = new MainPage()
+const myfinance = new myFinance()
+const currency = 'USD '
+const newValue = 1000
+const internationalNumberFormat = new Intl.NumberFormat('en-US')
+
+const name = () => Cypress._.random(0, 1e6)
+const id = name()
+const testName = "AUTOMATEDMORTGAGE #" + `${id}`
+
 Cypress.on('uncaught:exception', (err, runnable) => {
     return false
 })
 
 describe('Creating and testing the Mortgage account', function () {
-    const mainpage = new MainPage()
-    const myfinance = new myFinance()
-    const currency = 'USD '
-    const newValue = 1000
-    const internationalNumberFormat = new Intl.NumberFormat('en-US')
 
-    const name = () => Cypress._.random(0, 1e6)
-    const id = name()
-    const testName = "AUTOMATEDMORTGAGE #" + `${id}`
+    beforeEach(() => {
+        cy.goToLoginPage()
+        cy.loginCommand("mya-automated-tests@gmail.com", "mya-automated-tests@gmail.com")
+        mainpage.homePageUrl()
+    })
 
     it('Go to the MyFinance page and create the Mortgage account', function () {
-        cy.goToLoginPage()
-        cy.loginCommand("myautomation10@gmail.com", "myautomation10@gmail.com")
-        mainpage.homePageUrl()
 
         mainpage.goToMyFinance().click()
         myfinance.cashAndBankingTab().click()
@@ -31,7 +35,6 @@ describe('Creating and testing the Mortgage account', function () {
         mainpage.modalTitle().should('have.text', 'Mortgage Account')
 
         // wait for a full firebase API loading
-        
 
         myfinance.accountNameField().type(testName)
         myfinance.outstandingAmmount().type(newValue).should('have.value', '1,000')
@@ -39,8 +42,9 @@ describe('Creating and testing the Mortgage account', function () {
         myfinance.ziaBankInstitution().should('exist')
         myfinance.bankInstitutionField().tab().type('{enter}')
 
-        cy.contains('0%', { timeout: 30000 })
+        cy.contains('Last Updated', { timeout: 30000 })
 
+        myfinance.cbValueWidget().should('not.have.value', '0');
         myfinance.cbValueWidget().then($widgetvalue => {
             const widgetvaluetext = $widgetvalue.text().replace(currency, "");
             cy.log(widgetvaluetext)
@@ -64,24 +68,23 @@ describe('Creating and testing the Mortgage account', function () {
         myfinance.transactionCreatedNotification().should('exist')
 
     })
-    it('Check the value widget', function () {
+    it('Check the value / liability / netValue widget values', function () {
+
+        mainpage.goToMyFinance().click()
+        myfinance.cashAndBankingTab().click()
+        myfinance.cbValueWidget().should('not.have.value', '0');
+        
+        //value    
         cy.log('wrap result is ' + this.wrapvalue)
         const wrapvalueconst = Number(this.wrapvalue)
         cy.log(wrapvalueconst)
         myfinance.cbValueWidget().should('have.text', currency + internationalNumberFormat.format(wrapvalueconst))
-
-    })
-
-
-    it('Check the liability widget', function () {
+        //liability
         cy.log('wrap result is ' + this.wrapliability)
         const wrapliabilityconst = Number(this.wrapliability) + newValue
         cy.log(wrapliabilityconst)
         myfinance.cbLiabilityWidget().should('have.text', currency + '(' + internationalNumberFormat.format(wrapliabilityconst) + ')')
-
-    })
-
-    it('Check the Net value widget', function () {
+        //netValue
         cy.log('wrap result is ' + this.wrapnetvalue)
         const wrapnetvaluetyconst = Number(this.wrapnetvalue) + newValue
         cy.log(wrapnetvaluetyconst)

@@ -5,7 +5,7 @@ import myFinance from '../pageObjects/myFinance'
 
 const mainpage = new MainPage()
 const myfinance = new myFinance()
-
+ 
 
 Cypress.Commands.add(
     'iframeLoaded',
@@ -25,7 +25,6 @@ Cypress.Commands.add(
             }
         })
     });
-
 
 Cypress.Commands.add(
     'getInDocument',
@@ -67,13 +66,24 @@ Cypress.Commands.add(
         myfinance.cashAccountCreatedNotification().should('exist')
         myfinance.transactionCreatedNotification().should('exist')
     })
-    Cypress.Commands.add(
-        "wrapcheck",
-        () => {
+Cypress.Commands.add(
+    "wrapcheck",
+    () => {
     cy.log('wrap commandresult is ' + this.wrapnetvalue)
     const wrapnetvaluetyconst = Number(this.wrapnetvalue) - newValue
     cy.log(wrapnetvaluetyconst)
     myfinance.cbNetValueWidget().should('have.text', currency + '(' + internationalNumberFormat.format(wrapnetvaluetyconst) + ')')
-})
+    })
 
+// import firebase from 'firebase'
+// const firebaseConfig ={ 
+//       apiKey: "AIzaSyATliT28o6HJdmQF9wOLhjxNw9PWUN-xTI",
+//     authDomain: "myassetstest.firebaseapp.com",
+//     projectId: "myassetstest",
+//     storageBucket: "myassetstest.appspot.com",
+//     messagingSenderId: "814204140209",
+//     appId: "1:814204140209:web:b4cbdc1cdf3300a1f20090",
+//     measurementId: "G-DPHDXHGF1X"
+// }
+// firebase.initializeApp(firebaseConfig)
 

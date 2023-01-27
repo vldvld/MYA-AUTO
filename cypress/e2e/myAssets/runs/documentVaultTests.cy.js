@@ -1,17 +1,18 @@
 import MainPage from '../../../pageObjects/mainPage'
 import documentStorage from '../../../pageObjects/documentStorage'
 
+const mainpage = new MainPage()
+const documentstorage = new documentStorage()
+
 Cypress.on('uncaught:exception', (err, runnable) => {
     return false
 })
 
 describe('Document Storage page tests', function () {
-    const mainpage = new MainPage()
-    const documentstorage = new documentStorage()
 
     it('Go to the Document storage page and add png/pdf/doc documents', function () {
         cy.goToLoginPage()
-        cy.loginCommand("myautomation10@gmail.com", "myautomation10@gmail.com")
+        cy.loginCommand("mya-automated-tests@gmail.com", "mya-automated-tests@gmail.com")
         mainpage.homePageUrl()
 
         mainpage.goToDocumentVault().click()

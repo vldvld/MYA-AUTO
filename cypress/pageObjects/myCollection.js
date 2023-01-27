@@ -33,7 +33,7 @@ saveAndClose(){
     return cy.contains('Save and Close')
 }
 artCreatedNotification(){
-    return cy.contains('Art Asset was created', { timeout: A})
+    return cy.contains('Art Asset was created', {timeout: 30000})
 }
 wineTab(){
     return cy.contains('Wine')

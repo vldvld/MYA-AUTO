@@ -17,16 +17,20 @@ const id = name()
 const testName = "AutoPortfolio #" + `${id}`
 
 describe('Creating a Portfolio account', function () {
-    it('Go to the Traditional page and create the portfolio', function () {
+
+    beforeEach(() => {
         cy.goToLoginPage()
-        cy.loginCommand("myautomation10@gmail.com", "myautomation10@gmail.com")
+        cy.loginCommand("mya-automated-tests@gmail.com", "mya-automated-tests@gmail.com")
         mainpage.homePageUrl()
+    })
+
+    it('Go to the Traditional page and create the portfolio', function () {
 
         mainpage.goToMyFinance().click()
         myfinance.TITab().click()
         myfinance.myFinancePlusButton().click()
         // wait for a full firebase API loading
-        cy.contains('%', { timeout: 40000 }).should('exist')
+        cy.contains('%', { timeout: 20000 }).should('exist')
 
         myfinance.TIName().type(testName).should('have.value', testName)
 
@@ -38,12 +42,10 @@ describe('Creating a Portfolio account', function () {
         cy.contains(/Bitcoin/)
         cy.get('li').last().click()
 
-    //    myfinance.TIUnits().type(1)
         cy.wait(1000)
         myfinance.createButton().click()
 
         myfinance.portfolioWasCreatedNotification().should('exist')
-
 
         // myfinance.TIPortfolioType().click()
         // cy.get('#portfolioType-option-0').click()

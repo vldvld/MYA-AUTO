@@ -32,7 +32,7 @@ describe('Create the Loan account and check the C&B widgets', function ()
     it('Go to the MyFinance page and create the loan account', function()
     {
         cy.goToLoginPage()
-        cy.loginCommand("myautomation10@gmail.com", "myautomation10@gmail.com")
+        cy.loginCommand("mya-automated-tests@gmail.com", "mya-automated-tests@gmail.com")
         mainpage.homePageUrl()
         
         mainpage.goToMyFinance().click()

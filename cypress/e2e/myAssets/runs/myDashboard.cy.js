@@ -12,66 +12,81 @@ Cypress.on('uncaught:exception', (err, runnable) => {
 })
 
 describe('Collect values from the each dashboard page and calculate a sum', function () {
-
+  beforeEach(() => {
+    cy.goToLoginPage()
+    cy.loginCommand("mya-automated-tests@gmail.com", "mya-automated-tests@gmail.com")
+    mainpage.homePageUrl()
+  })
 
   it('Collect a values from the collectables widgets', function () {
-    cy.goToLoginPage()
-    cy.loginCommand("myautomation10@gmail.com", "myautomation10@gmail.com")
-    mainpage.homePageUrl()
 
     // wait for a full firebase API list loading
-    cy.wait(15000)
-
+    myfinance.cbValueWidget().should('not.have.value', '0');
     mainpage.goToMyFinance().click()
     cy.contains('Cash & Banking').click()
 
     myfinance.cbValueWidget().then($widgetvalue => {
-        const widgetvaluetext = $widgetvalue.text().replace(currency, "");
-        cy.log(widgetvaluetext)
-        cy.wrap(widgetvaluetext.replace(/[^a-zA-Z0-9 ]/g, '')).as('wrapFinanceValue')
-      })
+      const widgetvaluetext = $widgetvalue.text().replace(currency, "");
+      cy.log(widgetvaluetext)
+      cy.wrap(widgetvaluetext.replace(/[^a-zA-Z0-9 ]/g, '')).as('wrapFinanceValue')
+    })
     cy.contains('Traditional Investments').click()
 
     myfinance.cbValueWidget().then($widgetvalue => {
-        const widgetvaluetext = $widgetvalue.text().replace(currency, "");
-        cy.log(widgetvaluetext)
-        cy.wrap(widgetvaluetext.replace(/[^a-zA-Z0-9 ]/g, '')).as('wrapPortfolioValue')
-      })
+      const widgetvaluetext = $widgetvalue.text().replace(currency, "");
+      cy.log(widgetvaluetext)
+      cy.wrap(widgetvaluetext.replace(/[^a-zA-Z0-9 ]/g, '')).as('wrapPortfolioValue')
+    })
 
     mainpage.goToMyBelongings().click()
-
+    myfinance.cbValueWidget().should('not.have.value', '0');
     myfinance.cbValueWidget().then($widgetvalue => {
-        const widgetvaluetext = $widgetvalue.text().replace(currency, "");
-        cy.log(widgetvaluetext)
-        cy.wrap(widgetvaluetext.replace(/[^a-zA-Z0-9 ]/g, '')).as('wrapBelongingsValue')
-      })
+      const widgetvaluetext = $widgetvalue.text().replace(currency, "");
+      cy.log(widgetvaluetext)
+      cy.wrap(widgetvaluetext.replace(/[^a-zA-Z0-9 ]/g, '')).as('wrapBelongingsValue')
+    })
     mainpage.goToMyCollection().click()
 
+    myfinance.cbValueWidget().should('not.have.value', '0');
     myfinance.cbValueWidget().then($widgetvalue => {
-        const widgetvaluetext = $widgetvalue.text().replace(currency, "");
-        cy.log(widgetvaluetext)
-        cy.wrap(widgetvaluetext.replace(/[^a-zA-Z0-9 ]/g, '')).as('wrapCollectionValue')
-      })
+      const widgetvaluetext = $widgetvalue.text().replace(currency, "");
+      cy.log(widgetvaluetext)
+      cy.wrap(widgetvaluetext.replace(/[^a-zA-Z0-9 ]/g, '')).as('wrapCollectionValue')
+    })
     mainpage.goToMyProperty().click()
+    myfinance.cbValueWidget().should('not.have.value', '0');
 
     myfinance.cbValueWidget().then($widgetvalue => {
-        const widgetvaluetext = $widgetvalue.text().replace(currency, "");
-        cy.log(widgetvaluetext)
-        cy.wrap(widgetvaluetext.replace(/[^a-zA-Z0-9 ]/g, '')).as('wrapPropertyValue')
-      })
+      const widgetvaluetext = $widgetvalue.text().replace(currency, "");
+      cy.log(widgetvaluetext)
+      cy.wrap(widgetvaluetext.replace(/[^a-zA-Z0-9 ]/g, '')).as('wrapPropertyValue')
+    })
+
+    mainpage.goToMyFinance().click()
+    cy.contains('Cryptocurrencies').click()
+
+    myfinance.cbValueWidget().then($widgetvalue => {
+      const widgetvaluetext = $widgetvalue.text().replace(currency, "");
+      cy.log(widgetvaluetext)
+      cy.wrap(widgetvaluetext.replace(/[^a-zA-Z0-9 ]/g, '')).as('wrapCryptoValue')
+    })
+
 
     mainpage.goToMyDashboard().click()
 
     myfinance.cbValueWidget().then($widgetvalue => {
-        const widgetvaluetext = $widgetvalue.text().replace(currency, "");
-        cy.log(widgetvaluetext)
-        cy.wrap(widgetvaluetext.replace(/[^a-zA-Z0-9 ]/g, '')).as('wrapDashboardValue')
-      })
+      const widgetvaluetext = $widgetvalue.text().replace(currency, "");
+      cy.log(widgetvaluetext)
+      cy.wrap(widgetvaluetext.replace(/[^a-zA-Z0-9 ]/g, '')).as('wrapDashboardValue')
+    })
+
   })
 
   it('Calculate values and compare the result of the MyFinance collectables Value widget ', function () {
-    cy.log('wrap result is :' + 'C&B value : ' + this.wrapFinanceValue + '. ' + 'Belongings value: ' + this.wrapBelongingsValue + '. ' + 'MyCollection value: ' + this.wrapCollectionValue + '. ' + 'Property value: ' + this.wrapPropertyValue + '. ' + 'Portfolio value: ' + this.wrapPortfolioValue + '. ' + 'My dashboard total value: ' + this.wrapDashboardValue)
-    const wrapvalueconst = Number(this.wrapFinanceValue) +  Number(this.wrapBelongingsValue) +  Number(this.wrapCollectionValue) +  Number(this.wrapPropertyValue) + Number(this.wrapPortfolioValue)
+
+    myfinance.cbValueWidget().should('not.have.value', '0');
+    cy.log('wrap result is :' + 'Crypto value : ' + this.wrapCryptoValue + '. ' + 'C&B value : ' + this.wrapFinanceValue + '. ' + 'Belongings value: ' + this.wrapBelongingsValue + '. ' + 'MyCollection value: ' + this.wrapCollectionValue + '. ' + 'Property value: ' + this.wrapPropertyValue + '. ' + 'Portfolio value: ' + this.wrapPortfolioValue + '. ' + 'My dashboard total value: ' + this.wrapDashboardValue)
+    const wrapvalueconst = Number(this.wrapCryptoValue) + Number(this.wrapFinanceValue) + Number(this.wrapBelongingsValue) + Number(this.wrapCollectionValue) + Number(this.wrapPropertyValue) + Number(this.wrapPortfolioValue)
     cy.log(wrapvalueconst)
     expect(wrapvalueconst).to.equal(Number(this.wrapDashboardValue))
   })

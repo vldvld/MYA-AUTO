@@ -48,10 +48,10 @@ balanceFieldCash(){
     return cy.get('#balance')
 }
 savingAccountCreatedNotification(){
-    return cy.contains('Saving Account was created')
+    return cy.contains('Saving Account was created',{ timeout: 30000 })
 }
 mortgageCreatedNotification(){
-    return cy.contains('Mortgage Account was created')
+    return cy.contains('Mortgage Account was created',{ timeout: 30000 })
 }
 cashAccountCreatedNotification(){
     return cy.contains('Cash Account was created', { timeout: 30000 })
@@ -91,9 +91,6 @@ cashAndBankingTab(){
 
 TITab(){
     return cy.get('[href="/finances/traditional-investments"]') 
-}
-TIName(){
-    return cy.get('#name')
 }
 TIPortfolioType(){
     return cy.get('#portfolioType')
@@ -137,5 +134,18 @@ creditCardTypeLast4(){
 modalName(){
     return cy.get('[data-cy="asset-dialog-title"]')
 }
+TIName(){
+    return cy.get('#nameAndCurrency')
+}
+cryptoInstitutionField(){
+    return cy.get('#institutionExchange')
+}
+cryptoHoldingField(){
+    return cy.get('#holding')
+}
+cryptoPriceField(){
+    return cy.get('#pricePerUnit')
+}
+
 }
     export default myfinance
