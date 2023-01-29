@@ -69,7 +69,6 @@ describe('Creating an Art asset', function () {
 
     mycollection.createButton().should('not.be.disabled').click()
     mycollection.artCreatedNotification().should('exist')
-
     cy.wait(1000)
   })
 
@@ -97,13 +96,15 @@ describe('Creating an Art asset', function () {
     cy.contains('You added ' + testName + ' for USD 1,000', { timeout: 20000 })
   })
 
-  it('Check a created asset on the art assets list by using the card view', function () {
+  it('Check a created asset on the art assets list by using the card view + using search field', function () {
     cy.get('[data-cy=art-search-tab-btn]').click()
     cy.url().should('include', '/art/collection')
-    cy.contains('AUTOMATEDART')
+    cy.contains('AUTOMATEDART').should('exist', { timeout: 20000 })
+    cy.get('[data-cy="header-action-panel-search-input"]').type('nonvalidassettest').type('{enter}')
+    cy.contains('Sorry, no Assets were found matching your search')
+    cy.get('.MuiInputAdornment-positionEnd > .MuiButtonBase-root').click()
     cy.get('[data-cy="header-action-panel-search-input"]').type(testName).type('{enter}')
-    cy.wait(500)
-
+    cy.contains('1-1 of 1', {timeout: 30000}).should('exist')
     cy.contains('USD 1,000').click()
     cy.url().should('include', '/detail')
     cy.contains(testName).should('exist')
@@ -112,5 +113,30 @@ describe('Creating an Art asset', function () {
     cy.contains('AUTOMATEDPROPERTY #').should('exist')
     cy.contains('You located art at AUTOMATEDPROPERTY').should('exist')
     cy.contains('You added AUTOMATEDART #').should('exist', { timeout: 20000 })
+  })
+
+  it('Check the art search feature by using the table view screen', function () {
+
+    cy.get('[data-cy=art-search-tab-btn]').should('exist').click()
+    cy.get('[data-cy="layout-toggler-table"] > .MuiIconButton-label > .MuiSvgIcon-root').click()
+    cy.url().should('include', '/art/collection')
+    cy.contains('AUTOMATEDART', {timeout: 30000}).should('exist', {timeout: 30000})
+    cy.get('[data-cy="header-action-panel-search-input"]').type('nonvalidassettest').type('{enter}')
+    cy.contains('No Data To Display')
+    cy.get('.MuiInputAdornment-positionEnd > .MuiButtonBase-root').click()
+    cy.get('[data-cy="header-action-panel-search-input"]').type(testName).type('{enter}')
+    cy.contains('1-1 of 1', {timeout: 30000}).should('exist', {timeout: 30000})
+    cy.contains('Bob Evans').should('exist')
+    cy.contains('Calligraphy').should('exist')
+    cy.contains('USD 1,000').should('exist')
+    cy.get('.MuiGrid-root > .MuiTypography-root').click()
+    cy.url().should('include', '/detail')
+    cy.contains(testName, {timeout: 30000}).should('exist')
+    cy.contains('Bob Evans', {timeout: 30000}).should('exist')
+    cy.contains('Calligraphy').should('exist')
+    cy.contains('AUTOMATEDPROPERTY #').should('exist')
+    cy.contains('You located art at AUTOMATEDPROPERTY').should('exist')
+    cy.contains('You added AUTOMATEDART #').should('exist', { timeout: 20000 })
+
   })
 })

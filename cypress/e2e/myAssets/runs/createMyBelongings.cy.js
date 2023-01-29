@@ -84,6 +84,51 @@ describe('Creating the My Belonging asset', function () {
     mainpage.cbNetValueWidget().should('have.text', currency + internationalNumberFormat.format(wrapnetvaluetyconst))
 
   })
+  it('Check a created asset on the art assets list by using the card view + using search field', function () {
+    mainpage.goToMyBelongings().click()
+    cy.url().should('eq', `${Cypress.config().baseUrl}others/summary`)
+
+    cy.contains('Search MyBelongings').click()
+    cy.url().should('include', '/others/collection')
+    cy.contains('AUTOMATEDOTHERASSET')
+    cy.get('[data-cy="header-action-panel-search-input"]').type('nonvalidassettest').type('{enter}')
+    cy.contains('Sorry, no Assets were found matching your search')
+    cy.get('.MuiInputAdornment-positionEnd > .MuiButtonBase-root').click()
+    cy.get('[data-cy="header-action-panel-search-input"]').type(testName).type('{enter}')
+    cy.contains('1-1 of 1').should('exist')
+    cy.contains('USD 1,000').click()
+    cy.url().should('include', '/detail')
+    cy.contains(testName).should('exist')
+    cy.contains('manufacturer').should('exist')
+    cy.contains('AUTOMATEDPROPERTY #').should('exist')
+
+  })
+
+  it('Check the art search feature by using table view screen', function () {
+    mainpage.goToMyBelongings().click()
+    cy.url().should('eq', `${Cypress.config().baseUrl}others/summary`)
+
+    cy.contains('Search MyBelongings').click()
+    cy.get('[data-cy="layout-toggler-table"] > .MuiIconButton-label > .MuiSvgIcon-root').click()
+    cy.url().should('include', '/others/collection')
+    cy.contains('AUTOMATEDOTHERASSET')
+    cy.get('[data-cy="header-action-panel-search-input"]').type('nonvalidassettest').type('{enter}')
+    cy.contains('Sorry, no Assets were found matching your search')
+    cy.get('.MuiInputAdornment-positionEnd > .MuiButtonBase-root').click()
+    cy.get('[data-cy="header-action-panel-search-input"]').type(testName).type('{enter}')
+    cy.contains('1-1 of 1').should('exist')
+    cy.contains('USD 1,000').should('exist')
+    cy.get('.MuiGrid-root > .MuiTypography-root').click()
+    cy.url().should('include', '/detail')
+    cy.contains(testName).should('exist')
+    cy.contains('manufacturer').should('exist')
+    cy.contains('AUTOMATEDPROPERTY #').should('exist')    
+    cy.url().should('include', '/detail')
+    cy.contains(testName).should('exist')
+    cy.contains('manufacturer').should('exist')
+    cy.contains('AUTOMATEDPROPERTY #').should('exist')
+
+  })
 
   // it('Make sure that a created asset is shown on the asstest list', function () {
   //   cy.get('[href="/others/collection"]').click()
