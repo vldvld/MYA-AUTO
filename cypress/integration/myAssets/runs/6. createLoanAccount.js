@@ -46,7 +46,8 @@ describe('Create the Loan account and check the C&B widgets', function ()
         
         myfinance.outstandingAmmount().type(newValue).should('have.value', '1,000')
         
-        myfinance.accountNameField().type(testName).should('have.value', testName)
+        myfinance.accountNameField().clear()
+myfinance.accountNameField().type(testName).should('have.value', testName)
         myfinance.bankInstitutionField().type("Afghanistan Commercial Bank")
         myfinance.ziaBankInstitution().should('exist')
         myfinance.bankInstitutionField().tab().type('{enter}')

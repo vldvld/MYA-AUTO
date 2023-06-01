@@ -42,7 +42,7 @@ artTab(){
     return cy.get('[data-cy="collectibles-art-tab-btn"]')
 }
 createNewWine(){
-    return cy.contains('Create a new wine')
+    return cy.contains('Create manually')
 }
 wineProducer(){
     return cy.get('#wineProducer')

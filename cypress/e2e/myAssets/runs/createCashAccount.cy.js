@@ -68,12 +68,16 @@ describe('Creating Cash account', function () {
     })
 
     myfinance.balanceFieldCash().type(newValue).should('have.value', '1,000')
+    myfinance.accountNameField().clear()
     myfinance.accountNameField().type(testName)
 
     myfinance.createButton().should('not.be.disabled').click()
 
     myfinance.cashAccountCreatedNotification().should('exist')
     myfinance.transactionCreatedNotification().should('exist')
+
+
+
   })
 
   it('Check the value widget', function () {

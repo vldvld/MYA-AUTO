@@ -35,13 +35,13 @@ describe('Create the Loan account and check the C&B widgets', function () {
     mainpage.modalTitle().should('have.text', 'Loan Account')
     // wait for a full firebase API loading
 
-
     myfinance.outstandingAmmount().type(newValue).should('have.value', '1,000')
-
+    cy.get('#initialAmount').type(newValue).should('have.value', '1,000')
+    myfinance.accountNameField().clear()
     myfinance.accountNameField().type(testName).should('have.value', testName)
-    myfinance.bankInstitutionField().type("Afghanistan Commercial Bank")
-    myfinance.ziaBankInstitution().should('exist')
-    myfinance.bankInstitutionField().tab().type('{enter}')
+    myfinance.bankInstitutionField().type("Afghan u")
+    myfinance.ziaBankInstitution().should('exist') 
+    cy.get(".MuiList-root").contains(/Afghan United Bank/, { timeout: 50000 }).trigger("click")
 
     cy.contains('Last Updated', { timeout: 30000 })
 
@@ -65,8 +65,10 @@ describe('Create the Loan account and check the C&B widgets', function () {
     })
 
     myfinance.createButton().should('not.be.disabled').click()
-    myfinance.loanAccountCreatedNotification().should('exist')
+    
     myfinance.transactionCreatedNotification().should('exist')
+    myfinance.loanAccountCreatedNotification().should('exist')
+
   })
 
   it('Check the value / liability / netValue widget values', function () {

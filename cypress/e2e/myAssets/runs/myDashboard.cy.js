@@ -38,6 +38,14 @@ describe('Collect values from the each dashboard page and calculate a sum', func
       cy.wrap(widgetvaluetext.replace(/[^a-zA-Z0-9 ]/g, '')).as('wrapPortfolioValue')
     })
 
+    cy.contains('Cryptocurrencies').click()
+
+    myfinance.cbValueWidget().then($widgetvalue => {
+      const widgetvaluetext = $widgetvalue.text().replace(currency, "");
+      cy.log(widgetvaluetext)
+      cy.wrap(widgetvaluetext.replace(/[^a-zA-Z0-9 ]/g, '')).as('wrapCryptoValue')
+    })
+
     mainpage.goToMyBelongings().click()
     myfinance.cbValueWidget().should('not.have.value', '0');
     myfinance.cbValueWidget().then($widgetvalue => {
@@ -61,16 +69,6 @@ describe('Collect values from the each dashboard page and calculate a sum', func
       cy.log(widgetvaluetext)
       cy.wrap(widgetvaluetext.replace(/[^a-zA-Z0-9 ]/g, '')).as('wrapPropertyValue')
     })
-
-    mainpage.goToMyFinance().click()
-    cy.contains('Cryptocurrencies').click()
-
-    myfinance.cbValueWidget().then($widgetvalue => {
-      const widgetvaluetext = $widgetvalue.text().replace(currency, "");
-      cy.log(widgetvaluetext)
-      cy.wrap(widgetvaluetext.replace(/[^a-zA-Z0-9 ]/g, '')).as('wrapCryptoValue')
-    })
-
 
     mainpage.goToMyDashboard().click()
 

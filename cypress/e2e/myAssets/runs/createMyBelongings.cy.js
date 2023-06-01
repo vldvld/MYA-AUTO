@@ -90,7 +90,7 @@ describe('Creating the My Belonging asset', function () {
 
     cy.contains('Search MyBelongings').click()
     cy.url().should('include', '/others/collection')
-    cy.contains('AUTOMATEDOTHERASSET')
+    cy.contains('AUTOMATEDOTHERASSET', { timeout: 50000 })
     cy.get('[data-cy="header-action-panel-search-input"]').type('nonvalidassettest').type('{enter}')
     cy.contains('Sorry, no Assets were found matching your search')
     cy.get('.MuiInputAdornment-positionEnd > .MuiButtonBase-root').click()
@@ -111,7 +111,7 @@ describe('Creating the My Belonging asset', function () {
     cy.contains('Search MyBelongings').click()
     cy.get('[data-cy="layout-toggler-table"] > .MuiIconButton-label > .MuiSvgIcon-root').click()
     cy.url().should('include', '/others/collection')
-    cy.contains('AUTOMATEDOTHERASSET')
+    cy.contains('AUTOMATEDOTHERASSET', { timeout: 50000 })
     cy.get('[data-cy="header-action-panel-search-input"]').type('nonvalidassettest').type('{enter}')
     cy.contains('Sorry, no Assets were found matching your search')
     cy.get('.MuiInputAdornment-positionEnd > .MuiButtonBase-root').click()

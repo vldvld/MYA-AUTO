@@ -78,7 +78,7 @@ cbNetValueWidget(){
     return cy.get('[data-cy=summary-widget-net-value]',{ timeout: 30000 })
 }
 ziaBankInstitution(){
-    return cy.get('[role=menu]')
+    return cy.get('[role=menu]',{ timeout: 30000 })
     // .contains('Afghanistan Commercial Bank', { timeout: 60000 })
 }
 outstandingAmmount(){
@@ -145,6 +145,21 @@ cryptoHoldingField(){
 }
 cryptoPriceField(){
     return cy.get('#pricePerUnit')
+}
+insuranceTab(){
+    return cy.get('[href="/finances/insurance"]')    
+}
+insurancePolicyName(){
+    return cy.get('#policyName')
+}
+insuranceCompany(){
+    return cy.get('#insuranceCompany')
+}
+insuranceCoverageAmount(){
+    return cy.get('#coverageAmount')
+}
+insuranceCreate(){
+    return cy.get('[data-cy="asset-dialog-submit-btn"]')
 }
 
 }

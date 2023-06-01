@@ -74,7 +74,7 @@ describe('Creating an other collectables asset', function () {
     cy.wait(500)
   })
 
-  it('Check the value widget', function () {
+  it('Check the value and net value widgets', function () {
     mainpage.goToMyCollection({ timeout: 20000 }).click()
     mycollection.otherCollectablesTab().click()
     
@@ -89,9 +89,6 @@ describe('Creating an other collectables asset', function () {
     const wrapnetvaluetyconst = Number(this.wrapNetvalue) + newValue
     cy.log(wrapnetvaluetyconst)
     mainpage.cbNetValueWidget().should('have.text', currency + internationalNumberFormat.format(wrapnetvaluetyconst))
-
   })
 
-  it('Check the Net value widget', function () {
-  })
 })

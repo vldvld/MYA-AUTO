@@ -56,6 +56,8 @@ class mainpage {
   cbNetValueWidget() {
     return cy.get('[data-cy=summary-widget-net-value]', { timeout: 30000 })
   }
-
+  personalRefNo() {
+    return cy.get('#personalRefNo')
+  }
 }
 export default mainpage

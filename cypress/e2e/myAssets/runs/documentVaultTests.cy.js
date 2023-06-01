@@ -16,14 +16,14 @@ describe('Document Storage page tests', function () {
         mainpage.homePageUrl()
 
         mainpage.goToDocumentVault().click()
-        cy.url().should('eq', `${Cypress.config().baseUrl}documents/list`)
+        cy.url().should('eq', `${Cypress.config().baseUrl}documents/folder`)
         documentstorage.plusButton().click()
         documentstorage.skipButton().click()
 
         cy.contains('Drop file(s) here or choose file(s)').should('exist')
         cy.contains('Storage space 0%').should('exist')
         documentstorage.uploadButton().should('be.disabled')
-
+cy.wait(10000)
         documentstorage.dropFilesButton().attachFile('png-test.png', { subjectType: 'drag-n-drop' })
         documentstorage.dropFilesButton().attachFile('pdf-test.pdf', { subjectType: 'drag-n-drop' })
         documentstorage.dropFilesButton().attachFile('doc-test.doc', { subjectType: 'drag-n-drop' })

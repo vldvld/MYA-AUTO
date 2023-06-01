@@ -29,7 +29,9 @@ describe('Creating a Portfolio account', function () {
         mainpage.goToMyFinance().click()
         myfinance.TITab().click()
         myfinance.myFinancePlusButton().click()
+
         // wait for a full firebase API loading
+
         cy.contains('%', { timeout: 20000 }).should('exist')
 
         myfinance.TIName().type(testName).should('have.value', testName)
@@ -40,12 +42,15 @@ describe('Creating a Portfolio account', function () {
         myfinance.TIHoldingName().type('bitcoin')
 
         cy.contains(/Bitcoin/)
+        cy.wait(3000)
         cy.get('li').last().click()
 
+        cy.get('[data-cy="asset-dialog-submit-btn"]').should('be.enabled')
         cy.wait(1000)
-        myfinance.createButton().click()
+        cy.get('[data-cy="asset-dialog-submit-btn"]').click()
 
         myfinance.portfolioWasCreatedNotification().should('exist')
+        cy.wait(1000)
 
         // myfinance.TIPortfolioType().click()
         // cy.get('#portfolioType-option-0').click()
@@ -57,6 +62,42 @@ describe('Creating a Portfolio account', function () {
         // myfinance.TIProduct().should('have.value', 'TestAutoProduct '+`${id}`)
         // myfinance.TISaveAndCloseButton().click()
     })
+
+    it('Go to the Traditional page and make sure that created portfolio is shown on the list and chekc the search feature ', function () {
+
+        mainpage.goToMyFinance().click()
+        myfinance.TITab().click()
+  
+        cy.contains(testName, { timeout: 20000 }).should('exist')
+        
+        cy.get('[data-cy="header-action-panel-search-input"]').type('nonvalidassettest').type('{enter}')
+        cy.contains('Sorry, no Portfolios were found matching your search')
+        cy.get('.MuiInputAdornment-positionEnd > .MuiButtonBase-root').click()
+        cy.get('[data-cy="header-action-panel-search-input"]').type(testName).type('{enter}')
+        cy.wait(1000)
+        cy.contains('1-1 of 1').should('exist')
+        cy.get('.MuiInputAdornment-positionEnd > .MuiButtonBase-root').click()
+        cy.contains(testName).click()
+
+        cy.url().should('include', '/detail')
+        cy.contains(testName).should('exist')
+
+    })
+
+    // it('Go to the created portfolio details page and check the delete feature ', function () {
+
+    //     mainpage.goToMyFinance().click()
+    //     myfinance.TITab().click()
+
+    //     cy.contains(testName, { timeout: 20000 }).click()
+    //     cy.wait(10000)
+    //     cy.url().should('include', '/detail')
+    //     cy.contains(testName, { timeout: 20000 }).should('exist')
+        
+    //     cy.get('#assetActionsMenu').click()
+
+
+    // })
     // it('Check the created Portfolio notifications and created data', function()
     // {  
     //     myfinance.portfolioWasCreatedNotification().should('exist')

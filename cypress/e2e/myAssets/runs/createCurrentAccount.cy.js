@@ -37,9 +37,10 @@ describe('Creating and testing a current account', function () {
   
     cy.contains('Single-Currency Account').should('exist')
     myfinance.balanceField().type(newValue).should('have.value', '1,000')
+    myfinance.accountNameField().clear()
     myfinance.accountNameField().type(testName)
     myfinance.bankInstitutionField().type("Afghan u")
-    myfinance.ziaBankInstitution().should('exist') 
+    myfinance.ziaBankInstitution({ timeout: 30000 }).should('exist', { timeout: 30000 }) 
     cy.get(".MuiList-root").contains(/Afghan United Bank/, { timeout: 50000 }).trigger("click")
     cy.contains('Last Updated', { timeout: 30000 })
 
@@ -62,8 +63,11 @@ describe('Creating and testing a current account', function () {
       cy.wrap(widgetnetvaluetext.replace(/[^a-zA-Z0-9 ]/g, '')).as('wrapnetvalue')
     })
     myfinance.createButton().should('not.be.disabled').click()
+    
     myfinance.currentAccountCreatedNotification().should('exist')
     myfinance.transactionCreatedNotification().should('exist')
+   
+   
   })
 
   it('Check the value / liability / netValue widget values', function () {

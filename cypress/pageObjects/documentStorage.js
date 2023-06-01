@@ -14,8 +14,6 @@ class documentstorage{
     }
     uploadButton(){
         return cy.get('[data-cy="asset-dialog-submit-btn"]')
-
-        
     }
     modalTitle(){
         return cy.get('#customized-dialog-title')   

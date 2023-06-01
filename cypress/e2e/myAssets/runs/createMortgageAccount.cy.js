@@ -36,11 +36,12 @@ describe('Creating and testing the Mortgage account', function () {
 
         // wait for a full firebase API loading
 
+        myfinance.accountNameField().clear()
         myfinance.accountNameField().type(testName)
         myfinance.outstandingAmmount().type(newValue).should('have.value', '1,000')
-        myfinance.bankInstitutionField().type("Afghanistan Commercial Bank")
-        myfinance.ziaBankInstitution().should('exist')
-        myfinance.bankInstitutionField().tab().type('{enter}')
+        myfinance.bankInstitutionField().type("Afghan u")
+        myfinance.ziaBankInstitution().should('exist') 
+        cy.get(".MuiList-root").contains(/Afghan United Bank/, { timeout: 50000 }).trigger("click")
 
         cy.contains('Last Updated', { timeout: 30000 })
 
@@ -64,8 +65,11 @@ describe('Creating and testing the Mortgage account', function () {
         })
 
         myfinance.createButton().should('not.be.disabled').click()
+        
         myfinance.mortgageCreatedNotification().should('exist')
         myfinance.transactionCreatedNotification().should('exist')
+        
+    
 
     })
     it('Check the value / liability / netValue widget values', function () {

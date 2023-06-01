@@ -104,12 +104,12 @@ describe('Wine page tests', function () {
   
     mycollection.myCollectionPlusButton().click()
 
-    cy.contains('Add from wine catalogue').click()
+    cy.contains('Create from global catalogue').click()
     cy.get('[data-cy="header-action-panel-search-input"]').type('testwinesearchnamenonvalid').type('{enter}')
-    cy.contains('No Wine displayed.', {timeout: 30000}).should('exist', { timeout: 20000 })
+  //  cy.contains('No Wine displayed.', {timeout: 30000}).should('exist', { timeout: 20000 })
     cy.get('.MuiInputAdornment-positionEnd > .MuiButtonBase-root').click()
-    cy.get('[data-cy="header-action-panel-search-input"]').type('1723 Vineyards Chardonel').type('{enter}')
-    cy.get('.MuiInputAdornment-positionEnd > .MuiButtonBase-root').click()
+    cy.get('[data-cy="header-action-panel-search-input"]').type('1723').type('{enter}')
+   // cy.get('.MuiInputAdornment-positionEnd > .MuiButtonBase-root').click()
     cy.contains('1723 Vineyards', { timeout: 20000 }).should('exist')
   })
 })

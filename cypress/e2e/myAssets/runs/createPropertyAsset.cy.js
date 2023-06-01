@@ -27,7 +27,7 @@ describe('Creating and testing a property asset', function () {
     cy.goToLoginPage()
     cy.loginCommand("mya-automated-tests@gmail.com", "mya-automated-tests@gmail.com")
     mainpage.homePageUrl()
-})
+  })
 
   it('Go to the Property page and create the property', function () {
 
@@ -73,12 +73,12 @@ describe('Creating and testing a property asset', function () {
     const wrapvalueconst = Number(this.wrapvalue) + newValue
     cy.log(wrapvalueconst)
     mainpage.cbValueWidget().should('have.text', currency + internationalNumberFormat.format(wrapvalueconst))
-   
+
     cy.log('wrap result is ' + this.wrapNetvalue)
     const wrapnetvaluetyconst = Number(this.wrapNetvalue) + newValue
     cy.log(wrapnetvaluetyconst)
     mainpage.cbNetValueWidget().should('have.text', currency + internationalNumberFormat.format(wrapnetvaluetyconst))
-  
+
   })
 })
 

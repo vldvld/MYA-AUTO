@@ -20,7 +20,7 @@ describe('Creating and testing a saving account', function () {
     cy.goToLoginPage()
     cy.loginCommand("mya-automated-tests@gmail.com", "mya-automated-tests@gmail.com")
     mainpage.homePageUrl()
-})
+  })
   it('Go to the MyFinance page and create the Saving account', function () {
 
     mainpage.goToMyFinance().click()
@@ -34,16 +34,17 @@ describe('Creating and testing a saving account', function () {
     cy.contains('Single-Currency Account').should('exist')
 
     // wait for a full firebase API loading
-  
+
+    myfinance.accountNameField().clear()
     myfinance.accountNameField().type(testName)
-    myfinance.bankInstitutionField().type("Afghanistan Commercial Bank")
-    myfinance.ziaBankInstitution().should('exist')
-    myfinance.bankInstitutionField().tab().type('{enter}')
+    myfinance.bankInstitutionField().type("Afghan u")
+    myfinance.ziaBankInstitution().should('exist') 
+    cy.get(".MuiList-root").contains(/Afghan United Bank/, { timeout: 50000 }).trigger("click")
     myfinance.balanceField().type(newValue).should('have.value', '1,000')
 
     cy.contains('Last Updated', { timeout: 30000 })
     myfinance.cbValueWidget().should('not.have.value', '0');
-    
+
     myfinance.cbValueWidget().then($widgetvalue => {
       const widgetvaluetext = $widgetvalue.text().replace(currency, "");
       cy.log(widgetvaluetext)
@@ -63,8 +64,10 @@ describe('Creating and testing a saving account', function () {
     })
     cy.wait(500)
     myfinance.createButton().should('not.be.disabled').click()
+    
     myfinance.savingAccountCreatedNotification().should('exist')
     myfinance.transactionCreatedNotification().should('exist')
+ 
   })
 
   it('Check the value / liability / netValue widget values', function () {
@@ -78,13 +81,13 @@ describe('Creating and testing a saving account', function () {
     const wrapvalueconst = Number(this.wrapvalue) + newValue
     cy.log(wrapvalueconst)
     myfinance.cbValueWidget().should('have.text', currency + internationalNumberFormat.format(wrapvalueconst))
-    
+
     //liability
     cy.log('wrap result is ' + this.wrapliability)
     const wrapliabilityconst = Number(this.wrapliability)
     cy.log(wrapliabilityconst)
     myfinance.cbLiabilityWidget().should('have.text', currency + '(' + internationalNumberFormat.format(wrapliabilityconst) + ')')
-    
+
     //netValue
     cy.log('wrap result is ' + this.wrapnetvalue)
     const wrapnetvaluetyconst = Number(this.wrapnetvalue) - newValue
