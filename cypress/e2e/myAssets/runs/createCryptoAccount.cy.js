@@ -58,7 +58,7 @@ describe('Go to the cryptocurrency dashboard page and create a new crypto accoun
     cy.contains('Crypto Account was created',{ timeout: 30000 })
     cy.wait(500)
 })
-it('Check the value / netValue widget values', function () {
+it('Check a value / netValue widget values', function () {
 
   mainpage.goToMyFinance().click()
   cy.contains('Cryptocurrencies').click()

@@ -3,6 +3,7 @@ const { defineConfig } = require('cypress');
 module.exports = defineConfig({
   
   chromeWebSecurity: false,
+  numTestsKeptInMemory: 0,
   defaultCommandTimeout: 4000,
   video: false,
   viewportWidth: 1440,
@@ -18,7 +19,10 @@ module.exports = defineConfig({
     //   return require('./cypress/plugins/index.js')(on, config)
       
     // },
-    baseUrl: 'https://app.myassets.com/',
+    baseUrl: 'https://preprod.myassets.dev/',
   },
 })
  
+
+
+
